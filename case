@@ -1,1 +1,292 @@
-delete
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EV Demand Forecast – Germany | Batuhan Dogan</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<!-- NAV -->
+<nav class="bg-white border-b sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto flex justify-between p-4">
+    <a href="../index.html">← Back</a>
+    <span class="font-black">Batuhan Dogan</span>
+  </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-6 py-20">
+
+<!-- HERO -->
+<section class="mb-20">
+
+<h1 class="text-5xl font-black mb-6">
+EV Demand Forecast & Inventory Optimization — Germany
+</h1>
+
+<p class="text-xl text-slate-600 max-w-4xl">
+SQL-driven regional demand modeling and Power BI-style dashboarding
+to reduce inventory imbalance and improve operational decisions.
+</p>
+
+<div class="grid md:grid-cols-4 gap-6 mt-10">
+<div class="bg-white p-6 rounded-2xl shadow"><strong>2.3M rows</strong><br/>transactions & listings</div>
+<div class="bg-white p-6 rounded-2xl shadow"><strong>6 regions</strong><br/>DE states</div>
+<div class="bg-white p-6 rounded-2xl shadow"><strong>Inventory −7%</strong><br/>simulation impact</div>
+<div class="bg-white p-6 rounded-2xl shadow"><strong>Forecast −22%</strong><br/>error reduction</div>
+</div>
+
+</section>
+
+<!-- DATA SOURCES -->
+<section class="mb-24">
+
+<h2 class="text-3xl font-bold mb-6">Data Sources</h2>
+
+<ul class="list-disc ml-6 text-slate-600">
+<li>
+AutoScout24 EV Listings (Market proxy):
+<a class="text-blue-600 underline" target="_blank"
+href="https://www.autoscout24.com/">autoscout24.com</a>
+</li>
+
+<li>
+ZSW German EV registrations:
+<a class="text-blue-600 underline" target="_blank"
+href="https://www.zsw-bw.de/en/media-center/data-service.html">
+zsw-bw.de
+</a>
+</li>
+
+<li>
+Kaggle EV datasets:
+<a class="text-blue-600 underline" target="_blank"
+href="https://www.kaggle.com/search?q=electric+vehicle">
+kaggle.com
+</a>
+</li>
+</ul>
+
+<p class="text-sm text-slate-500 mt-4">
+All figures in this case are anonymized and scenario-based, created for portfolio demonstration.
+</p>
+
+</section>
+
+<!-- STEP 1 -->
+<section class="mb-32">
+
+<h2 class="text-3xl font-bold mb-6">
+Step 1 — Problem Diagnosis
+</h2>
+
+<p class="text-slate-600 max-w-4xl mb-10">
+Operations teams struggled with uneven EV distribution: some regions faced
+excess stock while others experienced shortages.
+Weekly planning relied on aggregated national averages, masking local seasonality
+and regional demand spikes.
+</p>
+
+<div class="grid md:grid-cols-2 gap-10">
+
+<div class="bg-white p-8 rounded-3xl shadow">
+<h3 class="font-bold mb-4">Regional Demand vs Inventory</h3>
+<canvas id="regionGapChart"></canvas>
+</div>
+
+<div class="bg-white p-8 rounded-3xl shadow">
+<h3 class="font-bold mb-4">Monthly National Trend</h3>
+<canvas id="trendChart"></canvas>
+</div>
+
+</div>
+
+</section>
+
+<!-- STEP 2 -->
+<section class="mb-32">
+
+<h2 class="text-3xl font-bold mb-6">
+Step 2 — Analytical Approach
+</h2>
+
+<ul class="list-disc ml-6 text-slate-600 mb-12 max-w-4xl">
+<li>SQL pipelines cleaned 2.3M records (outlier removal, geo-mapping, deduplication).</li>
+<li>Time-series aggregation by month and region.</li>
+<li>Seasonality decomposition.</li>
+<li>Scenario simulation for inventory redistribution.</li>
+</ul>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-white p-8 rounded-3xl shadow">
+<h3 class="font-bold mb-4">Seasonality Index</h3>
+<canvas id="seasonChart"></canvas>
+</div>
+
+<div class="bg-white p-8 rounded-3xl shadow">
+<h3 class="font-bold mb-4">Regional Heatmap</h3>
+<canvas id="heatmapChart"></canvas>
+</div>
+
+<div class="bg-white p-8 rounded-3xl shadow">
+<h3 class="font-bold mb-4">Forecast vs Actual</h3>
+<canvas id="forecastChart"></canvas>
+</div>
+
+</div>
+
+</section>
+
+<!-- STEP 3 -->
+<section class="mb-32">
+
+<h2 class="text-3xl font-bold mb-6">
+Step 3 — Recommendation
+</h2>
+
+<p class="text-slate-600 max-w-4xl mb-10">
+I recommended implementing a Power BI inventory allocation dashboard updated weekly via SQL.
+The tool highlights surplus/shortage regions, demand drivers, and allows operations managers
+to simulate redistribution scenarios before committing logistics resources.
+</p>
+
+<div class="bg-white p-10 rounded-3xl shadow">
+<h3 class="font-bold mb-6">Inventory Reallocation Simulation</h3>
+
+<label class="font-semibold">Demand uplift scenario (%)</label>
+<input id="simSlider" type="range" min="0" max="30" value="10" class="w-full my-4"/>
+
+<canvas id="simulationChart"></canvas>
+</div>
+
+</section>
+
+<!-- STEP 4 -->
+<section class="mb-32">
+
+<h2 class="text-3xl font-bold mb-6">
+Step 4 — Implementation
+</h2>
+
+<ul class="list-disc ml-6 text-slate-600 mb-10 max-w-4xl">
+<li>Automated SQL ETL jobs refreshing weekly.</li>
+<li>Power BI dashboard with slicers for region/month/vehicle class.</li>
+<li>Operational alerting for shortages.</li>
+<li>Scenario sliders for logistics planning.</li>
+</ul>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-white p-6 rounded-2xl shadow">Automated ETL</div>
+<div class="bg-white p-6 rounded-2xl shadow">Regional slicers</div>
+<div class="bg-white p-6 rounded-2xl shadow">Ops alerts</div>
+
+</div>
+
+</section>
+
+<!-- STEP 5 -->
+<section class="mb-32">
+
+<h2 class="text-3xl font-bold mb-6">
+Step 5 — Results & Business Impact
+</h2>
+
+<div class="grid md:grid-cols-4 gap-6">
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<strong>−7%</strong><br/>Inventory cost
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<strong>−22%</strong><br/>Forecast error
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<strong>+15%</strong><br/>Decision speed
+</div>
+
+<div class="bg-white p-6 rounded-2xl shadow">
+<strong>6 regions</strong><br/>optimized
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<script>
+
+/* REGION GAP */
+new Chart(regionGapChart,{
+type:'bar',
+data:{
+labels:["North","West","South","East","Berlin","Bavaria"],
+datasets:[
+{label:"Demand",data:[120,160,210,130,190,220]},
+{label:"Inventory",data:[180,120,170,160,150,140]}
+]
+}
+});
+
+/* TREND */
+new Chart(trendChart,{
+type:'line',
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+datasets:[{label:"National Demand",data:[100,120,150,190,230,260,280,300]}]
+}
+});
+
+/* SEASON */
+new Chart(seasonChart,{
+type:'radar',
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+datasets:[{label:"Seasonality Index",data:[0.7,0.8,1.0,1.2,1.4,1.3,1.1,0.9]}]
+}
+});
+
+/* FORECAST */
+new Chart(forecastChart,{
+type:'line',
+data:{
+labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+datasets:[
+{label:"Forecast",data:[95,130,155,185,215,255,275,295]},
+{label:"Actual",data:[100,120,150,190,230,260,280,300]}
+]
+}
+});
+
+/* SIMULATION */
+const simData=[120,160,210,130,190,220];
+
+const simChart=new Chart(simulationChart,{
+type:'bar',
+data:{
+labels:["North","West","South","East","Berlin","Bavaria"],
+datasets:[
+{label:"Baseline",data:simData},
+{label:"After Reallocation",data:simData.map(v=>v*1.1)}
+]
+}
+});
+
+simSlider.oninput=e=>{
+const factor=1+e.target.value/100;
+simChart.data.datasets[1].data=simData.map(v=>Math.round(v*factor));
+simChart.update();
+};
+
+</script>
+
+</body>
+</html>
