@@ -1,33 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Batuhan Dogan | Analytics · Product · UX · Growth</title>
-
-  <!-- SEO -->
-  <meta name="description" content="Portfolio of Batuhan Dogan – Analytics, Product Strategy, UX Research and Growth projects. MSc Business student in Germany targeting Werkstudent and Junior roles." />
-  <meta name="author" content="Batuhan Dogan" />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Batuhan Dogan – Analytics & Product Portfolio" />
-  <meta property="og:description" content="Case studies in SQL analytics, UX research, product strategy and growth." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/og-preview.png" />
-  <meta property="og:url" content="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/" />
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Batuhan Dogan – Analytics & Product Portfolio"/>
-  <meta name="twitter:description" content="SQL-driven analytics, UX research and product strategy projects."/>
-  <meta name="twitter:image" content="assets/og-preview.png"/>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Batuhan Dogan | Analytics · Product · UX · Growth</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
@@ -45,139 +22,133 @@
 </nav>
 
 <!-- HERO -->
-<header class="pt-40 max-w-7xl mx-auto px-6 mb-40">
-  <h1 id="heroTitle" class="text-6xl font-black mb-6 leading-tight">
-    SQL-Driven Analytics, Product Thinking & UX Strategy
-  </h1>
-  <p id="heroSub" class="text-xl text-slate-600 max-w-3xl">
-    MSc Business student in Germany targeting Werkstudent & Junior roles in
-    Data, Operations, Product, UX and Digital Marketing.
-  </p>
-  <div class="mt-10 flex gap-4">
-    <a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 text-white px-8 py-4 rounded-full font-bold">Download CV</a>
-    <a href="#cases" class="border px-8 py-4 rounded-full font-bold">View Case Studies</a>
-  </div>
+<header class="pt-40 max-w-7xl mx-auto px-6 mb-40 text-center">
+<h1 id="heroTitle" class="text-6xl font-black mb-6 leading-tight">
+SQL-Driven Analytics, Product Thinking & UX Strategy
+</h1>
+<p id="heroSub" class="text-xl text-slate-600 max-w-3xl mx-auto">
+MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.
+</p>
+
+<div class="mt-10 flex justify-center gap-4">
+<a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 text-white px-8 py-4 rounded-full font-bold">
+Download CV
+</a>
+<a href="#cases" class="border px-8 py-4 rounded-full font-bold">
+View Case Studies
+</a>
+</div>
 </header>
 
-<!-- CASES -->
+<!-- CASES GRID -->
 <section id="cases" class="max-w-7xl mx-auto px-6 mb-40">
-  <h2 class="text-4xl font-bold mb-12">Selected Case Studies</h2>
+<h2 class="text-4xl font-bold mb-12 text-center">Selected Case Studies</h2>
 
-  <div class="grid md:grid-cols-3 gap-8">
+<div class="grid md:grid-cols-3 gap-8">
 
-    <a href="#evDemandCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">EV Demand Forecast</h3>
-      <p class="text-sm text-slate-500">SQL · BI · Inventory −7%</p>
-    </a>
+<!-- EV Demand -->
+<a href="cases/ev-demand.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">EV Demand Forecast</h3>
+<p class="text-sm text-slate-500 mb-4">SQL · Power BI · Ops</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Reduced forecast error by 22% and optimized inventory across 6 regions. Interactive simulation included.</p>
+</div>
+</a>
 
-    <a href="#uxCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">Mobile App UX Research</h3>
-      <p class="text-sm text-slate-500">UX · Figma · Funnels +18%</p>
-    </a>
+<!-- UX Banking Flow -->
+<a href="cases/ux-banking.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">Mobile App UX Research</h3>
+<p class="text-sm text-slate-500 mb-4">UX · Figma · Funnels</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Improved onboarding completion by 18% with prototype testing and iterative design.</p>
+</div>
+</a>
 
-    <a href="#uiCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">UI Design System</h3>
-      <p class="text-sm text-slate-500">Figma · Web App</p>
-    </a>
+<!-- UI Logistics SaaS -->
+<a href="cases/ui-logistics.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">UI Design System</h3>
+<p class="text-sm text-slate-500 mb-4">Figma · Web App</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Created scalable component library with +30% task speed and dark mode support.</p>
+</div>
+</a>
 
-  </div>
-</section>
+<!-- SEO Growth -->
+<a href="cases/seo-growth.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">SEO Growth Engine</h3>
+<p class="text-sm text-slate-500 mb-4">Marketing · Traffic</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Boosted organic traffic by 40% through keyword analysis and funnel optimization.</p>
+</div>
+</a>
 
-<!-- EV CASE -->
-<section id="evDemandCase" class="max-w-7xl mx-auto px-6 mb-40">
-  <h2 class="text-3xl font-bold mb-6">EV Demand Forecast – Germany</h2>
+<!-- Product Launch -->
+<a href="cases/product-launch.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">Product Market Entry</h3>
+<p class="text-sm text-slate-500 mb-4">Strategy · Pricing</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Simulated pricing & market scenarios to maximize launch revenue and adoption.</p>
+</div>
+</a>
 
-  <p class="text-slate-600 mb-4">
-    <strong>Problem:</strong> Over-stocking and stockouts across regions.
-  </p>
+<!-- Inventory Optimization -->
+<a href="cases/inventory-opt.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">Inventory Optimization</h3>
+<p class="text-sm text-slate-500 mb-4">Ops · Simulation</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Reduced regional stock imbalance with scenario-driven dashboard and Power BI simulations.</p>
+</div>
+</a>
 
-  <canvas id="evChart" class="mb-6 h-64"></canvas>
+<!-- Churn Prediction -->
+<a href="cases/churn-analysis.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">Customer Churn Analysis</h3>
+<p class="text-sm text-slate-500 mb-4">Python · SQL · ML</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Predictive modeling reduced projected churn by 12%, enabling targeted retention campaigns.</p>
+</div>
+</a>
 
-  <p class="text-slate-600 mb-4">
-    <strong>Results:</strong> Inventory −7%, Forecast error −22%.
-  </p>
-</section>
+<!-- Funnel Optimization -->
+<a href="cases/funnel-optimization.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
+<h3 class="font-bold text-xl mb-2">Funnel Optimization</h3>
+<p class="text-sm text-slate-500 mb-4">A/B Testing · Conversion</p>
+<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
+<p class="text-slate-900 text-sm">Optimized conversion funnel, simulated multiple A/B scenarios for maximum ROI.</p>
+</div>
+</a>
 
-<!-- UX CASE -->
-<section id="uxCase" class="max-w-7xl mx-auto px-6 mb-40">
-  <h2 class="text-3xl font-bold mb-6">Mobile App UX Research – Banking Flow</h2>
-  <p class="text-slate-600 mb-4">
-    Drop-off −18%, Completion rate +20%.
-  </p>
-</section>
-
-<!-- UI CASE -->
-<section id="uiCase" class="max-w-7xl mx-auto px-6 mb-40">
-  <h2 class="text-3xl font-bold mb-6">Web App UI Redesign – Logistics SaaS</h2>
-  <p class="text-slate-600 mb-4">
-    Task speed +30%, Design system implemented.
-  </p>
+</div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="bg-slate-900 text-white rounded-[3rem] p-20 text-center max-w-7xl mx-auto mb-40">
-  <h2 class="text-4xl font-bold mb-6">Open to Werkstudent & Junior Roles</h2>
-  <p class="text-slate-400 mb-8">Data · Business · Product · UX · Marketing · Operations</p>
-  <a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 px-10 py-4 rounded-full font-bold">Download CV</a>
+<h2 class="text-4xl font-bold mb-6">Open to Werkstudent & Junior Roles</h2>
+<p class="text-slate-400 mb-8">
+Data · Business · Product · UX · Marketing · Operations
+</p>
+<a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 px-10 py-4 rounded-full font-bold">
+Download CV
+</a>
 </section>
 
+<!-- LANG TOGGLE -->
 <script>
-/* ======================
-   LANGUAGE TOGGLE
-====================== */
+let de=false;
+const langBtn=document.getElementById('langBtn');
+const heroTitle=document.getElementById('heroTitle');
+const heroSub=document.getElementById('heroSub');
 
-const langBtn = document.getElementById("langBtn");
-const heroTitle = document.getElementById("heroTitle");
-const heroSub = document.getElementById("heroSub");
+langBtn.onclick=()=>{
+de=!de;
+heroTitle.textContent = de
+? "SQL-basierte Analysen, Produktdenken & UX-Strategie"
+: "SQL-Driven Analytics, Product Thinking & UX Strategy";
 
-let de = false;
-
-langBtn.addEventListener("click", () => {
-  de = !de;
-
-  heroTitle.textContent = de
-    ? "SQL-basierte Analysen, Produktdenken & UX-Strategie"
-    : "SQL-Driven Analytics, Product Thinking & UX Strategy";
-
-  heroSub.textContent = de
-    ? "MSc Business Student in Deutschland mit Fokus auf Werkstudent- und Junior-Rollen in Data, Operations, Product, UX und Digital Marketing."
-    : "MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.";
-
-  langBtn.textContent = de ? "🇬🇧" : "🇩🇪";
-});
-
-/* ======================
-   EV CHART
-====================== */
-
-const ctx = document.getElementById("evChart").getContext("2d");
-
-new Chart(ctx, {
-  type: "line",
-  data: {
-    labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-    datasets: [
-      {
-        label: "Forecast Demand",
-        data: [120,150,180,240,300,360,400,420],
-        borderColor: "rgb(34,197,94)",
-        tension: 0.25
-      },
-      {
-        label: "Actual Demand",
-        data: [110,145,170,230,310,355,390,430],
-        borderColor: "rgb(14,165,233)",
-        tension: 0.25
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      legend: { position: "bottom" }
-    }
-  }
-});
+heroSub.textContent = de
+? "MSc Business Student in Deutschland mit Fokus auf Werkstudent- und Junior-Rollen in Data, Operations, Product, UX und Digital Marketing."
+: "MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.";
+};
 </script>
 
 </body>
