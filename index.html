@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Batuhan Dogan | Analytics · Product · UX · Growth</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Batuhan Dogan | Analytics · Product · UX · Growth</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Portfolio of Batuhan Dogan – Analytics, Product Strategy, UX Research and Growth projects. MSc Business student in Germany targeting Werkstudent and Junior roles." />
+  <meta name="author" content="Batuhan Dogan" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Batuhan Dogan – Analytics & Product Portfolio" />
+  <meta property="og:description" content="Case studies in SQL analytics, UX research, product strategy and growth." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-preview.png" />
+  <meta property="og:url" content="https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Batuhan Dogan – Analytics & Product Portfolio"/>
+  <meta name="twitter:description" content="SQL-driven analytics, UX research and product strategy projects."/>
+  <meta name="twitter:image" content="assets/og-preview.png"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
@@ -40,95 +62,57 @@
 <!-- CASES -->
 <section id="cases" class="max-w-7xl mx-auto px-6 mb-40">
   <h2 class="text-4xl font-bold mb-12">Selected Case Studies</h2>
-  
+
   <div class="grid md:grid-cols-3 gap-8">
-    <!-- EV Demand Forecast -->
+
     <a href="#evDemandCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
       <h3 class="font-bold text-xl">EV Demand Forecast</h3>
       <p class="text-sm text-slate-500">SQL · BI · Inventory −7%</p>
     </a>
 
-    <!-- Mobile App UX Research -->
     <a href="#uxCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
       <h3 class="font-bold text-xl">Mobile App UX Research</h3>
       <p class="text-sm text-slate-500">UX · Figma · Funnels +18%</p>
     </a>
 
-    <!-- UI Design System -->
     <a href="#uiCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
       <h3 class="font-bold text-xl">UI Design System</h3>
       <p class="text-sm text-slate-500">Figma · Web App</p>
     </a>
 
-    <!-- SEO Growth Engine -->
-    <a href="#seoCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">SEO Growth Engine</h3>
-      <p class="text-sm text-slate-500">Marketing · Traffic +40%</p>
-    </a>
-
-    <!-- Product Market Entry -->
-    <a href="#productCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">Product Market Entry</h3>
-      <p class="text-sm text-slate-500">Strategy · Pricing</p>
-    </a>
-
-    <!-- Inventory Optimization -->
-    <a href="#inventoryCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">Inventory Optimization</h3>
-      <p class="text-sm text-slate-500">SQL · Power BI · Ops</p>
-    </a>
-
-    <!-- Customer Churn Analysis -->
-    <a href="#churnCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">Customer Churn Analysis</h3>
-      <p class="text-sm text-slate-500">SQL · Python · Retention</p>
-    </a>
-
-    <!-- Marketing Funnel Optimization -->
-    <a href="#funnelCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
-      <h3 class="font-bold text-xl">Marketing Funnel Optimization</h3>
-      <p class="text-sm text-slate-500">Analytics · A/B Testing +18%</p>
-    </a>
   </div>
 </section>
 
-<!-- CASE CONTENTS -->
+<!-- EV CASE -->
 <section id="evDemandCase" class="max-w-7xl mx-auto px-6 mb-40">
   <h2 class="text-3xl font-bold mb-6">EV Demand Forecast – Germany</h2>
+
   <p class="text-slate-600 mb-4">
-    <strong>Problem:</strong> Over-stocking in some regions and stockouts in others, leading to operational inefficiency.  
-    <em>Data sources:</em> <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a>, 
-    <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>
+    <strong>Problem:</strong> Over-stocking and stockouts across regions.
   </p>
-  <p class="text-slate-600 mb-4"><strong>Approach:</strong> Cleaned 2.3M transaction rows in SQL, performed region-wise demand analysis, seasonal trend analysis, and simulated stock allocation in Power BI.</p>
-  <p class="text-slate-600 mb-4"><strong>Recommendation:</strong> Implement a region-wise inventory allocation dashboard with weekly SQL updates for the operations team.</p>
-  <p class="text-slate-600 mb-4"><strong>Implementation:</strong> Power BI dashboard with interactive slider to simulate demand changes by region.</p>
-  <canvas id="evChart" class="mb-6"></canvas>
-  <p class="text-slate-600 mb-4"><strong>Results / KPIs:</strong> Inventory −7%, Forecast error −22%, Decision speed +15%, Regional allocation optimized across 6 regions.</p>
+
+  <canvas id="evChart" class="mb-6 h-64"></canvas>
+
+  <p class="text-slate-600 mb-4">
+    <strong>Results:</strong> Inventory −7%, Forecast error −22%.
+  </p>
 </section>
 
+<!-- UX CASE -->
 <section id="uxCase" class="max-w-7xl mx-auto px-6 mb-40">
   <h2 class="text-3xl font-bold mb-6">Mobile App UX Research – Banking Flow</h2>
-  <p class="text-slate-600 mb-4"><strong>Problem:</strong> Users dropped off during identity verification and onboarding.</p>
-  <p class="text-slate-600 mb-4"><strong>Approach:</strong> User interviews, journey mapping, Figma wireframes, prototype testing with 42 users.</p>
-  <p class="text-slate-600 mb-4"><strong>Recommendation:</strong> Simplify verification steps, inline validation, clear progress indicators.</p>
-  <p class="text-slate-600 mb-4"><strong>Implementation:</strong> 10-screen Figma prototype with welcome, sign-up, identity verification, selfie capture, error handling, dashboard overview.</p>
-  <!-- Figma embed placeholder -->
-  <iframe src="YOUR_FIGMA_PROTOTYPE_LINK" width="100%" height="600px" class="mb-6"></iframe>
-  <p class="text-slate-600 mb-4"><strong>Results / KPIs:</strong> Drop-off −18%, Completion rate +20%, Positive usability feedback from all participants.</p>
+  <p class="text-slate-600 mb-4">
+    Drop-off −18%, Completion rate +20%.
+  </p>
 </section>
 
+<!-- UI CASE -->
 <section id="uiCase" class="max-w-7xl mx-auto px-6 mb-40">
   <h2 class="text-3xl font-bold mb-6">Web App UI Redesign – Logistics SaaS</h2>
-  <p class="text-slate-600 mb-4"><strong>Problem:</strong> Existing UI was inconsistent, slowing down task completion.</p>
-  <p class="text-slate-600 mb-4"><strong>Approach:</strong> Figma redesign, component library creation, token-based typography, colors, and grid systems.</p>
-  <p class="text-slate-600 mb-4"><strong>Recommendation:</strong> Implement scalable design system with dark/light mode.</p>
-  <p class="text-slate-600 mb-4"><strong>Implementation:</strong> Interactive Figma prototype embedded.</p>
-  <iframe src="YOUR_FIGMA_UI_PROTOTYPE_LINK" width="100%" height="600px" class="mb-6"></iframe>
-  <p class="text-slate-600 mb-4"><strong>Results / KPIs:</strong> Task speed +30%, Consistent UI across modules, 12 reusable components.</p>
+  <p class="text-slate-600 mb-4">
+    Task speed +30%, Design system implemented.
+  </p>
 </section>
-
-<!-- Remaining cases (SEO, Product Launch, Inventory, Churn, Funnel) follow same format with Chart.js interactivity placeholders -->
 
 <!-- CONTACT -->
 <section id="contact" class="bg-slate-900 text-white rounded-[3rem] p-20 text-center max-w-7xl mx-auto mb-40">
@@ -138,26 +122,60 @@
 </section>
 
 <script>
-let de=false;
-langBtn.onclick=()=>{
-  de=!de;
-  heroTitle.textContent = de ? "SQL-basierte Analysen, Produktdenken & UX-Strategie" : "SQL-Driven Analytics, Product Thinking & UX Strategy";
-  heroSub.textContent = de ? "MSc Business Student in Deutschland mit Fokus auf Werkstudent- und Junior-Rollen in Data, Operations, Product, UX und Digital Marketing." : "MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.";
-  // TODO: Add EN/DE toggle for each case header and description
-};
+/* ======================
+   LANGUAGE TOGGLE
+====================== */
 
-// EV Chart simulation
-const ctx = document.getElementById('evChart').getContext('2d');
-const initialData=[120,150,180,240,300,360,400,420];
-const actualData=[110,145,170,230,310,355,390,430];
-const evChart=new Chart(ctx,{
-  type:'line',
-  data:{
-    labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-    datasets:[
-      {label:"Forecast Demand", data:initialData, borderColor:"rgb(34,197,94)", fill:false, tension:0.2},
-      {label:"Actual Demand", data:actualData, borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
+const langBtn = document.getElementById("langBtn");
+const heroTitle = document.getElementById("heroTitle");
+const heroSub = document.getElementById("heroSub");
+
+let de = false;
+
+langBtn.addEventListener("click", () => {
+  de = !de;
+
+  heroTitle.textContent = de
+    ? "SQL-basierte Analysen, Produktdenken & UX-Strategie"
+    : "SQL-Driven Analytics, Product Thinking & UX Strategy";
+
+  heroSub.textContent = de
+    ? "MSc Business Student in Deutschland mit Fokus auf Werkstudent- und Junior-Rollen in Data, Operations, Product, UX und Digital Marketing."
+    : "MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.";
+
+  langBtn.textContent = de ? "🇬🇧" : "🇩🇪";
+});
+
+/* ======================
+   EV CHART
+====================== */
+
+const ctx = document.getElementById("evChart").getContext("2d");
+
+new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+    datasets: [
+      {
+        label: "Forecast Demand",
+        data: [120,150,180,240,300,360,400,420],
+        borderColor: "rgb(34,197,94)",
+        tension: 0.25
+      },
+      {
+        label: "Actual Demand",
+        data: [110,145,170,230,310,355,390,430],
+        borderColor: "rgb(14,165,233)",
+        tension: 0.25
+      }
     ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: "bottom" }
+    }
   }
 });
 </script>
