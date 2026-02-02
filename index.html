@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Batuhan Dogan | Analytics · Product · UX · Growth</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<!-- NAV -->
+<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
+  <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+    <span class="font-black text-xl">Batuhan Dogan</span>
+    <div class="flex gap-4 items-center text-sm font-semibold">
+      <a href="#cases">Cases</a>
+      <a href="#contact">Contact</a>
+      <button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">🇩🇪</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="pt-40 max-w-7xl mx-auto px-6 mb-40">
+  <h1 id="heroTitle" class="text-6xl font-black mb-6 leading-tight">
+    SQL-Driven Analytics, Product Thinking & UX Strategy
+  </h1>
+  <p id="heroSub" class="text-xl text-slate-600 max-w-3xl">
+    MSc Business student in Germany targeting Werkstudent & Junior roles in
+    Data, Operations, Product, UX and Digital Marketing.
+  </p>
+  <div class="mt-10 flex gap-4">
+    <a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 text-white px-8 py-4 rounded-full font-bold">Download CV</a>
+    <a href="#cases" class="border px-8 py-4 rounded-full font-bold">View Case Studies</a>
+  </div>
+</header>
+
+<!-- CASES -->
+<section id="cases" class="max-w-7xl mx-auto px-6 mb-40">
+  <h2 class="text-4xl font-bold mb-12">Selected Case Studies</h2>
+  
+  <div class="grid md:grid-cols-3 gap-8">
+    <!-- EV Demand Forecast -->
+    <a href="#evDemandCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">EV Demand Forecast</h3>
+      <p class="text-sm text-slate-500">SQL · BI · Inventory −7%</p>
+    </a>
+
+    <!-- Mobile App UX Research -->
+    <a href="#uxCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">Mobile App UX Research</h3>
+      <p class="text-sm text-slate-500">UX · Figma · Funnels +18%</p>
+    </a>
+
+    <!-- UI Design System -->
+    <a href="#uiCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">UI Design System</h3>
+      <p class="text-sm text-slate-500">Figma · Web App</p>
+    </a>
+
+    <!-- SEO Growth Engine -->
+    <a href="#seoCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">SEO Growth Engine</h3>
+      <p class="text-sm text-slate-500">Marketing · Traffic +40%</p>
+    </a>
+
+    <!-- Product Market Entry -->
+    <a href="#productCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">Product Market Entry</h3>
+      <p class="text-sm text-slate-500">Strategy · Pricing</p>
+    </a>
+
+    <!-- Inventory Optimization -->
+    <a href="#inventoryCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">Inventory Optimization</h3>
+      <p class="text-sm text-slate-500">SQL · Power BI · Ops</p>
+    </a>
+
+    <!-- Customer Churn Analysis -->
+    <a href="#churnCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">Customer Churn Analysis</h3>
+      <p class="text-sm text-slate-500">SQL · Python · Retention</p>
+    </a>
+
+    <!-- Marketing Funnel Optimization -->
+    <a href="#funnelCase" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl">Marketing Funnel Optimization</h3>
+      <p class="text-sm text-slate-500">Analytics · A/B Testing +18%</p>
+    </a>
+  </div>
+</section>
+
+<!-- CASE CONTENTS -->
+<section id="evDemandCase" class="max-w-7xl mx-auto px-6 mb-40">
+  <h2 class="text-3xl font-bold mb-6">EV Demand Forecast – Germany</h2>
+  <p class="text-slate-600 mb-4">
+    <strong>Problem:</strong> Over-stocking in some regions and stockouts in others, leading to operational inefficiency.  
+    <em>Data sources:</em> <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a>, 
+    <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>
+  </p>
+  <p class="text-slate-600 mb-4"><strong>Approach:</strong> Cleaned 2.3M transaction rows in SQL, performed region-wise demand analysis, seasonal trend analysis, and simulated stock allocation in Power BI.</p>
+  <p class="text-slate-600 mb-4"><strong>Recommendation:</strong> Implement a region-wise inventory allocation dashboard with weekly SQL updates for the operations team.</p>
+  <p class="text-slate-600 mb-4"><strong>Implementation:</strong> Power BI dashboard with interactive slider to simulate demand changes by region.</p>
+  <canvas id="evChart" class="mb-6"></canvas>
+  <p class="text-slate-600 mb-4"><strong>Results / KPIs:</strong> Inventory −7%, Forecast error −22%, Decision speed +15%, Regional allocation optimized across 6 regions.</p>
+</section>
+
+<section id="uxCase" class="max-w-7xl mx-auto px-6 mb-40">
+  <h2 class="text-3xl font-bold mb-6">Mobile App UX Research – Banking Flow</h2>
+  <p class="text-slate-600 mb-4"><strong>Problem:</strong> Users dropped off during identity verification and onboarding.</p>
+  <p class="text-slate-600 mb-4"><strong>Approach:</strong> User interviews, journey mapping, Figma wireframes, prototype testing with 42 users.</p>
+  <p class="text-slate-600 mb-4"><strong>Recommendation:</strong> Simplify verification steps, inline validation, clear progress indicators.</p>
+  <p class="text-slate-600 mb-4"><strong>Implementation:</strong> 10-screen Figma prototype with welcome, sign-up, identity verification, selfie capture, error handling, dashboard overview.</p>
+  <!-- Figma embed placeholder -->
+  <iframe src="YOUR_FIGMA_PROTOTYPE_LINK" width="100%" height="600px" class="mb-6"></iframe>
+  <p class="text-slate-600 mb-4"><strong>Results / KPIs:</strong> Drop-off −18%, Completion rate +20%, Positive usability feedback from all participants.</p>
+</section>
+
+<section id="uiCase" class="max-w-7xl mx-auto px-6 mb-40">
+  <h2 class="text-3xl font-bold mb-6">Web App UI Redesign – Logistics SaaS</h2>
+  <p class="text-slate-600 mb-4"><strong>Problem:</strong> Existing UI was inconsistent, slowing down task completion.</p>
+  <p class="text-slate-600 mb-4"><strong>Approach:</strong> Figma redesign, component library creation, token-based typography, colors, and grid systems.</p>
+  <p class="text-slate-600 mb-4"><strong>Recommendation:</strong> Implement scalable design system with dark/light mode.</p>
+  <p class="text-slate-600 mb-4"><strong>Implementation:</strong> Interactive Figma prototype embedded.</p>
+  <iframe src="YOUR_FIGMA_UI_PROTOTYPE_LINK" width="100%" height="600px" class="mb-6"></iframe>
+  <p class="text-slate-600 mb-4"><strong>Results / KPIs:</strong> Task speed +30%, Consistent UI across modules, 12 reusable components.</p>
+</section>
+
+<!-- Remaining cases (SEO, Product Launch, Inventory, Churn, Funnel) follow same format with Chart.js interactivity placeholders -->
+
+<!-- CONTACT -->
+<section id="contact" class="bg-slate-900 text-white rounded-[3rem] p-20 text-center max-w-7xl mx-auto mb-40">
+  <h2 class="text-4xl font-bold mb-6">Open to Werkstudent & Junior Roles</h2>
+  <p class="text-slate-400 mb-8">Data · Business · Product · UX · Marketing · Operations</p>
+  <a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 px-10 py-4 rounded-full font-bold">Download CV</a>
+</section>
+
+<script>
+let de=false;
+langBtn.onclick=()=>{
+  de=!de;
+  heroTitle.textContent = de ? "SQL-basierte Analysen, Produktdenken & UX-Strategie" : "SQL-Driven Analytics, Product Thinking & UX Strategy";
+  heroSub.textContent = de ? "MSc Business Student in Deutschland mit Fokus auf Werkstudent- und Junior-Rollen in Data, Operations, Product, UX und Digital Marketing." : "MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.";
+  // TODO: Add EN/DE toggle for each case header and description
+};
+
+// EV Chart simulation
+const ctx = document.getElementById('evChart').getContext('2d');
+const initialData=[120,150,180,240,300,360,400,420];
+const actualData=[110,145,170,230,310,355,390,430];
+const evChart=new Chart(ctx,{
+  type:'line',
+  data:{
+    labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+    datasets:[
+      {label:"Forecast Demand", data:initialData, borderColor:"rgb(34,197,94)", fill:false, tension:0.2},
+      {label:"Actual Demand", data:actualData, borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
+    ]
+  }
+});
+</script>
+
+</body>
+</html>
