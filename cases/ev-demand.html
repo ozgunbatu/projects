@@ -10,79 +10,82 @@
   .kpi { font-size: 2rem; font-weight: bold; color: #16a34a; }
   .kpi-label { font-size: 1rem; color: #374151; }
   .hover-link { color:#2563eb; text-decoration:underline; }
+  .card { background:white; border-radius:1.5rem; padding:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
 </style>
 </head>
-  
+
 <body class="bg-slate-50 text-slate-900">
 
-<!-- HEADER -->
-<header class="pt-20 max-w-6xl mx-auto px-6 mb-20 text-center">
-  <h1 class="text-5xl font-extrabold mb-4">EV Demand Forecast – Germany</h1>
-  <p class="text-xl text-slate-600 max-w-3xl mx-auto">
-    With the rapid rise of electric vehicle adoption, regional disparities in inventory caused overstock in some cities and shortages in others. 
-    Using historical sales & registration data, we optimized inventory allocation and improved forecast accuracy.
-  </p>
-  <div class="mt-6 space-y-2">
-    <p class="text-slate-500 text-sm">
-      <span class="font-semibold">Data sources:</span> 
-      <a href="https://example.com/historical-ev-sales.csv" target="_blank" class="hover-link">Historical EV sales & listings (downloaded CSV)</a>,
-      <a href="https://example.com/zsw-ev-data.csv" target="_blank" class="hover-link">ZSW Electromobility – Regional registrations (CSV)</a>
-    </p>
+<!-- LANG TOGGLE -->
+<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <span class="font-black text-xl">Batuhan Dogan</span>
+    <button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">EN/DE</button>
   </div>
+</nav>
+
+<!-- HEADER / PROBLEM -->
+<header class="pt-32 max-w-6xl mx-auto px-6 mb-10 text-center">
+  <h1 id="heroTitle" class="text-4xl md:text-5xl font-extrabold mb-4">
+    Electric Vehicle Demand Forecast – Germany
+  </h1>
+  <p id="heroSub" class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-4">
+    The rapid adoption of electric vehicles has created regional inventory imbalances, leading to both overstock and shortages. Using historical sales & registration data, we optimized allocations and improved forecast accuracy.
+  </p>
+  <p class="text-slate-500 text-sm">
+    <span class="font-semibold">Data sources:</span>
+    <a href="https://example.com/historical-ev-sales.csv" target="_blank" class="hover-link">Historical EV sales & listings (CSV)</a>,
+    <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="hover-link">ZSW Electromobility – Regional registrations (CSV)</a>
+  </p>
 </header>
 
-<!-- KPI CARDS -->
-<section class="max-w-6xl mx-auto px-6 mb-20 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-  <div class="bg-white p-6 rounded-3xl shadow">
+<!-- KPI -->
+<section class="max-w-6xl mx-auto px-6 mb-10 flex justify-around text-center">
+  <div class="card">
     <p class="kpi" id="invReduction">0</p>
-    <p class="kpi-label">Inventory Reduction</p>
+    <p class="kpi-label" id="invLabel">Inventory Reduction</p>
   </div>
-  <div class="bg-white p-6 rounded-3xl shadow">
+  <div class="card">
     <p class="kpi" id="forecastError">0</p>
-    <p class="kpi-label">Forecast Error Improvement</p>
+    <p class="kpi-label" id="errorLabel">Forecast Error Improvement</p>
   </div>
-  <div class="bg-white p-6 rounded-3xl shadow">
-    <p class="kpi" id="decisionSpeed">0</p>
-    <p class="kpi-label">Decision Speed Increase</p>
+  <div class="card">
+    <p class="kpi" id="decisionSpeed">0%</p>
+    <p class="kpi-label" id="speedLabel">Decision Speed Increase</p>
   </div>
 </section>
 
-<!-- LINE CHART: Forecast vs Actual -->
-<section class="max-w-6xl mx-auto px-6 mb-20">
-  <h2 class="text-3xl font-bold mb-6 text-center">Forecast vs Actual Demand (Monthly)</h2>
-  <canvas id="forecastChart" class="shadow rounded-3xl bg-white p-4"></canvas>
-</section>
-
-<!-- BAR CHART: Regional Inventory Before/After -->
-<section class="max-w-6xl mx-auto px-6 mb-20">
-  <h2 class="text-3xl font-bold mb-6 text-center">Regional Inventory – Before & After Optimization</h2>
-  <canvas id="regionalChart" class="shadow rounded-3xl bg-white p-4"></canvas>
-</section>
-
-<!-- Recommendations -->
-<section class="max-w-6xl mx-auto px-6 mb-20 bg-white p-10 rounded-3xl shadow">
-  <h2 class="text-3xl font-bold mb-6">Recommendations & Implementation</h2>
-  <ul class="list-disc list-inside text-slate-700 space-y-3">
-    <li>Implement region-wise inventory allocation dashboards with weekly SQL updates for operations.</li>
-    <li>Prioritize high-demand cities while reducing overstock in low-demand areas.</li>
-    <li>Integrate Power BI interactive dashboards for scenario simulations and trend monitoring.</li>
-    <li>Regularly update forecasts with historical sales & registration data to reduce forecast error.</li>
-  </ul>
-</section>
-
-<!-- RESULTS -->
-<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-3 gap-8 text-center">
-  <div class="bg-white p-6 rounded-3xl shadow">
-    <p class="kpi">−7%</p>
-    <p class="kpi-label">Overall Inventory Reduction</p>
+<!-- GRAPHS -->
+<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-2 gap-8">
+  <div class="card">
+    <h2 class="text-xl font-bold mb-4 text-center" id="forecastTitle">Forecast vs Actual Demand</h2>
+    <canvas id="forecastChart"></canvas>
   </div>
-  <div class="bg-white p-6 rounded-3xl shadow">
-    <p class="kpi">−22%</p>
-    <p class="kpi-label">Forecast Error Improvement</p>
+  <div class="card">
+    <h2 class="text-xl font-bold mb-4 text-center" id="regionalTitle">Regional Inventory – Before & After</h2>
+    <canvas id="regionalChart"></canvas>
   </div>
-  <div class="bg-white p-6 rounded-3xl shadow">
-    <p class="kpi">+15%</p>
-    <p class="kpi-label">Decision Speed Increase</p>
+</section>
+
+<!-- RECOMMENDATIONS & RESULTS -->
+<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-2 gap-8">
+  <div class="card">
+    <h3 class="text-xl font-bold mb-4" id="recTitle">Recommendations</h3>
+    <ul class="list-disc list-inside text-slate-700 space-y-2" id="recList">
+      <li>Implement region-wise inventory dashboards with weekly SQL updates for operations.</li>
+      <li>Prioritize high-demand cities while reducing overstock in low-demand areas.</li>
+      <li>Integrate Power BI interactive dashboards for scenario simulations and trend monitoring.</li>
+      <li>Regularly update forecasts using historical sales & registration data.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 class="text-xl font-bold mb-4" id="resultTitle">Results</h3>
+    <ul class="list-disc list-inside text-slate-700 space-y-2">
+      <li>Inventory reduced by 7% overall</li>
+      <li>Forecast error improved by 22%</li>
+      <li>Decision speed increased by 15%</li>
+      <li>Regional stock balance optimized across 6 cities</li>
+    </ul>
   </div>
 </section>
 
@@ -93,6 +96,22 @@
 
 <!-- JS -->
 <script>
+// LANG TOGGLE
+let de=false;
+langBtn.onclick=()=>{
+  de=!de;
+  heroTitle.textContent = de ? "Prognose der Nachfrage nach Elektrofahrzeugen – Deutschland" : "Electric Vehicle Demand Forecast – Germany";
+  heroSub.textContent = de ? "Die schnelle Einführung von Elektrofahrzeugen hat regionale Bestandsungleichgewichte verursacht, was zu Überbeständen und Engpässen führt. Mithilfe historischer Verkaufs- und Registrierungsdaten haben wir die Bestandsverteilung optimiert und die Prognosegenauigkeit verbessert." :
+                             "The rapid adoption of electric vehicles has created regional inventory imbalances, leading to both overstock and shortages. Using historical sales & registration data, we optimized allocations and improved forecast accuracy.";
+  invLabel.textContent = de ? "Bestandsreduzierung" : "Inventory Reduction";
+  errorLabel.textContent = de ? "Prognosefehler-Verbesserung" : "Forecast Error Improvement";
+  speedLabel.textContent = de ? "Erhöhung der Entscheidungsgeschwindigkeit" : "Decision Speed Increase";
+  forecastTitle.textContent = de ? "Prognose vs. tatsächliche Nachfrage" : "Forecast vs Actual Demand";
+  regionalTitle.textContent = de ? "Regionaler Bestand – Vorher & Nachher" : "Regional Inventory – Before & After";
+  recTitle.textContent = de ? "Empfehlungen" : "Recommendations";
+  resultTitle.textContent = de ? "Ergebnisse" : "Results";
+};
+
 // KPI Animation
 function animateValue(id, start, end, duration) {
   let obj = document.getElementById(id);
@@ -105,7 +124,7 @@ function animateValue(id, start, end, duration) {
       current = end;
       clearInterval(timer);
     }
-    obj.textContent = Math.round(current) + (id==="decisionSpeed"?"%":"");
+    obj.textContent = id==="decisionSpeed"? Math.round(current)+"%" : Math.round(current);
   }, 50);
 }
 animateValue("invReduction", 0, 7, 1500);
@@ -123,7 +142,7 @@ new Chart(ctxForecast, {
       {label:"Actual Demand", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.3}
     ]
   },
-  options: { responsive:true, plugins:{legend:{position:"top"}} }
+  options:{ responsive:true, plugins:{legend:{position:"top"}}, scales:{y:{beginAtZero:true}} }
 });
 
 // Regional Inventory Chart
