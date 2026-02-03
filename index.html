@@ -3,153 +3,107 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Batuhan Dogan | Analytics · Product · UX · Growth</title>
+<title>Batuhan Dogan | Analytics · Product · UX · Strategy</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body class="bg-slate-50 text-slate-900">
-  
+<body class="bg-slate-50 text-slate-900 font-sans">
+
 <!-- NAV -->
 <nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
   <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
     <span class="font-black text-xl">Batuhan Dogan</span>
     <div class="flex gap-4 items-center text-sm font-semibold">
-      <a href="#cases">Cases</a>
-      <a href="#contact">Contact</a>
+      <a href="#cases" class="hover:text-emerald-600 transition">Cases</a>
+      <a href="#contact" class="hover:text-emerald-600 transition">Contact</a>
       <button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">🇩🇪</button>
     </div>
   </div>
 </nav>
 
 <!-- HERO -->
-<header class="pt-40 max-w-7xl mx-auto px-6 mb-40 text-center">
-<h1 id="heroTitle" class="text-6xl font-black mb-6 leading-tight">
-SQL-Driven Analytics, Product Thinking & UX Strategy
-</h1>
-<p id="heroSub" class="text-xl text-slate-600 max-w-3xl mx-auto">
-MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.
-</p>
-
-<div class="mt-10 flex justify-center gap-4">
-<a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 text-white px-8 py-4 rounded-full font-bold">
-Download CV
-</a>
-<a href="#cases" class="border px-8 py-4 rounded-full font-bold">
-View Case Studies
-</a>
-</div>
+<header class="pt-40 max-w-7xl mx-auto px-6 mb-40">
+  <h1 id="heroTitle" class="text-6xl font-black mb-6 leading-tight">
+    SQL-Driven Analytics, Product Thinking & UX Strategy
+  </h1>
+  <p id="heroSub" class="text-xl text-slate-600 max-w-3xl mb-6">
+    MSc Business student in Germany, delivering structured insights, operational excellence, and product-led growth strategies.
+  </p>
+  <div class="flex gap-4">
+    <a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 text-white px-8 py-4 rounded-full font-bold hover:bg-emerald-700 transition">Download CV</a>
+    <a href="#cases" class="border px-8 py-4 rounded-full font-bold hover:bg-slate-100 transition">View Case Studies</a>
+  </div>
 </header>
 
-<!-- CASES GRID -->
+<!-- CASES LIST -->
 <section id="cases" class="max-w-7xl mx-auto px-6 mb-40">
-<h2 class="text-4xl font-bold mb-12 text-center">Selected Case Studies</h2>
+  <h2 class="text-4xl font-bold mb-12">Selected Case Studies</h2>
+  
+  <div class="grid md:grid-cols-3 gap-8">
+    <a href="cases/ev-demand.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">EV Demand Forecast</h3>
+      <p class="text-sm text-slate-500">SQL · BI · Inventory Optimization</p>
+      <p class="text-sm text-slate-400 mt-2">Inventory −7%, Forecast Error −22%, Decision Speed +15%</p>
+    </a>
 
-<div class="grid md:grid-cols-3 gap-8">
+    <a href="cases/ux-banking.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">Mobile App UX Research</h3>
+      <p class="text-sm text-slate-500">UX · Figma · Funnel Optimization</p>
+      <p class="text-sm text-slate-400 mt-2">Drop-off −18%, Completion Rate +20%, Positive Feedback 100%</p>
+    </a>
 
-<!-- EV Demand -->
-<a href="cases/ev-demand.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">EV Demand Forecast</h3>
-<p class="text-sm text-slate-500 mb-4">SQL · Power BI · Ops</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Reduced forecast error by 22% and optimized inventory across 6 regions. Interactive simulation included.</p>
-</div>
-</a>
+    <a href="cases/ui-logistics.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">UI Design System</h3>
+      <p class="text-sm text-slate-500">Figma · Web App · Design Tokens</p>
+      <p class="text-sm text-slate-400 mt-2">Task Speed +30%, Consistent UI, 12 Reusable Components</p>
+    </a>
 
-<!-- UX Banking Flow -->
-<a href="cases/ux-banking.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">Mobile App UX Research</h3>
-<p class="text-sm text-slate-500 mb-4">UX · Figma · Funnels</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Improved onboarding completion by 18% with prototype testing and iterative design.</p>
-</div>
-</a>
+    <a href="cases/seo-growth.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">SEO Growth Engine</h3>
+      <p class="text-sm text-slate-500">Marketing · SEO · Traffic Optimization</p>
+      <p class="text-sm text-slate-400 mt-2">Organic Traffic +40%, CTR +15%, Ranking Top 3 for 12 Keywords</p>
+    </a>
 
-<!-- UI Logistics SaaS -->
-<a href="cases/ui-logistics.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">UI Design System</h3>
-<p class="text-sm text-slate-500 mb-4">Figma · Web App</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Created scalable component library with +30% task speed and dark mode support.</p>
-</div>
-</a>
+    <a href="cases/product-launch.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">Product Market Entry</h3>
+      <p class="text-sm text-slate-500">Strategy · Pricing · Market Research</p>
+      <p class="text-sm text-slate-400 mt-2">Revenue Forecast +25%, Market Share 10% in 6 Months</p>
+    </a>
 
-<!-- SEO Growth -->
-<a href="cases/seo-growth.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">SEO Growth Engine</h3>
-<p class="text-sm text-slate-500 mb-4">Marketing · Traffic</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Boosted organic traffic by 40% through keyword analysis and funnel optimization.</p>
-</div>
-</a>
+    <a href="cases/inventory-opt.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">Inventory Optimization</h3>
+      <p class="text-sm text-slate-500">SQL · Power BI · Operations</p>
+      <p class="text-sm text-slate-400 mt-2">Stock-out −12%, Holding Cost −8%, Lead Time −10%</p>
+    </a>
 
-<!-- Product Launch -->
-<a href="cases/product-launch.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">Product Market Entry</h3>
-<p class="text-sm text-slate-500 mb-4">Strategy · Pricing</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Simulated pricing & market scenarios to maximize launch revenue and adoption.</p>
-</div>
-</a>
+    <a href="cases/churn-analysis.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">Customer Churn Analysis</h3>
+      <p class="text-sm text-slate-500">SQL · Python · Retention</p>
+      <p class="text-sm text-slate-400 mt-2">Churn −15%, Retention +18%, LTV +12%</p>
+    </a>
 
-<!-- Inventory Optimization -->
-<a href="cases/inventory-opt.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">Inventory Optimization</h3>
-<p class="text-sm text-slate-500 mb-4">Ops · Simulation</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Reduced regional stock imbalance with scenario-driven dashboard and Power BI simulations.</p>
-</div>
-</a>
+    <a href="cases/funnel-optimization.html" class="bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition">
+      <h3 class="font-bold text-xl mb-2">Marketing Funnel Optimization</h3>
+      <p class="text-sm text-slate-500">A/B Testing · Analytics · Conversion</p>
+      <p class="text-sm text-slate-400 mt-2">Conversion +18%, CPA −12%, Funnel Completion +20%</p>
+    </a>
+  </div>
+</section>
 
-<!-- Churn Prediction -->
-<a href="cases/churn-analysis.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">Customer Churn Analysis</h3>
-<p class="text-sm text-slate-500 mb-4">Python · SQL · ML</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Predictive modeling reduced projected churn by 12%, enabling targeted retention campaigns.</p>
-</div>
-</a>
-
-<!-- Funnel Optimization -->
-<a href="cases/funnel-optimization.html" class="group bg-white p-8 rounded-3xl shadow hover:scale-[1.03] transition relative">
-<h3 class="font-bold text-xl mb-2">Funnel Optimization</h3>
-<p class="text-sm text-slate-500 mb-4">A/B Testing · Conversion</p>
-<div class="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black/5 flex items-center justify-center text-center p-4 rounded-3xl">
-<p class="text-slate-900 text-sm">Optimized conversion funnel, simulated multiple A/B scenarios for maximum ROI.</p>
-</div>
-</a>
-
-</div>
+<!-- EV Demand Chart -->
+<section class="max-w-7xl mx-auto px-6 mb-40">
+  <h2 class="text-3xl font-bold mb-6">EV Demand Forecast – Germany</h2>
+  <canvas id="evChart" class="mb-6 rounded-lg shadow-lg"></canvas>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="bg-slate-900 text-white rounded-[3rem] p-20 text-center max-w-7xl mx-auto mb-40">
-<h2 class="text-4xl font-bold mb-6">Open to Werkstudent & Junior Roles</h2>
-<p class="text-slate-400 mb-8">
-Data · Business · Product · UX · Marketing · Operations
-</p>
-<a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 px-10 py-4 rounded-full font-bold">
-Download CV
-</a>
+  <h2 class="text-4xl font-bold mb-6">Open to Werkstudent & Junior Roles</h2>
+  <p class="text-slate-400 mb-8">Data · Business · Product · UX · Marketing · Operations</p>
+  <a href="assets/Batuhan_Dogan_CV.pdf" class="bg-emerald-600 px-10 py-4 rounded-full font-bold hover:bg-emerald-700 transition">Download CV</a>
 </section>
 
-<!-- LANG TOGGLE -->
-<script>
-let de=false;
-const langBtn=document.getElementById('langBtn');
-const heroTitle=document.getElementById('heroTitle');
-const heroSub=document.getElementById('heroSub');
-
-langBtn.onclick=()=>{
-de=!de;
-heroTitle.textContent = de
-? "SQL-basierte Analysen, Produktdenken & UX-Strategie"
-: "SQL-Driven Analytics, Product Thinking & UX Strategy";
-
-heroSub.textContent = de
-? "MSc Business Student in Deutschland mit Fokus auf Werkstudent- und Junior-Rollen in Data, Operations, Product, UX und Digital Marketing."
-: "MSc Business student in Germany targeting Werkstudent & Junior roles in Data, Operations, Product, UX and Digital Marketing.";
-};
-</script>
-
+<script src="scripts/charts.js"></script>
 </body>
 </html>
