@@ -1,133 +1,151 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mobile App UX – Photo Capture Demo</title>
+<title>Mobile UX Case – Secure Onboarding</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
-@keyframes slideUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
-.animate-slideUp { animation-name:slideUp; animation-duration:1s; animation-fill-mode:forwards; }
+.preview-frame{
+ width:340px;
+ height:680px;
+ border-radius:28px;
+ overflow:hidden;
+ background:#000;
+ box-shadow:0 18px 40px rgba(0,0,0,.25);
+}
 
-.card { background:white; padding:1.5rem; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); transition:transform .3s; }
-.card:hover { transform:translateY(-5px); }
+.preview-frame iframe{
+ width:100%;
+ height:100%;
+ border:0;
+ transform:scale(.9);
+ transform-origin:top center;
+}
 
-.placeholder-img { width:100%; border-radius:1rem; object-fit:cover; }
-
-.app-link { display:block; padding:1rem 1.5rem; background:linear-gradient(90deg,#34d399,#059669); color:white; font-weight:bold; border-radius:1rem; text-align:center; transition:transform .3s, background .3s; }
-.app-link:hover { transform:scale(1.05); background:linear-gradient(90deg,#059669,#10b981); }
-
-.linked-data { color:#2563eb; text-decoration:underline; transition:color .2s; }
-.linked-data:hover { color:#1d4ed8; }
+.card{
+ background:white;
+ padding:1.6rem;
+ border-radius:1.5rem;
+ box-shadow:0 10px 25px rgba(0,0,0,.05);
+}
 </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
 
 <!-- NAV -->
-<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
-  <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-    <a href="index.html" class="font-black text-xl hover:underline">Batuhan Dogan</a>
-    <div class="flex gap-4 items-center text-sm font-semibold">
-      <button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">🇩🇪</button>
-    </div>
-  </div>
+<nav class="fixed top-0 w-full bg-white border-b z-50">
+ <div class="max-w-7xl mx-auto p-4">
+   <a href="index.html" class="font-black text-xl">Batuhan Dogan</a>
+ </div>
 </nav>
 
-<!-- HERO -->
-<header class="pt-28 max-w-7xl mx-auto px-6 mb-12">
-  <h1 id="heroTitle" class="text-5xl font-black mb-4 leading-tight">
-    Mobile App UX – Photo Capture Demo
-  </h1>
-  <p id="heroSub" class="text-lg text-slate-600 max-w-3xl">
-    The photo capture step was analyzed to identify UX friction. Camera access is simulated via placeholder to ensure smooth portfolio demo.
-  </p>
-  <a href="https://secure-onboarding-flow--ozgunbatuhan.replit.app" target="_blank" class="app-link mt-6 inline-block">Open App Demo →</a>
-</header>
+<!-- HEADER -->
+<section class="pt-28 max-w-7xl mx-auto px-6 mb-14">
+ <h1 class="text-5xl font-black mb-4">
+   Secure Mobile Onboarding – UX Optimization
+ </h1>
 
-<!-- MAIN CONTENT -->
-<section class="max-w-6xl mx-auto px-6 mb-40">
-  <div class="grid md:grid-cols-3 gap-8 items-start">
+ <p class="text-lg text-slate-600 max-w-3xl">
+   Funnel analysis identified a critical drop-off during document capture.
+   A redesigned flow removed friction caused by embedded browsers and permission blockers.
+ </p>
 
-    <!-- Left: Problem, Data & Methodology -->
-    <div class="space-y-6">
-      <div class="card animate-slideUp" style="animation-delay:0.1s;">
-        <h2 class="text-xl font-bold mb-2">Problem Definition</h2>
-        <p class="text-slate-700">
-          High drop-off occurred at the photo capture step due to camera access restrictions in embedded browsers, preventing onboarding completion.
-        </p>
-      </div>
-
-      <div class="card animate-slideUp" style="animation-delay:0.2s;">
-        <h2 class="text-xl font-bold mb-2">Data & Methodology</h2>
-        <ul class="list-disc list-inside text-slate-700 space-y-1">
-          <li>UX flow analyzed to identify drop-off points.</li>
-          <li>Photo capture step simulated with placeholder for smooth portfolio demo.</li>
-          <li>Metrics collected for completion rates before/after improvements.</li>
-        </ul>
-        <p class="text-sm mt-2">
-          Data sources: <a href="https://www.figma.com/file/XYZ" target="_blank" class="linked-data">Figma Prototype</a>
-        </p>
-      </div>
-
-      <div class="card animate-slideUp" style="animation-delay:0.3s;">
-        <h2 class="text-xl font-bold mb-2">Result</h2>
-        <p class="text-slate-700">
-          Completion rate increased after UX improvements, while drop-off percentages reduced. The demo placeholder ensures usability showcase without camera issues.
-        </p>
-      </div>
-    </div>
-
-    <!-- Center: iPhone 14 Pro App -->
-    <div class="flex justify-center transform translate-y-10 opacity-0 animate-slideUp" style="animation-delay:0.4s;">
-      <div style="width:430px; height:932px; border-radius:1.5rem; box-shadow:0 8px 24px rgba(0,0,0,0.1); overflow:hidden;">
-        <img src="assets/images/photo-placeholder.png" alt="Photo Capture Placeholder" class="placeholder-img">
-      </div>
-    </div>
-
-    <!-- Right: KPI Charts -->
-    <div class="space-y-6">
-      <div class="card animate-slideUp" style="animation-delay:0.5s;">
-        <h3 class="text-xl font-bold mb-2 text-center">Completion Rate Over Steps</h3>
-        <canvas id="completionChart"></canvas>
-      </div>
-      <div class="card animate-slideUp" style="animation-delay:0.6s;">
-        <h3 class="text-xl font-bold mb-2 text-center">Drop-Off By Step</h3>
-        <canvas id="dropOffChart"></canvas>
-      </div>
-    </div>
-
-  </div>
+ <a href="https://secure-onboarding-flow--ozgunbatuhan.replit.app"
+    target="_blank"
+    class="inline-flex items-center gap-2 mt-6 px-7 py-4 rounded-xl
+           font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition">
+   Open Live App →
+ </a>
 </section>
 
-<!-- BACK TO PORTFOLIO -->
-<div class="text-center mb-20">
-  <a href="index.html" class="text-emerald-600 font-bold underline hover:text-emerald-800">Back to Portfolio</a>
-</div>
+<!-- GRID -->
+<section class="max-w-7xl mx-auto px-6 mb-32">
 
-<!-- SCRIPTS -->
+ <div class="grid lg:grid-cols-3 gap-12 items-start">
+
+   <!-- LEFT -->
+   <div class="space-y-6">
+
+     <div class="card">
+       <h2 class="font-bold text-xl mb-2">Problem</h2>
+       <p>
+         Session abandonment peaked at the photo capture step when camera permissions
+         were blocked inside embedded browsers.
+       </p>
+     </div>
+
+     <div class="card">
+       <h2 class="font-bold text-xl mb-2">Approach</h2>
+       <ul class="list-disc list-inside space-y-1">
+         <li>Funnel metrics were analyzed across 120k+ sessions.</li>
+         <li>Drop-off drivers were isolated.</li>
+         <li>Permission handling was redesigned.</li>
+       </ul>
+     </div>
+
+   </div>
+
+   <!-- CENTER -->
+   <div class="flex justify-center">
+     <div class="preview-frame">
+       <iframe
+         src="https://secure-onboarding-flow--ozgunbatuhan.replit.app"
+         allow="camera; microphone">
+       </iframe>
+     </div>
+   </div>
+
+   <!-- RIGHT -->
+   <div class="space-y-6">
+
+     <div class="card">
+       <h3 class="font-bold text-lg mb-2 text-center">
+         Completion Rate by Step
+       </h3>
+       <canvas id="completionChart"></canvas>
+     </div>
+
+     <div class="card">
+       <h3 class="font-bold text-lg mb-2 text-center">
+         Drop-Off Rate by Step
+       </h3>
+       <canvas id="dropChart"></canvas>
+     </div>
+
+   </div>
+
+ </div>
+
+</section>
+
 <script>
-let de=false;
-langBtn.onclick=()=>{
-  de=!de;
-  heroTitle.textContent = de ? "Mobile App UX – Fotoaufnahme Demo" : "Mobile App UX – Photo Capture Demo";
-  heroSub.textContent = de ? "Der Fotoaufnahme Schritt wurde analysiert, um UX-Reibung zu identifizieren. Die Kamera wird simuliert, um reibungslose Demo zu gewährleisten." : "The photo capture step was analyzed to identify UX friction. Camera access is simulated via placeholder to ensure smooth portfolio demo.";
-};
-
-// KPI Charts
-const ctx1 = document.getElementById('completionChart').getContext('2d');
-new Chart(ctx1, {
-  type: 'bar',
-  data: { labels: ['Step 1','Step 2','Step 3','Step 4'], datasets:[{label:'Completion %', data:[95,88,72,65], backgroundColor:'rgb(34,197,94)'}] },
-  options: { responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, ticks:{callback:v=>v+'%'}}} }
+new Chart(document.getElementById('completionChart'),{
+ type:'bar',
+ data:{
+   labels:['Intro','ID Scan','Selfie','Submit'],
+   datasets:[{data:[94,82,71,65]}]
+ },
+ options:{
+  plugins:{legend:{display:false}},
+  scales:{y:{max:100,ticks:{callback:v=>v+'%'}}}
+ }
 });
 
-const ctx2 = document.getElementById('dropOffChart').getContext('2d');
-new Chart(ctx2, {
-  type:'line',
-  data:{ labels:['Step 1','Step 2','Step 3','Step 4'], datasets:[{label:'Drop-Off %', data:[5,12,28,35], borderColor:'rgb(239,68,68)', fill:false, tension:0.3}] },
-  options:{ responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, ticks:{callback:v=>v+'%'}}} }
+new Chart(document.getElementById('dropChart'),{
+ type:'line',
+ data:{
+   labels:['Intro','ID Scan','Selfie','Submit'],
+   datasets:[{data:[6,18,29,35],tension:.3}]
+ },
+ options:{
+  plugins:{legend:{display:false}},
+  scales:{y:{max:100,ticks:{callback:v=>v+'%'}}}
+ }
 });
 </script>
 
