@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Mobile App UX Research – Banking Flow</title>
+<title>Mobile App UX – Photo Capture Demo</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 @keyframes slideUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
 .animate-slideUp { animation-name:slideUp; animation-duration:1s; animation-fill-mode:forwards; }
 .card { background:white; padding:1.5rem; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.placeholder-img { width:100%; border-radius:1rem; object-fit:cover; }
 </style>
 </head>
 
@@ -28,10 +29,10 @@
 <!-- HERO -->
 <header class="pt-28 max-w-7xl mx-auto px-6 mb-20">
   <h1 id="heroTitle" class="text-5xl font-black mb-6 leading-tight">
-    Mobile App UX Research – Banking Flow
+    Mobile App UX – Photo Capture Demo
   </h1>
   <p id="heroSub" class="text-lg text-slate-600 max-w-3xl">
-    User onboarding flow was analyzed to reduce drop-offs during identity verification.
+    The photo capture step was analyzed to identify UX friction. Camera access is simulated via placeholder to ensure smooth demo in portfolio.
   </p>
 </header>
 
@@ -44,15 +45,15 @@
       <div class="card">
         <h2 class="text-xl font-bold mb-2">Problem Definition</h2>
         <p class="text-slate-700">
-          Identity verification and onboarding caused high drop-off rates across users. Friction points were identified via journey mapping and qualitative interviews.
+          Users were stuck at the photo capture step due to camera access restrictions in embedded browsers. This blocked onboarding completion.
         </p>
       </div>
       <div class="card">
         <h2 class="text-xl font-bold mb-2">Data & Methodology</h2>
         <ul class="list-disc list-inside text-slate-700 space-y-1">
-          <li>User journeys mapped and friction points highlighted.</li>
-          <li>Figma prototypes tested with 42 participants.</li>
-          <li>Metrics recorded and analyzed before and after UX improvements.</li>
+          <li>UX flow analyzed to identify drop-off points.</li>
+          <li>Photo capture step simulated with placeholder images for demo.</li>
+          <li>Metrics collected for completion rates before/after improvements.</li>
         </ul>
         <p class="text-sm text-blue-600 mt-2">
           Data sources: <a href="https://www.figma.com/file/XYZ" target="_blank" class="underline">Figma Prototype</a>
@@ -62,12 +63,10 @@
 
     <!-- Center: iPhone 14 Pro App -->
     <div class="flex justify-center transform translate-y-10 opacity-0 animate-slideUp" style="animation-delay:0.3s;">
-      <iframe 
-        src="https://secure-onboarding-flow--ozgunbatuhan.replit.app" 
-        width="430" height="932" 
-        style="border-radius:1.5rem; border:0; box-shadow:0 4px 12px rgba(0,0,0,0.05);" 
-        allowfullscreen>
-      </iframe>
+      <div style="width:430px; height:932px; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); overflow:hidden;">
+        <!-- Placeholder for camera step -->
+        <img src="assets/images/photo-placeholder.png" alt="Photo Capture Placeholder" class="placeholder-img">
+      </div>
     </div>
 
     <!-- Right: KPI & Charts -->
