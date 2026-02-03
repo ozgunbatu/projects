@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Warehouse & Fleet Optimization – UX Case</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root {
+  --kpi-green: #16a34a; /* EV Demand yeşil tonu */
+  --brand-blue: #2563eb;
+}
+.kpi-num { color: var(--kpi-green); font-size:2.6rem; font-weight:900; }
+.back-link{ display:flex; align-items:center; gap:0.5rem; font-weight:500; color:var(--brand-blue);}
+.back-link:hover{text-decoration:underline;}
+</style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<!-- HEADER -->
+<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-40">
+  <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+    <a href="https://ozgunbatu.github.io/projects/" class="back-link text-lg">← Back to Portfolio</a>
+    <span class="font-black text-xl">Batuhan Dogan</span>
+    <div id="lang-toggle" class="cursor-pointer text-slate-600 font-semibold">EN/DE</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="pt-32 max-w-7xl mx-auto px-6 text-center mb-24">
+<h1 class="text-5xl md:text-6xl font-black mb-6" data-en="Warehouse & Fleet Optimization" data-de="Lager- & Flottenoptimierung">Warehouse & Fleet Optimization</h1>
+
+<p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto" 
+   data-en="High inventory mismatches and fleet underutilization were causing delays and cost increases in logistics operations. Optimized stock levels and fleet routes were implemented based on historical data to improve efficiency."
+   data-de="Hohe Bestandsabweichungen und geringe Flottenauslastung verursachten Verzögerungen und Kostensteigerungen in den Logistikabläufen. Optimierte Lagerbestände und Flottenrouten wurden auf Basis historischer Daten implementiert, um die Effizienz zu steigern.">
+High inventory mismatches and fleet underutilization were causing delays and cost increases in logistics operations. Optimized stock levels and fleet routes were implemented based on historical data to improve efficiency.
+</p>
+
+<div class="mt-6 text-sm text-slate-500">
+Data sources:
+<a class="underline text-sky-600 hover:text-sky-700" target="_blank" href="https://www.kaggle.com/datasets">Kaggle Logistics Datasets</a>
+ ·
+<a class="underline text-sky-600 hover:text-sky-700" target="_blank" href="https://developers.google.com/web">Operational IoT & Fleet APIs</a>
+</div>
+
+<div class="mt-10">
+ <a href="#"
+    target="_blank"
+    class="bg-emerald-600 text-white px-10 py-4 rounded-full font-bold hover:bg-emerald-700 transition">
+   Open Interactive Demo →
+ </a>
+</div>
+</header>
+
+<!-- PROBLEM DEFINITION -->
+<section class="max-w-7xl mx-auto px-6 mb-12">
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-4" data-en="Problem Definition" data-de="Problemdefinition">Problem Definition</h2>
+<p class="text-slate-600 text-lg" 
+   data-en="Warehouses faced frequent stock shortages and excesses across regions, while fleet routes were underutilized, causing delivery delays and higher operational costs."
+   data-de="Lagerhäuser hatten häufig Bestandsengpässe und Überschüsse in verschiedenen Regionen, während Flottenrouten unterausgelastet waren, was zu Lieferverzögerungen und höheren Betriebskosten führte.">
+Warehouses faced frequent stock shortages and excesses across regions, while fleet routes were underutilized, causing delivery delays and higher operational costs.
+</p>
+</div>
+</section>
+
+<!-- KPI -->
+<section class="max-w-7xl mx-auto px-6 mb-28">
+<div class="grid md:grid-cols-4 gap-8">
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500" data-en="Stock Accuracy Improvement" data-de="Bestandsgenauigkeit Verbesserung">Stock Accuracy Improvement</p>
+<p class="kpi-num" data-target="15">0%</p>
+</div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500" data-en="On-time Delivery Rate" data-de="Termingerechte Lieferung">On-time Delivery Rate</p>
+<p class="kpi-num" data-target="22">0%</p>
+</div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500" data-en="Fleet Utilization ↑" data-de="Flottenauslastung ↑">Fleet Utilization ↑</p>
+<p class="kpi-num" data-target="18">0%</p>
+</div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500" data-en="Operational Cost ↓" data-de="Betriebskosten ↓">Operational Cost ↓</p>
+<p class="kpi-num" data-target="12">0%</p>
+</div>
+</div>
+</section>
+
+<!-- DATA & METHODOLOGY -->
+<section class="max-w-7xl mx-auto px-6 mb-24">
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-4" data-en="Data & Methodology" data-de="Daten & Methodik">Data & Methodology</h2>
+<ul class="list-disc list-inside text-slate-600 space-y-2">
+<li data-en="200,000+ historical warehouse transactions analyzed." data-de="Über 200.000 historische Lagertransaktionen analysiert.">200,000+ historical warehouse transactions analyzed.</li>
+<li data-en="Fleet GPS & IoT data processed for route optimization." data-de="Flotten-GPS- und IoT-Daten für Routenoptimierung verarbeitet.">Fleet GPS & IoT data processed for route optimization.</li>
+<li data-en="SQL & Python used for data cleaning and KPI calculation." data-de="SQL & Python für Datenbereinigung und KPI-Berechnung genutzt.">SQL & Python used for data cleaning and KPI calculation.</li>
+<li data-en="Scenario simulations performed to test stock & route adjustments." data-de="Szenario-Simulationen durchgeführt, um Lager- und Routenanpassungen zu testen.">Scenario simulations performed to test stock & route adjustments.</li>
+<li data-en="Real-time dashboard mockups prepared for management." data-de="Echtzeit-Dashboard-Mockups für das Management erstellt.">Real-time dashboard mockups prepared for management.</li>
+</ul>
+</div>
+</section>
+
+<!-- ANALYSIS -->
+<section class="max-w-7xl mx-auto px-6 mb-28">
+<div class="grid md:grid-cols-2 gap-12">
+<div class="bg-white p-10 rounded-3xl shadow">
+<h3 class="font-bold text-xl mb-4" data-en="Stock Levels by Region" data-de="Bestände nach Region">Stock Levels by Region</h3>
+<canvas id="stockChart"></canvas>
+</div>
+<div class="bg-white p-10 rounded-3xl shadow">
+<h3 class="font-bold text-xl mb-4" data-en="Delivery Performance Before vs After" data-de="Lieferleistung Vorher vs Nachher">Delivery Performance Before vs After</h3>
+<canvas id="deliveryChart"></canvas>
+</div>
+</div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section class="max-w-7xl mx-auto px-6 mb-28">
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-6" data-en="Recommendations" data-de="Empfehlungen">Recommendations</h2>
+<ul class="list-disc list-inside text-slate-600 space-y-2">
+<li data-en="Adjust stock levels per warehouse using historical demand." data-de="Lagerbestände pro Standort basierend auf historischem Bedarf anpassen.">Adjust stock levels per warehouse using historical demand.</li>
+<li data-en="Optimize fleet routes and utilization based on GPS & traffic data." data-de="Flottenrouten und Auslastung basierend auf GPS- & Verkehrsdaten optimieren.">Optimize fleet routes and utilization based on GPS & traffic data.</li>
+<li data-en="Implement real-time dashboard monitoring for operations." data-de="Echtzeit-Dashboard-Monitoring für den Betrieb implementieren.">Implement real-time dashboard monitoring for operations.</li>
+<li data-en="Scenario simulations for peak season planning." data-de="Szenario-Simulationen für die Planung der Hochsaison durchführen.">Scenario simulations for peak season planning.</li>
+<li data-en="Regular KPI review and continuous process improvement." data-de="Regelmäßige KPI-Überprüfung und kontinuierliche Prozessverbesserung.">Regular KPI review and continuous process improvement.</li>
+</ul>
+</div>
+</section>
+
+<!-- RESULTS -->
+<section class="max-w-7xl mx-auto px-6 mb-40">
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-6" data-en="Results & Next Steps" data-de="Ergebnisse & Nächste Schritte">Results & Next Steps</h2>
+<ul class="list-disc list-inside text-slate-600 space-y-2">
+<li data-en="Stock shortages and excesses reduced by 15%." data-de="Bestandsengpässe und Überschüsse um 15% reduziert.">Stock shortages and excesses reduced by 15%.</li>
+<li data-en="On-time delivery improved by 22%." data-de="Termingerechte Lieferungen um 22% verbessert.">On-time delivery improved by 22%.</li>
+<li data-en="Fleet utilization increased by 18%." data-de="Flottenauslastung um 18% erhöht.">Fleet utilization increased by 18%.</li>
+<li data-en="Operational costs decreased by 12%." data-de="Betriebskosten um 12% gesenkt.">Operational costs decreased by 12%.</li>
+</ul>
+</div>
+</section>
+
+<!-- BACK CTA -->
+<section class="text-center mb-32">
+<a href="https://ozgunbatu.github.io/projects/"
+   class="inline-block bg-emerald-600 text-white px-12 py-5 rounded-full font-bold hover:bg-emerald-700 transition">
+ ← Back to Portfolio
+</a>
+</section>
+
+<script>
+/* KPI COUNT-UP */
+document.querySelectorAll('.kpi-num').forEach(el=>{
+ let target=+el.dataset.target,val=0;
+ const step=Math.ceil(target/40);
+ const t=setInterval(()=>{
+  val+=step;
+  if(val>=target){val=target;clearInterval(t);}
+  el.textContent=val+"%";
+ },35);
+});
+
+/* CHARTS */
+const brandBlue="#2563eb";
+new Chart(document.getElementById('stockChart'),{
+ type:'bar',
+ data:{ labels:['Berlin','Hamburg','Munich','Frankfurt','Cologne','Stuttgart'], datasets:[{ data:[80,65,70,60,55,50], backgroundColor:brandBlue }]},
+ options:{ plugins:{legend:{display:false}}, scales:{y:{max:100,ticks:{callback:v=>v+"%"}}} }
+});
+new Chart(document.getElementById('deliveryChart'),{
+ type:'line',
+ data:{ labels:['Before','After'], datasets:[{ data:[40,18], borderColor:brandBlue, tension:.35 }]},
+ options:{ plugins:{legend:{display:false}}, scales:{y:{max:50,ticks:{callback:v=>v+"%"}}} }
+});
+
+/* LANGUAGE TOGGLE */
+const toggle=document.getElementById('lang-toggle');
+toggle.addEventListener('click',()=>{
+ document.querySelectorAll('[data-en]').forEach(el=>{
+   if(el.textContent===el.dataset.en){
+     el.textContent=el.dataset.de;
+   } else {
+     el.textContent=el.dataset.en;
+   }
+ });
+});
+</script>
+
+</body>
+</html>
