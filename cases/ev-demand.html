@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>EV Demand Forecast – Germany</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+
+<header class="max-w-7xl mx-auto px-6 py-10">
+  <h1 class="text-4xl font-bold mb-6">EV Demand Forecast – Germany</h1>
+  <a href="../index.html" class="text-emerald-600 hover:underline mb-4 inline-block">← Back to Cases</a>
+</header>
+
+<main class="max-w-4xl mx-auto px-6 mb-40">
+  <section class="mb-10">
+    <h2 class="text-2xl font-semibold mb-2">Problem</h2>
+    <p>Over-stocking in some regions and stockouts in others caused inefficiencies in operations and increased holding costs.</p>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-semibold mb-2">Approach</h2>
+    <p>Cleaned 2.3M transaction rows in SQL, performed region-wise demand analysis, seasonal trend analysis, and simulated stock allocation.</p>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-semibold mb-2">Recommendation</h2>
+    <p>Implement a region-wise inventory allocation dashboard with weekly SQL updates for the operations team.</p>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-semibold mb-2">Implementation</h2>
+    <p>Power BI dashboard with interactive slider to simulate demand changes by region, enabling data-driven allocation decisions.</p>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-2xl font-semibold mb-2">Results / KPIs</h2>
+    <ul class="list-disc list-inside">
+      <li>Inventory −7%</li>
+      <li>Forecast error −22%</li>
+      <li>Decision speed +15%</li>
+      <li>Regional allocation optimized across 6 regions</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-semibold mb-2">Interactive Chart</h2>
+    <canvas id="evChart"></canvas>
+  </section>
+</main>
+
+<script src="../scripts/charts.js"></script>
+</body>
+</html>
 
