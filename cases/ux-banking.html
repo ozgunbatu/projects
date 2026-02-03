@@ -19,7 +19,7 @@
 <!-- NAV -->
 <nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
   <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
-    <span class="font-black text-xl">Batuhan Dogan</span>
+    <a href="../index.html" class="font-black text-xl hover:text-emerald-600">Batuhan Dogan</a>
     <button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">EN/DE</button>
   </div>
 </nav>
@@ -30,98 +30,90 @@
     Mobile App UX Research – Banking Flow
   </h1>
   <p id="heroSub" class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-4">
-    Drop-offs were observed during identity verification and onboarding. User interviews and journey mapping were conducted, and Figma prototypes were tested with 42 participants. UX improvements were derived to enhance completion rates and user satisfaction.
-  </p>
-  <p class="text-slate-500 text-sm">
-    <span class="font-semibold">Data sources:</span>
-    <a href="https://www.figma.com/proto/EXAMPLE" target="_blank" class="hover-link">Figma Prototype</a>
+    Drop-offs occurred during identity verification and onboarding. User journeys were mapped and Figma prototypes were tested with 42 participants. UX improvements were derived to enhance completion rates and user satisfaction.
   </p>
 </header>
 
-<!-- PROBLEM DEFINITION -->
-<section class="max-w-6xl mx-auto px-6 mb-10">
-  <h2 class="text-2xl font-bold mb-4" id="problemTitle">Problem Definition</h2>
-  <p id="problemText" class="text-slate-700 mb-6">
-    High drop-off rates were observed during user identity verification and onboarding processes. Completion rates were inconsistent, and user frustration was recorded in qualitative interviews.
-  </p>
+<!-- KPI ANIMATION -->
+<section class="max-w-6xl mx-auto px-6 mb-10 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+  <div class="card">
+    <p class="kpi" id="completionRate">0%</p>
+    <p class="kpi-label">Completion Rate Increase</p>
+  </div>
+  <div class="card">
+    <p class="kpi" id="dropOffReduction">0%</p>
+    <p class="kpi-label">Drop-Off Reduction</p>
+  </div>
+  <div class="card">
+    <p class="kpi" id="usabilityScore">0%</p>
+    <p class="kpi-label">Usability Score</p>
+  </div>
+</section>
 
-  <!-- KPI ANIMATION -->
-  <div class="flex justify-around text-center">
+<!-- MAIN CONTENT GRID -->
+<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-3 gap-8 items-start">
+  <!-- Left Column: Problem & Data -->
+  <div class="md:col-span-1 space-y-6">
     <div class="card">
-      <p class="kpi" id="completionRate">0%</p>
-      <p class="kpi-label">Completion Rate Increase</p>
+      <h2 class="text-xl font-bold mb-2">Problem Definition</h2>
+      <p class="text-slate-700">High drop-off rates during identity verification and onboarding were observed. Completion rates varied across users, and frustrations were recorded in qualitative interviews.</p>
     </div>
     <div class="card">
-      <p class="kpi" id="dropOffReduction">0%</p>
-      <p class="kpi-label">Drop-Off Reduction</p>
+      <h2 class="text-xl font-bold mb-2">Data & Methodology</h2>
+      <ul class="list-disc list-inside text-slate-700 space-y-1">
+        <li>User journeys mapped and friction points identified.</li>
+        <li>Figma wireframes & interactive prototypes tested with 42 participants.</li>
+        <li>Feedback coded to highlight recurring pain points.</li>
+        <li>Metrics measured and compared before & after UX improvements.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Center Column: Phone -->
+  <div class="md:col-span-1">
+    <div style="position:relative; padding-bottom:56%; height:0; overflow:hidden; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
+      <iframe 
+        src="https://secure-onboarding-flow--ozgunbatuhan.replit.app" 
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Right Column: Graphs -->
+  <div class="md:col-span-1 space-y-6">
+    <div class="card">
+      <h3 class="text-xl font-bold mb-2 text-center">Completion Rate Over Steps</h3>
+      <canvas id="completionChart"></canvas>
     </div>
     <div class="card">
-      <p class="kpi" id="usabilityScore">0%</p>
-      <p class="kpi-label">Usability Score</p>
+      <h3 class="text-xl font-bold mb-2 text-center">Drop-Off By Step</h3>
+      <canvas id="dropOffChart"></canvas>
     </div>
   </div>
 </section>
 
-<!-- DATA & METHODOLOGY -->
-<section class="max-w-6xl mx-auto px-6 mb-10">
-  <h2 class="text-2xl font-bold mb-4">Data & Methodology</h2>
-  <ul class="list-disc list-inside text-slate-700 space-y-2">
-    <li>User journeys were mapped and analyzed to detect friction points.</li>
-    <li>Figma wireframes and interactive prototypes were tested with 42 participants.</li>
-    <li>Qualitative feedback was coded to identify recurring pain points.</li>
-    <li>Completion metrics and drop-off rates were measured and compared before and after UX interventions.</li>
-  </ul>
-</section>
-
-<!-- INTERACTIVE PROTOTYPE -->
-<section id="uxAppDemo" class="max-w-6xl mx-auto px-6 mb-20">
-  <h3 class="text-2xl font-bold mb-4">Interactive Onboarding Prototype</h3>
-  <p class="text-slate-600 mb-4">
-    The live onboarding flow can be explored directly below. All interactions and steps are fully functional.
-  </p>
-  <div style="position:relative; padding-bottom:130%; height:0; overflow:hidden; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-    <iframe 
-      src="https://secure-onboarding-flow--ozgunbatuhan.replit.app" 
-      style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" 
-      allowfullscreen>
-    </iframe>
-  </div>
-</section>
-
-<!-- GRAPHS -->
+<!-- Recommendations & Results -->
 <section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-2 gap-8">
   <div class="card">
-    <h3 class="text-xl font-bold mb-4 text-center">Completion Rate Over Steps</h3>
-    <canvas id="completionChart"></canvas>
-  </div>
-  <div class="card">
-    <h3 class="text-xl font-bold mb-4 text-center">Drop-Off By Step</h3>
-    <canvas id="dropOffChart"></canvas>
-  </div>
-</section>
-
-<!-- RECOMMENDATIONS & RESULTS -->
-<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-2 gap-8">
-  <div class="card">
-    <h3 class="text-xl font-bold mb-4">Recommendations</h3>
+    <h3 class="text-xl font-bold mb-2">Recommendations</h3>
     <ul class="list-disc list-inside text-slate-700 space-y-2">
-      <li>Identity verification steps were simplified and inline validation was implemented.</li>
-      <li>Progress indicators and clear error feedback were incorporated.</li>
-      <li>Prototype iterations were used to refine onboarding flows.</li>
-      <li>User testing was scheduled continuously to validate improvements.</li>
+      <li>Identity verification steps simplified; inline validation added.</li>
+      <li>Clear progress indicators and error feedback implemented.</li>
+      <li>Iterative prototype refinements validated via user testing.</li>
     </ul>
   </div>
   <div class="card">
-    <h3 class="text-xl font-bold mb-4">Results</h3>
+    <h3 class="text-xl font-bold mb-2">Results</h3>
     <ul class="list-disc list-inside text-slate-700 space-y-2">
-      <li>Drop-off rates were reduced by 18%</li>
-      <li>Completion rates increased by 20%</li>
-      <li>Positive usability feedback was recorded from all participants</li>
+      <li>Drop-off reduced by 18%</li>
+      <li>Completion rate increased by 20%</li>
+      <li>Positive usability feedback from all participants</li>
     </ul>
   </div>
 </section>
 
-<!-- BACK TO PORTFOLIO -->
+<!-- Back to Portfolio -->
 <section class="max-w-6xl mx-auto px-6 mb-40 text-center">
   <a href="../index.html" class="bg-emerald-600 px-8 py-4 rounded-full font-bold text-white hover:bg-emerald-700">Back to Portfolio</a>
 </section>
@@ -133,8 +125,8 @@ let de=false;
 langBtn.onclick=()=>{
   de=!de;
   heroTitle.textContent = de ? "Mobile App UX Research – Banking Flow (DE)" : "Mobile App UX Research – Banking Flow";
-  heroSub.textContent = de ? "Hohe Abbruchraten wurden während der Identitätsprüfung und Onboarding-Prozesse beobachtet. Benutzerinterviews und Journey-Mapping wurden durchgeführt und Figma-Prototypen mit 42 Teilnehmern getestet. UX-Verbesserungen wurden abgeleitet, um Abschlussraten und Benutzerzufriedenheit zu steigern." :
-                             "Drop-offs were observed during identity verification and onboarding. User interviews and journey mapping were conducted, and Figma prototypes were tested with 42 participants. UX improvements were derived to enhance completion rates and user satisfaction.";
+  heroSub.textContent = de ? "Hohe Abbruchraten während Identitätsprüfung und Onboarding. User Journeys wurden analysiert und Figma Prototypen mit 42 Teilnehmern getestet. UX-Verbesserungen wurden abgeleitet, um Abschlussraten zu steigern." :
+                             "Drop-offs occurred during identity verification and onboarding. User journeys were mapped and Figma prototypes were tested with 42 participants. UX improvements were derived to enhance completion rates and user satisfaction.";
 };
 
 // KPI Animation
