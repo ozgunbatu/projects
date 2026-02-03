@@ -9,8 +9,17 @@
 <style>
 @keyframes slideUp { from {opacity:0; transform:translateY(30px);} to {opacity:1; transform:translateY(0);} }
 .animate-slideUp { animation-name:slideUp; animation-duration:1s; animation-fill-mode:forwards; }
-.card { background:white; padding:1.5rem; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+
+.card { background:white; padding:1.5rem; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); transition:transform .3s; }
+.card:hover { transform:translateY(-5px); }
+
 .placeholder-img { width:100%; border-radius:1rem; object-fit:cover; }
+
+.app-link { display:block; padding:1rem 1.5rem; background:linear-gradient(90deg,#34d399,#059669); color:white; font-weight:bold; border-radius:1rem; text-align:center; transition:transform .3s, background .3s; }
+.app-link:hover { transform:scale(1.05); background:linear-gradient(90deg,#059669,#10b981); }
+
+.linked-data { color:#2563eb; text-decoration:underline; transition:color .2s; }
+.linked-data:hover { color:#1d4ed8; }
 </style>
 </head>
 
@@ -27,55 +36,63 @@
 </nav>
 
 <!-- HERO -->
-<header class="pt-28 max-w-7xl mx-auto px-6 mb-20">
-  <h1 id="heroTitle" class="text-5xl font-black mb-6 leading-tight">
+<header class="pt-28 max-w-7xl mx-auto px-6 mb-12">
+  <h1 id="heroTitle" class="text-5xl font-black mb-4 leading-tight">
     Mobile App UX – Photo Capture Demo
   </h1>
   <p id="heroSub" class="text-lg text-slate-600 max-w-3xl">
-    The photo capture step was analyzed to identify UX friction. Camera access is simulated via placeholder to ensure smooth demo in portfolio.
+    The photo capture step was analyzed to identify UX friction. Camera access is simulated via placeholder to ensure smooth portfolio demo.
   </p>
+  <a href="https://secure-onboarding-flow--ozgunbatuhan.replit.app" target="_blank" class="app-link mt-6 inline-block">Open App Demo →</a>
 </header>
 
 <!-- MAIN CONTENT -->
 <section class="max-w-6xl mx-auto px-6 mb-40">
   <div class="grid md:grid-cols-3 gap-8 items-start">
-    
-    <!-- Left: Problem & Data -->
+
+    <!-- Left: Problem, Data & Methodology -->
     <div class="space-y-6">
-      <div class="card">
+      <div class="card animate-slideUp" style="animation-delay:0.1s;">
         <h2 class="text-xl font-bold mb-2">Problem Definition</h2>
         <p class="text-slate-700">
-          Users were stuck at the photo capture step due to camera access restrictions in embedded browsers. This blocked onboarding completion.
+          High drop-off occurred at the photo capture step due to camera access restrictions in embedded browsers, preventing onboarding completion.
         </p>
       </div>
-      <div class="card">
+
+      <div class="card animate-slideUp" style="animation-delay:0.2s;">
         <h2 class="text-xl font-bold mb-2">Data & Methodology</h2>
         <ul class="list-disc list-inside text-slate-700 space-y-1">
           <li>UX flow analyzed to identify drop-off points.</li>
-          <li>Photo capture step simulated with placeholder images for demo.</li>
+          <li>Photo capture step simulated with placeholder for smooth portfolio demo.</li>
           <li>Metrics collected for completion rates before/after improvements.</li>
         </ul>
-        <p class="text-sm text-blue-600 mt-2">
-          Data sources: <a href="https://www.figma.com/file/XYZ" target="_blank" class="underline">Figma Prototype</a>
+        <p class="text-sm mt-2">
+          Data sources: <a href="https://www.figma.com/file/XYZ" target="_blank" class="linked-data">Figma Prototype</a>
+        </p>
+      </div>
+
+      <div class="card animate-slideUp" style="animation-delay:0.3s;">
+        <h2 class="text-xl font-bold mb-2">Result</h2>
+        <p class="text-slate-700">
+          Completion rate increased after UX improvements, while drop-off percentages reduced. The demo placeholder ensures usability showcase without camera issues.
         </p>
       </div>
     </div>
 
     <!-- Center: iPhone 14 Pro App -->
-    <div class="flex justify-center transform translate-y-10 opacity-0 animate-slideUp" style="animation-delay:0.3s;">
-      <div style="width:430px; height:932px; border-radius:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); overflow:hidden;">
-        <!-- Placeholder for camera step -->
+    <div class="flex justify-center transform translate-y-10 opacity-0 animate-slideUp" style="animation-delay:0.4s;">
+      <div style="width:430px; height:932px; border-radius:1.5rem; box-shadow:0 8px 24px rgba(0,0,0,0.1); overflow:hidden;">
         <img src="assets/images/photo-placeholder.png" alt="Photo Capture Placeholder" class="placeholder-img">
       </div>
     </div>
 
-    <!-- Right: KPI & Charts -->
+    <!-- Right: KPI Charts -->
     <div class="space-y-6">
-      <div class="card">
+      <div class="card animate-slideUp" style="animation-delay:0.5s;">
         <h3 class="text-xl font-bold mb-2 text-center">Completion Rate Over Steps</h3>
         <canvas id="completionChart"></canvas>
       </div>
-      <div class="card">
+      <div class="card animate-slideUp" style="animation-delay:0.6s;">
         <h3 class="text-xl font-bold mb-2 text-center">Drop-Off By Step</h3>
         <canvas id="dropOffChart"></canvas>
       </div>
@@ -89,44 +106,28 @@
   <a href="index.html" class="text-emerald-600 font-bold underline hover:text-emerald-800">Back to Portfolio</a>
 </div>
 
-<!-- SCRIPT: KPI CHARTS -->
+<!-- SCRIPTS -->
 <script>
+let de=false;
+langBtn.onclick=()=>{
+  de=!de;
+  heroTitle.textContent = de ? "Mobile App UX – Fotoaufnahme Demo" : "Mobile App UX – Photo Capture Demo";
+  heroSub.textContent = de ? "Der Fotoaufnahme Schritt wurde analysiert, um UX-Reibung zu identifizieren. Die Kamera wird simuliert, um reibungslose Demo zu gewährleisten." : "The photo capture step was analyzed to identify UX friction. Camera access is simulated via placeholder to ensure smooth portfolio demo.";
+};
+
+// KPI Charts
 const ctx1 = document.getElementById('completionChart').getContext('2d');
 new Chart(ctx1, {
   type: 'bar',
-  data: {
-    labels: ['Step 1','Step 2','Step 3','Step 4'],
-    datasets: [{
-      label: 'Completion %',
-      data: [95, 88, 72, 65],
-      backgroundColor: 'rgb(34,197,94)'
-    }]
-  },
-  options: {
-    responsive:true,
-    plugins:{legend:{display:false}},
-    scales:{y:{beginAtZero:true, max:100, ticks:{callback: v => v+'%'}}}
-  }
+  data: { labels: ['Step 1','Step 2','Step 3','Step 4'], datasets:[{label:'Completion %', data:[95,88,72,65], backgroundColor:'rgb(34,197,94)'}] },
+  options: { responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, ticks:{callback:v=>v+'%'}}} }
 });
 
 const ctx2 = document.getElementById('dropOffChart').getContext('2d');
 new Chart(ctx2, {
-  type: 'line',
-  data: {
-    labels: ['Step 1','Step 2','Step 3','Step 4'],
-    datasets:[{
-      label:'Drop-Off %',
-      data:[5,12,28,35],
-      borderColor:'rgb(239,68,68)',
-      fill:false,
-      tension:0.3
-    }]
-  },
-  options:{
-    responsive:true,
-    plugins:{legend:{display:false}},
-    scales:{y:{beginAtZero:true, max:100, ticks:{callback: v => v+'%'}}}
-  }
+  type:'line',
+  data:{ labels:['Step 1','Step 2','Step 3','Step 4'], datasets:[{label:'Drop-Off %', data:[5,12,28,35], borderColor:'rgb(239,68,68)', fill:false, tension:0.3}] },
+  options:{ responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true, max:100, ticks:{callback:v=>v+'%'}}} }
 });
 </script>
 
