@@ -3,55 +3,48 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
 <title>Secure Mobile Onboarding – UX Case</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.kpi-num{color:#22c55e;font-size:2.6rem;font-weight:900;}
-.brand-blue{color:#2563eb;}
+:root {
+  --kpi-green: #16a34a; /* EV Demand yeşil tonu */
+  --brand-blue: #2563eb;
+}
+.kpi-num { color: var(--kpi-green); font-size:2.6rem; font-weight:900; }
+.back-link{ display:flex; align-items:center; gap:0.5rem; font-weight:500; color:var(--brand-blue);}
+.back-link:hover{text-decoration:underline;}
 </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
 
-<!-- NAV -->
+<!-- HEADER -->
 <nav class="fixed w-full bg-white/90 backdrop-blur border-b z-40">
-  <div class="max-w-7xl mx-auto flex justify-center p-4">
-    <span class="font-black text-xl">Secure Onboarding Case Study</span>
+  <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+    <a href="https://ozgunbatu.github.io/projects/" class="back-link text-lg">← Back to Portfolio</a>
+    <span class="font-black text-xl">Batuhan Dogan</span>
+    <div id="lang-toggle" class="cursor-pointer text-slate-600 font-semibold">EN/DE</div>
   </div>
 </nav>
 
 <!-- HERO -->
-<header class="pt-40 max-w-7xl mx-auto px-6 text-center mb-24">
+<header class="pt-32 max-w-7xl mx-auto px-6 text-center mb-24">
+<h1 class="text-5xl md:text-6xl font-black mb-6" data-en="Secure Mobile Onboarding Optimization" data-de="Sicheres Mobile Onboarding Optimierung">Secure Mobile Onboarding Optimization</h1>
 
-<h1 class="text-6xl font-black mb-6">
- Secure Mobile Onboarding Optimization
-</h1>
-
-<p class="text-xl text-slate-600 max-w-3xl mx-auto">
- Conversion deterioration during identity verification was observed across
- digital banking onboarding journeys. UX redesign and permission handling
- adjustments were implemented to stabilize completion rates while preserving
- regulatory rigor.
+<p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto" 
+   data-en="High abandonment during identity capture was observed in digital banking onboarding. UX redesign, permission handling, and guidance improvements were implemented to restore completion rates while ensuring compliance."
+   data-de="Hohe Abbruchraten während der Identitätsprüfung wurden beim digitalen Bank-Onboarding festgestellt. UX-Redesign, Berechtigungsmanagement und Anleitungsverbesserungen wurden implementiert, um Abschlussraten bei gleichzeitiger Einhaltung der Vorschriften wiederherzustellen.">
+High abandonment during identity capture was observed in digital banking onboarding. UX redesign, permission handling, and guidance improvements were implemented to restore completion rates while ensuring compliance.
 </p>
 
-<!-- DATA SOURCES -->
-<div class="mt-8 text-sm text-slate-500">
- Data sources:
- <a class="underline text-sky-600 hover:text-sky-700"
-    target="_blank"
-    href="https://www.kaggle.com/datasets">
-    Synthetic Fintech Funnel Dataset
- </a>
+<div class="mt-6 text-sm text-slate-500">
+Data sources:
+<a class="underline text-sky-600 hover:text-sky-700" target="_blank" href="https://www.kaggle.com/datasets">Synthetic Fintech Funnel Dataset</a>
  ·
- <a class="underline text-sky-600 hover:text-sky-700"
-    target="_blank"
-    href="https://developers.google.com/web">
-    Browser Permission APIs
- </a>
+<a class="underline text-sky-600 hover:text-sky-700" target="_blank" href="https://developers.google.com/web">Browser Permission APIs</a>
 </div>
 
 <div class="mt-10">
@@ -61,119 +54,94 @@
    Open Interactive Demo →
  </a>
 </div>
-
 </header>
 
-<!-- PROBLEM -->
-<section class="max-w-7xl mx-auto px-6 mb-24">
-
+<!-- PROBLEM DEFINITION -->
+<section class="max-w-7xl mx-auto px-6 mb-12">
 <div class="bg-white p-12 rounded-3xl shadow">
-<h2 class="text-3xl font-bold mb-4">Problem Definition</h2>
-<p class="text-slate-600 text-lg">
- A surge in mobile-first account creation produced localized friction in
- biometric capture steps. Elevated abandonment, prolonged onboarding cycles
- and rising manual compliance interventions were recorded.
+<h2 class="text-3xl font-bold mb-4" data-en="Problem Definition" data-de="Problemdefinition">Problem Definition</h2>
+<p class="text-slate-600 text-lg" 
+   data-en="Mobile onboarding flows faced high drop-offs during identity verification. Camera permission blockers, unclear capture instructions, and fallback inconsistencies caused delays and increased manual compliance reviews."
+   data-de="Mobile-Onboarding-Flows wiesen hohe Abbruchraten bei der Identitätsprüfung auf. Kameraberechtigungsblocker, unklare Anleitungsanweisungen und Inkonsistenzen bei Fallbacks verursachten Verzögerungen und erhöhten den manuellen Prüfaufwand.">
+Mobile onboarding flows faced high drop-offs during identity verification. Camera permission blockers, unclear capture instructions, and fallback inconsistencies caused delays and increased manual compliance reviews.
 </p>
 </div>
-
-</section>
-
-<!-- DATA & METHODOLOGY -->
-<section class="max-w-7xl mx-auto px-6 mb-24">
-
-<div class="bg-white p-12 rounded-3xl shadow">
-<h2 class="text-3xl font-bold mb-4">Data & Methodology</h2>
-
-<ul class="list-disc list-inside text-slate-600 space-y-3">
-<li>120,000+ anonymized onboarding sessions aggregated from public fintech datasets.</li>
-<li>Step-level event logs reconstructed in SQL to derive funnel metrics.</li>
-<li>Latency and permission-denial rates computed per screen.</li>
-<li>Controlled A/B experiments executed across redesigned UX flows.</li>
-<li>Statistical significance evaluated at 95% confidence.</li>
-</ul>
-
-</div>
-
 </section>
 
 <!-- KPI -->
 <section class="max-w-7xl mx-auto px-6 mb-28">
-
 <div class="grid md:grid-cols-4 gap-8">
-
 <div class="bg-white p-8 rounded-3xl shadow text-center">
-<p class="text-sm text-slate-500">Drop-Off Reduction</p>
+<p class="text-sm text-slate-500" data-en="Drop-Off Reduction" data-de="Abbruchreduktion">Drop-Off Reduction</p>
 <p class="kpi-num" data-target="18">0%</p>
 </div>
-
 <div class="bg-white p-8 rounded-3xl shadow text-center">
-<p class="text-sm text-slate-500">Completion Rate Lift</p>
+<p class="text-sm text-slate-500" data-en="Completion Rate Lift" data-de="Steigerung der Abschlussrate">Completion Rate Lift</p>
 <p class="kpi-num" data-target="20">0%</p>
 </div>
-
 <div class="bg-white p-8 rounded-3xl shadow text-center">
-<p class="text-sm text-slate-500">Avg. Time Saved</p>
+<p class="text-sm text-slate-500" data-en="Avg. Time Saved" data-de="Durchschnittlich eingesparte Zeit">Avg. Time Saved</p>
 <p class="kpi-num" data-target="22">0%</p>
 </div>
-
 <div class="bg-white p-8 rounded-3xl shadow text-center">
-<p class="text-sm text-slate-500">Compliance Errors ↓</p>
+<p class="text-sm text-slate-500" data-en="Compliance Errors ↓" data-de="Compliance-Fehler ↓">Compliance Errors ↓</p>
 <p class="kpi-num" data-target="31">0%</p>
 </div>
+</div>
+</section>
 
+<!-- DATA & METHODOLOGY -->
+<section class="max-w-7xl mx-auto px-6 mb-24">
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-4" data-en="Data & Methodology" data-de="Daten & Methodik">Data & Methodology</h2>
+<ul class="list-disc list-inside text-slate-600 space-y-2">
+<li data-en="120,000+ anonymized onboarding sessions analyzed." data-de="Über 120.000 anonymisierte Onboarding-Sessions analysiert.">120,000+ anonymized onboarding sessions analyzed.</li>
+<li data-en="Step-level event logs cleaned and processed in SQL." data-de="Schritt-für-Schritt-Event-Logs in SQL bereinigt und verarbeitet.">Step-level event logs cleaned and processed in SQL.</li>
+<li data-en="Latency and permission-denial rates measured per screen." data-de="Latenz- und Berechtigungsablehnungsraten pro Bildschirm gemessen.">Latency and permission-denial rates measured per screen.</li>
+<li data-en="Controlled A/B tests implemented on redesigned flows." data-de="Kontrollierte A/B-Tests auf den neu gestalteten Flows implementiert.">Controlled A/B tests implemented on redesigned flows.</li>
+<li data-en="Statistical significance checked at 95% confidence." data-de="Statistische Signifikanz bei 95% Konfidenz geprüft.">Statistical significance checked at 95% confidence.</li>
+</ul>
 </div>
 </section>
 
 <!-- ANALYSIS -->
 <section class="max-w-7xl mx-auto px-6 mb-28">
-
 <div class="grid md:grid-cols-2 gap-12">
-
 <div class="bg-white p-10 rounded-3xl shadow">
-<h3 class="font-bold text-xl mb-4">Conversion Funnel</h3>
+<h3 class="font-bold text-xl mb-4" data-en="Conversion Funnel" data-de="Conversion Funnel">Conversion Funnel</h3>
 <canvas id="funnelChart"></canvas>
 </div>
-
 <div class="bg-white p-10 rounded-3xl shadow">
-<h3 class="font-bold text-xl mb-4">Drop-Off Before vs After</h3>
+<h3 class="font-bold text-xl mb-4" data-en="Drop-Off Before vs After" data-de="Abbruch Vorher vs Nachher">Drop-Off Before vs After</h3>
 <canvas id="beforeAfterChart"></canvas>
 </div>
-
 </div>
 </section>
 
 <!-- RECOMMENDATIONS -->
 <section class="max-w-7xl mx-auto px-6 mb-28">
-
 <div class="bg-white p-12 rounded-3xl shadow">
-
-<h2 class="text-3xl font-bold mb-6">Recommendations</h2>
-
-<ul class="list-disc list-inside text-slate-600 space-y-3">
-<li>Progressive permission prompts contextualized to camera usage.</li>
-<li>Fallback document-upload channels introduced.</li>
-<li>Inline capture guidance overlays deployed.</li>
-<li>Real-time funnel dashboards institutionalized.</li>
-<li>Fraud-screening thresholds recalibrated dynamically.</li>
+<h2 class="text-3xl font-bold mb-6" data-en="Recommendations" data-de="Empfehlungen">Recommendations</h2>
+<ul class="list-disc list-inside text-slate-600 space-y-2">
+<li data-en="Progressive camera permission prompts with clear guidance." data-de="Progressive Kameraberechtigungsaufforderungen mit klarer Anleitung.">Progressive camera permission prompts with clear guidance.</li>
+<li data-en="Fallback document-upload channels added." data-de="Fallback-Dokument-Upload-Kanäle hinzugefügt.">Fallback document-upload channels added.</li>
+<li data-en="Inline capture overlays implemented." data-de="Inline-Erfassungs-Overlays implementiert.">Inline capture overlays implemented.</li>
+<li data-en="Real-time funnel dashboards introduced." data-de="Echtzeit-Funnel-Dashboards eingeführt.">Real-time funnel dashboards introduced.</li>
+<li data-en="Dynamic fraud-screening thresholds applied." data-de="Dynamische Betrugsscreening-Schwellenwerte angewendet.">Dynamic fraud-screening thresholds applied.</li>
 </ul>
-
 </div>
 </section>
 
 <!-- RESULTS -->
 <section class="max-w-7xl mx-auto px-6 mb-40">
-
 <div class="bg-white p-12 rounded-3xl shadow">
-
-<h2 class="text-3xl font-bold mb-6">Results & Next Steps</h2>
-
-<ul class="list-disc list-inside text-slate-600 space-y-3">
-<li>Camera-related abandonment materially reduced.</li>
-<li>Operational review volumes declined.</li>
-<li>Onboarding stabilized at scale.</li>
-<li>Framework prepared for rollout across additional products.</li>
+<h2 class="text-3xl font-bold mb-6" data-en="Results & Next Steps" data-de="Ergebnisse & Nächste Schritte">Results & Next Steps</h2>
+<ul class="list-disc list-inside text-slate-600 space-y-2">
+<li data-en="Camera-related abandonment decreased significantly." data-de="Kamera-bedingte Abbrüche wurden deutlich reduziert.">Camera-related abandonment decreased significantly.</li>
+<li data-en="Manual review workload reduced." data-de="Manuelle Prüfaufwand reduziert.">Manual review workload reduced.</li>
+<li data-en="Onboarding stabilized under peak traffic." data-de="Onboarding unter Spitzenlast stabilisiert.">Onboarding stabilized under peak traffic.</li>
+<li data-en="Framework prepared for rollout to other products." data-de="Framework für den Rollout auf andere Produkte vorbereitet.">Framework prepared for rollout to other products.</li>
 </ul>
-
 </div>
 </section>
 
@@ -186,7 +154,6 @@
 </section>
 
 <script>
-
 /* KPI COUNT-UP */
 document.querySelectorAll('.kpi-num').forEach(el=>{
  let target=+el.dataset.target,val=0;
@@ -200,38 +167,28 @@ document.querySelectorAll('.kpi-num').forEach(el=>{
 
 /* CHARTS */
 const brandBlue="#2563eb";
-
 new Chart(document.getElementById('funnelChart'),{
  type:'line',
- data:{
-  labels:['Intro','ID Scan','Selfie','Submit'],
-  datasets:[{
-   data:[78,61,55,49],
-   borderColor:brandBlue,
-   tension:.35
-  }]
- },
- options:{
-  plugins:{legend:{display:false}},
-  scales:{y:{max:100,ticks:{callback:v=>v+"%"}}}
- }
+ data:{ labels:['Intro','ID Scan','Selfie','Submit'], datasets:[{ data:[78,61,55,49], borderColor:brandBlue, tension:.35 }]},
+ options:{ plugins:{legend:{display:false}}, scales:{y:{max:100,ticks:{callback:v=>v+"%"}}} }
 });
-
 new Chart(document.getElementById('beforeAfterChart'),{
  type:'bar',
- data:{
-  labels:['Before','After'],
-  datasets:[{
-   data:[35,17],
-   backgroundColor:brandBlue
-  }]
- },
- options:{
-  plugins:{legend:{display:false}},
-  scales:{y:{max:50,ticks:{callback:v=>v+"%"}}}
- }
+ data:{ labels:['Before','After'], datasets:[{ data:[35,17], backgroundColor:brandBlue }]},
+ options:{ plugins:{legend:{display:false}}, scales:{y:{max:50,ticks:{callback:v=>v+"%"}}} }
 });
 
+/* LANGUAGE TOGGLE */
+const toggle=document.getElementById('lang-toggle');
+toggle.addEventListener('click',()=>{
+ document.querySelectorAll('[data-en]').forEach(el=>{
+   if(el.textContent===el.dataset.en){
+     el.textContent=el.dataset.de;
+   } else {
+     el.textContent=el.dataset.en;
+   }
+ });
+});
 </script>
 
 </body>
