@@ -89,3 +89,93 @@
 
     <!-- Charts -->
     <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">Forecast vs Actual Demand</h3>
+        <canvas id="evChart" height="220"></canvas>
+      </div>
+      <div class="bg-white p-6 rounded-2xl shadow-lg">
+        <h3 class="text-xl font-bold mb-2">Regional Inventory Levels</h3>
+        <canvas id="inventoryChart" height="220"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data Sources -->
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Data Sources</h2>
+    <ul class="list-disc list-inside space-y-2">
+      <li><a href="https://www.autoscout24.com/" target="_blank" class="data-link">AutoScout24 – Historical EV sales & listings</a></li>
+      <li><a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="data-link">ZSW Electromobility – Regional EV registration trends</a></li>
+    </ul>
+  </section>
+
+</main>
+
+<script>
+// KPI animation
+function animateKPI(){
+  const counters = document.querySelectorAll('.kpi-number');
+  counters.forEach(counter=>{
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+    const increment = Math.abs(target)/50;
+    const isNegative = target < 0;
+    const interval = setInterval(()=>{
+      count += increment;
+      if(count >= Math.abs(target)){
+        counter.textContent = isNegative ? `-${Math.round(Math.abs(target))}` : Math.round(target);
+        clearInterval(interval);
+      } else counter.textContent = isNegative ? `-${Math.round(count)}` : Math.round(count);
+    },30);
+  });
+}
+animateKPI();
+
+// Forecast vs Actual
+const evCtx = document.getElementById('evChart').getContext('2d');
+new Chart(evCtx, {
+    type:'line',
+    data:{
+        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+        datasets:[
+            {label:"Forecast", data:[120,150,180,240,300,360,400,420], borderColor:"rgb(34,197,94)", fill:false, tension:0.2},
+            {label:"Actual", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
+        ]
+    },
+    options:{
+        responsive:true,
+        plugins:{legend:{position:'top'}, tooltip:{mode:'index', intersect:false}}
+    }
+});
+
+// Regional Inventory
+const invCtx = document.getElementById('inventoryChart').getContext('2d');
+new Chart(invCtx, {
+    type:'bar',
+    data:{
+        labels:["Hamburg","Berlin","München","Köln","Frankfurt","Stuttgart"],
+        datasets:[
+            {label:"Before", data:[20,30,50,40,35,25], backgroundColor:"rgba(239,68,68,0.5)"},
+            {label:"After", data:[15,28,45,38,33,22], backgroundColor:"rgba(34,197,94,0.6)"}
+        ]
+    },
+    options:{
+        responsive:true,
+        plugins:{
+            legend:{position:'top'},
+            tooltip:{
+                callbacks:{
+                    label:function(context){
+                        const value = context.parsed.y;
+                        const before = context.datasetIndex === 0 ? value : context.chart.data.datasets[0].data[context.dataIndex];
+                        return `${context.dataset.label}: ${value} vehicles | Before: ${before}`;
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
