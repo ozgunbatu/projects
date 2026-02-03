@@ -6,9 +6,11 @@
 <title>EV Demand Forecast – Germany</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-/* KPI counter animation */
-.kpi-number { font-variant-numeric: tabular-nums; }
+  .kpi-number { font-variant-numeric: tabular-nums; }
+  #germanyMap { height: 500px; }
 </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
@@ -70,16 +72,10 @@
     </div>
   </section>
 
-  <!-- Before / After Charts -->
-  <section class="grid md:grid-cols-2 gap-6">
-    <div class="bg-white p-6 rounded-2xl shadow-lg">
-      <h3 class="text-xl font-bold mb-2">Forecast Error Before</h3>
-      <canvas id="beforeChart" height="200"></canvas>
-    </div>
-    <div class="bg-white p-6 rounded-2xl shadow-lg">
-      <h3 class="text-xl font-bold mb-2">Forecast Error After</h3>
-      <canvas id="afterChart" height="200"></canvas>
-    </div>
+  <!-- Germany Map -->
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h3 class="text-xl font-bold mb-4">Regional Inventory Map</h3>
+    <div id="germanyMap"></div>
   </section>
 
 </main>
@@ -91,19 +87,17 @@ function animateKPI(){
   counters.forEach(counter=>{
     const target = +counter.getAttribute('data-target');
     let count = 0;
-    const increment = target / 50; // adjust speed
+    const increment = target / 50;
     const interval = setInterval(()=>{
       count += increment;
-      if(count >= target){
-        counter.textContent = target;
-        clearInterval(interval);
-      } else counter.textContent = Math.round(count);
+      if(count >= target){ counter.textContent = target; clearInterval(interval);}
+      else counter.textContent = Math.round(count);
     },30);
   });
 }
 animateKPI();
 
-// Chart.js
+// Chart.js charts
 const evCtx = document.getElementById('evChart').getContext('2d');
 new Chart(evCtx, {
     type: 'line',
@@ -130,26 +124,29 @@ new Chart(invCtx,{
     options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
 });
 
-const beforeCtx = document.getElementById('beforeChart').getContext('2d');
-new Chart(beforeCtx,{
-    type:'line',
-    data:{
-        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-        datasets:[{label:"Forecast Error Before", data:[30,28,32,35,40,38,36,33], borderColor:"rgb(239,68,68)", fill:false, tension:0.2}]
-    },
-    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
-});
+// Leaflet Map
+const map = L.map('germanyMap').setView([51.1657, 10.4515], 6); // Germany center
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
 
-const afterCtx = document.getElementById('afterChart').getContext('2d');
-new Chart(afterCtx,{
-    type:'line',
-    data:{
-        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-        datasets:[{label:"Forecast Error After", data:[22,20,18,19,21,17,15,14], borderColor:"rgb(34,197,94)", fill:false, tension:0.2}]
-    },
-    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
-});
+// Simple polygon placeholders for regions (normally shapefile / GeoJSON ideal)
+const regions = {
+  "North": [[54.0,9.0],[54.0,11.0],[53.0,11.0],[53.0,9.0]],
+  "South": [[48.5,10.0],[48.5,13.0],[47.0,13.0],[47.0,10.0]],
+  "East": [[51.0,12.0],[51.0,15.0],[50.0,15.0],[50.0,12.0]],
+  "West": [[51.0,6.0],[51.0,9.0],[50.0,9.0],[50.0,6.0]],
+  "Central": [[51.0,9.0],[51.0,12.0],[50.0,12.0],[50.0,9.0]],
+  "Berlin": [[52.6,13.2],[52.6,13.5],[52.3,13.5],[52.3,13.2]]
+};
+
+const inventoryBefore = {North:350, South:420, East:370, West:340, Central:310, Berlin:310};
+const inventoryAfter  = {North:300, South:400, East:350, West:320, Central:280, Berlin:280};
+
+for(const [region, coords] of Object.entries(regions)){
+  const colorBefore = inventoryBefore[region] > inventoryAfter[region] ? 'rgba(239,68,68,0.5)' : 'rgba(34,197,94,0.6)';
+  const poly = L.polygon(coords, {color:colorBefore, fillOpacity:0.5}).addTo(map);
+  poly.bindTooltip(`<b>${region}</b><br>Inventory Before: ${inventoryBefore[region]}<br>Inventory After: ${inventoryAfter[region]}`);
+}
+
 </script>
-
 </body>
 </html>
