@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -10,217 +10,193 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.kpi-number{
-  font-size:2.5rem;
-  font-weight:900;
-  color:#10b981;
-}
-</style>
+.brand-blue { color:#2563eb; }
+.kpi-num { color:#22c55e; font-size:2.6rem; font-weight:900; }
 
+.back-link{
+ position:fixed;
+ top:22px;
+ left:28px;
+ font-weight:500;
+ color:#2563eb;
+ z-index:50;
+}
+.back-link:hover{text-decoration:underline;}
+</style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
 
+<!-- BACK -->
+<a href="/" class="back-link">← Back to Portfolio</a>
+
 <!-- NAV -->
-<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
-  <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-    <a href="index.html" class="font-black text-xl">Batuhan Dogan</a>
+<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-40">
+  <div class="max-w-7xl mx-auto flex justify-center p-4">
+    <a href="/" class="font-black text-xl">Batuhan Dogan</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<header class="pt-40 max-w-7xl mx-auto px-6 mb-28 text-center">
+<header class="pt-40 max-w-7xl mx-auto px-6 text-center mb-24">
 
-  <h1 class="text-6xl font-black mb-6 leading-tight">
-    Secure Mobile Onboarding – UX Optimization
-  </h1>
+<h1 class="text-6xl font-black mb-6">
+ Secure Mobile Onboarding Optimization
+</h1>
 
-  <p class="text-xl text-slate-600 max-w-3xl mx-auto">
-    Funnel diagnostics revealed a systemic conversion drop during identity
-    photo capture. Permission handling and guidance screens were redesigned
-    to stabilize onboarding performance at scale.
-  </p>
+<p class="text-xl text-slate-600 max-w-3xl mx-auto">
+ Funnel diagnostics uncovered severe abandonment during identity photo capture.
+ Permission handling and UX guidance layers were redesigned to restore conversion
+ while maintaining regulatory compliance.
+</p>
 
-  <!-- DATA SOURCES -->
-  <div class="mt-8 text-sm text-slate-500">
-    Data sources:
-    <a class="underline text-sky-600 hover:text-sky-700"
-       target="_blank"
-       href="https://www.kaggle.com/datasets">
-       Public Banking Funnel Dataset
-    </a>
-    ·
-    <a class="underline text-sky-600 hover:text-sky-700"
-       target="_blank"
-       href="https://developers.google.com/web">
-       Browser Permission APIs
-    </a>
-  </div>
+<!-- SOURCES -->
+<div class="mt-8 text-sm text-slate-500">
+ Data sources:
+ <a class="underline text-sky-600 hover:text-sky-700"
+    target="_blank"
+    href="https://www.kaggle.com/datasets">
+    Public Fintech Funnel Dataset
+ </a>
+ ·
+ <a class="underline text-sky-600 hover:text-sky-700"
+    target="_blank"
+    href="https://developers.google.com/web">
+    Browser Permission APIs
+ </a>
+</div>
 
-  <div class="mt-10">
-    <a href="https://secure-onboarding-flow--ozgunbatuhan.replit.app"
-       target="_blank"
-       class="bg-emerald-600 text-white px-10 py-4 rounded-full font-bold hover:bg-emerald-700 transition">
-       Open Live App
-    </a>
-  </div>
+<div class="mt-10">
+ <a href="https://secure-onboarding-flow--ozgunbatuhan.replit.app"
+    target="_blank"
+    class="bg-emerald-600 text-white px-10 py-4 rounded-full font-bold hover:bg-emerald-700 transition">
+   Open Interactive Demo →
+ </a>
+</div>
 
 </header>
 
+<!-- PROBLEM -->
+<section class="max-w-7xl mx-auto px-6 mb-28">
+
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-4">Problem Definition</h2>
+<p class="text-slate-600 text-lg">
+ Rapid growth in digital onboarding volumes led to regional conversion gaps.
+ Camera permission blockers, unclear capture instructions and fallback flows
+ caused friction and manual compliance reviews.
+</p>
+</div>
+
+</section>
+
 <!-- KPI -->
-<section class="max-w-7xl mx-auto px-6 mb-36">
+<section class="max-w-7xl mx-auto px-6 mb-32">
 
-  <div class="grid md:grid-cols-4 gap-8">
+<div class="grid md:grid-cols-4 gap-8">
 
-    <div class="bg-white p-8 rounded-3xl shadow text-center">
-      <p class="text-sm text-slate-500">Completion Rate</p>
-      <p class="kpi-number" data-target="20">0%</p>
-    </div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500">Drop-Off Reduction</p>
+<p class="kpi-num" data-target="18">0%</p>
+</div>
 
-    <div class="bg-white p-8 rounded-3xl shadow text-center">
-      <p class="text-sm text-slate-500">Drop-Off Reduction</p>
-      <p class="kpi-number" data-target="18">0%</p>
-    </div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500">Completion Rate Lift</p>
+<p class="kpi-num" data-target="20">0%</p>
+</div>
 
-    <div class="bg-white p-8 rounded-3xl shadow text-center">
-      <p class="text-sm text-slate-500">Avg. Onboarding Time ↓</p>
-      <p class="kpi-number" data-target="22">0%</p>
-    </div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500">Avg. Time Saved</p>
+<p class="kpi-num" data-target="22">0%</p>
+</div>
 
-    <div class="bg-white p-8 rounded-3xl shadow text-center">
-      <p class="text-sm text-slate-500">Compliance Errors ↓</p>
-      <p class="kpi-number" data-target="31">0%</p>
-    </div>
+<div class="bg-white p-8 rounded-3xl shadow text-center">
+<p class="text-sm text-slate-500">Compliance Errors ↓</p>
+<p class="kpi-num" data-target="31">0%</p>
+</div>
 
-  </div>
-
+</div>
 </section>
 
-<!-- CORE -->
-<section class="max-w-7xl mx-auto px-6 mb-36">
+<!-- ANALYSIS -->
+<section class="max-w-7xl mx-auto px-6 mb-32">
 
-  <div class="grid lg:grid-cols-3 gap-14">
+<div class="grid md:grid-cols-2 gap-12">
 
-    <div class="bg-white p-10 rounded-3xl shadow">
-      <h2 class="text-2xl font-bold mb-4">1. Problem</h2>
-      <p class="text-slate-600">
-        Rapid growth in digital banking volumes created operational bottlenecks.
-        Identity verification triggered abandonment due to blocked camera
-        permissions and unclear in-app guidance.
-      </p>
-    </div>
+<div class="bg-white p-10 rounded-3xl shadow">
+<h3 class="font-bold text-xl mb-4">Conversion Funnel</h3>
+<canvas id="funnelChart"></canvas>
+</div>
 
-    <div class="bg-white p-10 rounded-3xl shadow">
-      <h2 class="text-2xl font-bold mb-4">2. Analytical Approach</h2>
-      <ul class="list-disc list-inside text-slate-600 space-y-2">
-        <li>120k+ sessions analyzed using SQL funnel models.</li>
-        <li>Step-level conversion and latency quantified.</li>
-        <li>A/B testing executed across redesigned UX flows.</li>
-        <li>Permission-handling logic simplified.</li>
-      </ul>
-    </div>
+<div class="bg-white p-10 rounded-3xl shadow">
+<h3 class="font-bold text-xl mb-4">Drop-Off Before vs After</h3>
+<canvas id="beforeAfterChart"></canvas>
+</div>
 
-    <div class="bg-white p-10 rounded-3xl shadow">
-      <h2 class="text-2xl font-bold mb-4">3. Implementation</h2>
-      <ul class="list-disc list-inside text-slate-600 space-y-2">
-        <li>Progressive disclosure of camera permissions.</li>
-        <li>Fallback upload paths for restricted browsers.</li>
-        <li>Inline validation and instructional overlays.</li>
-        <li>Real-time funnel dashboards in Power BI.</li>
-      </ul>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- CHARTS -->
-<section class="max-w-7xl mx-auto px-6 mb-36">
-
-  <div class="grid md:grid-cols-2 gap-12">
-
-    <div class="bg-white p-10 rounded-3xl shadow">
-      <h3 class="font-bold text-xl mb-4">Conversion Funnel</h3>
-      <canvas id="funnelChart"></canvas>
-    </div>
-
-    <div class="bg-white p-10 rounded-3xl shadow">
-      <h3 class="font-bold text-xl mb-4">Drop-Off Before vs After</h3>
-      <canvas id="beforeAfterChart"></canvas>
-    </div>
-
-  </div>
-
+</div>
 </section>
 
 <!-- RESULTS -->
 <section class="max-w-7xl mx-auto px-6 mb-40">
 
-  <div class="bg-white p-12 rounded-3xl shadow">
+<div class="bg-white p-12 rounded-3xl shadow">
 
-    <h2 class="text-3xl font-bold mb-6">5. Results & Executive Summary</h2>
+<h2 class="text-3xl font-bold mb-6">Results & Next Steps</h2>
 
-    <ul class="list-disc list-inside text-slate-600 space-y-3">
-      <li>Camera-related abandonment materially reduced.</li>
-      <li>Onboarding stabilized at scale.</li>
-      <li>Compliance escalations declined.</li>
-      <li>Design patterns institutionalized across digital products.</li>
-    </ul>
+<ul class="list-disc list-inside text-slate-600 space-y-3">
+<li>Camera-driven abandonment materially reduced.</li>
+<li>Onboarding stabilized under peak demand.</li>
+<li>Manual review workload declined.</li>
+<li>Design system scaled across new financial products.</li>
+</ul>
 
-  </div>
-
+</div>
 </section>
 
 <script>
 
 /* KPI ANIMATION */
-document.querySelectorAll('.kpi-number').forEach(el=>{
-  const target=+el.dataset.target;
-  let val=0;
-  const step=Math.ceil(target/40);
-
-  const tick=setInterval(()=>{
-    val+=step;
-    if(val>=target){
-      val=target;
-      clearInterval(tick);
-    }
-    el.textContent=val+'%';
-  },35);
+document.querySelectorAll('.kpi-num').forEach(el=>{
+ let target=+el.dataset.target, val=0;
+ const step=Math.ceil(target/40);
+ const timer=setInterval(()=>{
+   val+=step;
+   if(val>=target){val=target;clearInterval(timer);}
+   el.textContent=val+"%";
+ },35);
 });
 
-/* BRAND BLUE */
-const brandBlue='rgb(14,165,233)';
+/* CHARTS */
+const brandBlue="#2563eb";
 
 new Chart(document.getElementById('funnelChart'),{
  type:'line',
  data:{
-   labels:['Intro','ID Scan','Selfie','Submit'],
-   datasets:[{
-     data:[78,61,55,49],
-     borderColor:brandBlue,
-     tension:.35,
-     fill:false
-   }]
+  labels:['Intro','ID Scan','Selfie','Submit'],
+  datasets:[{
+   data:[78,61,55,49],
+   borderColor:brandBlue,
+   tension:.35
+  }]
  },
  options:{
   plugins:{legend:{display:false}},
-  scales:{y:{max:100,ticks:{callback:v=>v+'%'}}}
+  scales:{y:{max:100,ticks:{callback:v=>v+"%"}}}
  }
 });
 
 new Chart(document.getElementById('beforeAfterChart'),{
  type:'bar',
  data:{
-   labels:['Before','After'],
-   datasets:[{
-     data:[35,17],
-     backgroundColor:brandBlue
-   }]
+  labels:['Before','After'],
+  datasets:[{
+   data:[35,17],
+   backgroundColor:brandBlue
+  }]
  },
  options:{
   plugins:{legend:{display:false}},
-  scales:{y:{max:50,ticks:{callback:v=>v+'%'}}}
+  scales:{y:{max:50,ticks:{callback:v=>v+"%"}}}
  }
 });
 
