@@ -30,7 +30,7 @@
     Electric Vehicle Demand Forecast – Germany
   </h1>
   <p id="heroSub" class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-4">
-    The rapid adoption of electric vehicles (EVs) has created regional inventory imbalances. Some cities experienced overstock, while others faced shortages. Using historical sales and registration data, we optimized allocations and improved forecast accuracy.
+    Rapid adoption of electric vehicles (EVs) has caused regional inventory imbalances. Some cities experienced overstock, while others faced shortages. Historical sales and registration data were used to optimize allocations and improve forecast accuracy.
   </p>
   <p class="text-slate-500 text-sm">
     <span class="font-semibold">Data sources:</span>
@@ -43,10 +43,10 @@
 <section class="max-w-6xl mx-auto px-6 mb-10">
   <h2 class="text-2xl font-bold mb-4" id="problemTitle">Problem Definition</h2>
   <p id="problemText" class="text-slate-700 mb-6">
-    Hamburg, Berlin, and Munich exhibited significant inventory imbalances. For example, Hamburg had 20 vehicles in stock while 50 orders arrived, creating overstock costs, whereas Berlin had 10 vehicles for 25 orders, leading to potential shortages. Our analysis aimed to optimize stock allocation regionally.
+    Inventory imbalances were observed in Hamburg, Berlin, and Munich. For example, Hamburg had 20 vehicles in stock while 50 orders arrived, creating overstock costs, whereas Berlin had 10 vehicles for 25 orders, leading to potential shortages. Stock allocation was optimized regionally based on the analysis.
   </p>
 
-  <!-- KPI ANIMATION (PROBLEM ALTINDA) -->
+  <!-- KPI ANIMATION -->
   <div class="flex justify-around text-center">
     <div class="card">
       <p class="kpi" id="invReduction">0%</p>
@@ -67,10 +67,10 @@
 <section class="max-w-6xl mx-auto px-6 mb-10">
   <h2 class="text-2xl font-bold mb-4" id="dataTitle">Data & Methodology</h2>
   <ul class="list-disc list-inside text-slate-700 space-y-2">
-    <li>Historical EV sales & listings dataset cleaned in SQL (2.3M rows → filtered 200 relevant vehicles).</li>
-    <li>Regional registrations from ZSW to validate forecast and allocation.</li>
-    <li>Power BI dashboards used for visualization, scenario simulations, and interactive planning.</li>
-    <li>Forecast errors reduced by comparing predicted vs actual monthly demand.</li>
+    <li>Historical EV sales & listings dataset was cleaned in SQL (2.3M rows → filtered 200 relevant vehicles).</li>
+    <li>Regional registrations from ZSW were used to validate forecast and allocation.</li>
+    <li>Power BI dashboards were used for visualization, scenario simulations, and interactive planning.</li>
+    <li>Forecast errors were reduced through comparison of predicted and actual monthly demand.</li>
   </ul>
 </section>
 
@@ -91,19 +91,19 @@
   <div class="card">
     <h3 class="text-xl font-bold mb-4" id="recTitle">Recommendations</h3>
     <ul class="list-disc list-inside text-slate-700 space-y-2">
-      <li>Implement weekly SQL-updated dashboards for inventory management.</li>
-      <li>Prioritize high-demand cities and balance stock across regions.</li>
-      <li>Use interactive Power BI simulations for operational planning.</li>
-      <li>Continuously refine forecasts using historical data and registrations.</li>
+      <li>Weekly SQL-updated dashboards should be implemented for inventory management.</li>
+      <li>High-demand cities should be prioritized and stock balanced across regions.</li>
+      <li>Interactive Power BI simulations should be used for operational planning.</li>
+      <li>Forecasts should be continuously refined using historical data and registrations.</li>
     </ul>
   </div>
   <div class="card">
     <h3 class="text-xl font-bold mb-4" id="resultTitle">Results</h3>
     <ul class="list-disc list-inside text-slate-700 space-y-2">
-      <li>Overall inventory reduced by 7%</li>
-      <li>Forecast error improved by 22%</li>
-      <li>Decision-making speed increased by 15%</li>
-      <li>Balanced stock across 6 major cities</li>
+      <li>Overall inventory was reduced by 7%</li>
+      <li>Forecast error was improved by 22%</li>
+      <li>Decision-making speed was increased by 15%</li>
+      <li>Stock was balanced across 6 major cities</li>
     </ul>
   </div>
 </section>
@@ -120,16 +120,16 @@ let de=false;
 langBtn.onclick=()=>{
   de=!de;
   heroTitle.textContent = de ? "Prognose der Nachfrage nach Elektrofahrzeugen – Deutschland" : "Electric Vehicle Demand Forecast – Germany";
-  heroSub.textContent = de ? "Die schnelle Einführung von Elektrofahrzeugen hat regionale Bestandsungleichgewichte verursacht. Einige Städte haben Überbestände, andere Engpässe. Mit historischen Verkaufs- und Registrierungsdaten optimierten wir die Verteilung und verbesserten die Prognosegenauigkeit." :
-                             "The rapid adoption of electric vehicles (EVs) has created regional inventory imbalances. Some cities experienced overstock, while others faced shortages. Using historical sales and registration data, we optimized allocations and improved forecast accuracy.";
+  heroSub.textContent = de ? "Die schnelle Einführung von Elektrofahrzeugen hat regionale Bestandsungleichgewichte verursacht. Einige Städte haben Überbestände, andere Engpässe. Historische Verkaufs- und Registrierungsdaten wurden verwendet, um die Verteilung zu optimieren und die Prognosegenauigkeit zu verbessern." :
+                             "Rapid adoption of electric vehicles (EVs) has caused regional inventory imbalances. Some cities experienced overstock, while others faced shortages. Historical sales and registration data were used to optimize allocations and improve forecast accuracy.";
   invLabel.textContent = de ? "Bestandsreduzierung" : "Inventory Reduction";
   errorLabel.textContent = de ? "Prognosefehler-Verbesserung" : "Forecast Error Improvement";
   speedLabel.textContent = de ? "Erhöhung der Entscheidungsgeschwindigkeit" : "Decision Speed Increase";
   forecastTitle.textContent = de ? "Prognose vs. tatsächliche Nachfrage" : "Forecast vs Actual Demand";
   regionalTitle.textContent = de ? "Regionaler Bestand – Vorher & Nachher" : "Regional Inventory – Before & After";
   problemTitle.textContent = de ? "Problemdefinition" : "Problem Definition";
-  problemText.textContent = de ? "Hamburg, Berlin und München zeigten deutliche Bestandsungleichgewichte. Hamburg hatte z.B. 20 Fahrzeuge auf Lager, während 50 Bestellungen eingingen, was zu Überbeständen führte. Berlin hatte 10 Fahrzeuge für 25 Bestellungen, was potenzielle Engpässe verursachte. Unsere Analyse zielte darauf ab, die Bestände regional zu optimieren." :
-                               "Hamburg, Berlin, and Munich exhibited significant inventory imbalances. For example, Hamburg had 20 vehicles in stock while 50 orders arrived, creating overstock costs, whereas Berlin had 10 vehicles for 25 orders, leading to potential shortages. Our analysis aimed to optimize stock allocation regionally.";
+  problemText.textContent = de ? "In Hamburg, Berlin und München wurden Bestandsungleichgewichte beobachtet. Zum Beispiel hatte Hamburg 20 Fahrzeuge auf Lager, während 50 Bestellungen eingingen, was zu Überbeständen führte, während Berlin 10 Fahrzeuge für 25 Bestellungen hatte, was potenzielle Engpässe verursachte. Die Bestandsverteilung wurde basierend auf der Analyse regional optimiert." :
+                               "Inventory imbalances were observed in Hamburg, Berlin, and Munich. For example, Hamburg had 20 vehicles in stock while 50 orders arrived, creating overstock costs, whereas Berlin had 10 vehicles for 25 orders, leading to potential shortages. Stock allocation was optimized regionally based on the analysis.";
   dataTitle.textContent = de ? "Daten & Methodik" : "Data & Methodology";
   recTitle.textContent = de ? "Empfehlungen" : "Recommendations";
   resultTitle.textContent = de ? "Ergebnisse" : "Results";
