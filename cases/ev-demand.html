@@ -1,80 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>EV Demand Forecast – Germany</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="bg-slate-50 text-slate-900 font-sans">
+<section id="evDemandCase" class="max-w-7xl mx-auto px-6 mb-40">
+  <h2 class="text-3xl font-bold mb-6">EV Demand Forecast – Germany</h2>
 
-<header class="max-w-7xl mx-auto px-6 py-10">
-  <h1 class="text-4xl font-bold mb-6">EV Demand Forecast – Germany</h1>
-  <a href="../index.html" class="text-emerald-600 hover:underline mb-4 inline-block">← Back to Cases</a>
-</header>
+  <div class="grid md:grid-cols-2 gap-8 mb-10">
+    <div class="bg-white p-6 rounded-2xl shadow-lg">
+      <h3 class="font-bold text-xl mb-2">Forecast vs Actual Demand</h3>
+      <canvas id="evChart"></canvas>
+    </div>
+    <div class="bg-white p-6 rounded-2xl shadow-lg">
+      <h3 class="font-bold text-xl mb-2">Regional Inventory Allocation</h3>
+      <canvas id="inventoryChart"></canvas>
+    </div>
+  </div>
 
-<main class="max-w-5xl mx-auto px-6 mb-40 space-y-12">
+  <p class="text-slate-600 mb-4">
+    Over-stocking in some regions and stockouts in others caused inefficiencies. Using AutoScout24 and ZSW data,
+    we built a predictive model and interactive dashboards to optimize allocations.
+  </p>
 
-  <!-- Problem -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-2">Problem</h2>
-    <p>
-      Over-stocking in some regions and stockouts in others led to operational inefficiencies,
-      increased holding costs, and missed sales opportunities. Management needed a
-      data-driven forecast model to optimize inventory allocation across Germany.
-    </p>
-  </section>
+  <div class="grid md:grid-cols-3 gap-4 mt-10">
+    <img src="../assets/images/ev-dashboard.png" class="rounded-xl shadow-lg" alt="EV Dashboard">
+    <img src="../assets/images/ev-forecast.png" class="rounded-xl shadow-lg" alt="Forecast Graph">
+    <img src="../assets/images/ev-allocation.png" class="rounded-xl shadow-lg" alt="Regional Allocation">
+  </div>
+</section>
 
-  <!-- Approach -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-2">Approach</h2>
-    <p>
-      Collected 2.3 million transactional rows from <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a> and 
-      <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>.
-      Performed SQL cleaning, region-wise demand analysis, seasonal trend identification, and
-      stock allocation simulations.
-    </p>
-  </section>
+<script>
+const ctx = document.getElementById('evChart').getContext('2d');
+const evChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+    datasets: [
+      {label:"Forecast Demand", data:[120,150,180,240,300,360,400,420], borderColor:"rgb(34,197,94)", fill:false, tension:0.2},
+      {label:"Actual Demand", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
+    ]
+  },
+  options: {responsive:true, plugins:{legend:{position:'top'}}}
+});
 
-  <!-- Recommendation -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-2">Recommendation</h2>
-    <p>
-      Implement a region-specific inventory allocation dashboard, updated weekly, enabling
-      operations teams to proactively manage stock levels and reduce both overstock and stockouts.
-    </p>
-  </section>
-
-  <!-- Implementation -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-2">Implementation</h2>
-    <p>
-      Developed a Power BI dashboard with:
-    </p>
-    <ul class="list-disc list-inside">
-      <li>Interactive slider to simulate monthly demand changes per region</li>
-      <li>Visual comparison of forecast vs. actual demand</li>
-      <li>Heatmaps for stock level alerts across 6 regions</li>
-    </ul>
-    <img src="../assets/images/ev-dashboard.png" alt="EV Dashboard" class="rounded-lg shadow-lg mt-4">
-  </section>
-
-  <!-- Results / KPIs -->
-  <section>
-    <h2 class="text-2xl font-semibold mb-2">Results / KPIs</h2>
-    <ul class="list-disc list-inside">
-      <li>Inventory reduced by 7%</li>
-      <li>Forecast error decreased by 22%</li>
-      <li>Decision-making speed improved by 15%</li>
-      <li>Optimized regional allocation across 6 key German regions</li>
-    </ul>
-    <canvas id="evChart" class="mt-6"></canvas>
-  </section>
-
-</main>
-
-<script src="../scripts/charts.js"></script>
-
-</body>
-</html>
+const ctxInv = document.getElementById('inventoryChart').getContext('2d');
+const inventoryChart = new Chart(ctxInv, {
+  type: 'bar',
+  data: {
+    labels:["North","South","East","West","Central","Berlin"],
+    datasets:[{label:"Inventory Level", data:[300,250,400,350,320,280], backgroundColor:"rgba(34,197,94,0.6)"}]
+  },
+  options:{responsive:true, plugins:{legend:{display:false}}}
+});
+</script>
