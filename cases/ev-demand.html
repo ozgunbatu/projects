@@ -1,18 +1,47 @@
-<section id="evDemandCase" class="max-w-7xl mx-auto px-6 mb-40">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV Demand Forecast – Germany</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900">
 
-  <h2 class="text-3xl font-bold mb-6 text-center">EV Demand Forecast – Germany</h2>
+<header class="max-w-5xl mx-auto px-6 py-10 text-center">
+  <h1 class="text-4xl font-black mb-4">EV Demand Forecast – Germany</h1>
+  <a href="../index.html" class="text-emerald-600 hover:underline">← Back to Portfolio</a>
+</header>
 
-  <!-- Before vs After Simulation -->
-  <div class="grid md:grid-cols-2 gap-6 mb-10">
+<main class="max-w-5xl mx-auto px-6 space-y-10">
+
+  <!-- Overview -->
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-2">Problem</h2>
+    <p>Over-stocking in some regions and stockouts in others caused inefficiencies and lost sales. 
+       Management needed a predictive model to optimize inventory allocation across Germany.</p>
+  </section>
+
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-2">Approach</h2>
+    <p>Collected 2.3M transaction rows from 
+       <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a> and
+       <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>. 
+       Performed SQL cleaning, seasonal trend analysis, and simulated stock allocation per region.</p>
+  </section>
+
+  <!-- Charts Section -->
+  <section class="grid md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-2xl shadow-lg">
       <h3 class="text-xl font-bold mb-2">Forecast vs Actual Demand</h3>
       <canvas id="evChart" height="200"></canvas>
     </div>
     <div class="bg-white p-6 rounded-2xl shadow-lg">
-      <h3 class="text-xl font-bold mb-2">Regional Inventory Levels</h3>
+      <h3 class="text-xl font-bold mb-2">Regional Inventory Levels (Before & After)</h3>
       <canvas id="inventoryChart" height="200"></canvas>
     </div>
-  </div>
+  </section>
 
   <!-- KPI Mini Cards -->
   <div class="grid md:grid-cols-4 gap-4 mb-10 text-center">
@@ -35,68 +64,66 @@
   </div>
 
   <!-- Before / After Charts -->
-  <div class="grid md:grid-cols-2 gap-6 mb-10">
+  <section class="grid md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-2xl shadow-lg">
-      <h3 class="text-xl font-bold mb-2">Before Recommendation</h3>
+      <h3 class="text-xl font-bold mb-2">Forecast Error Before</h3>
       <canvas id="beforeChart" height="200"></canvas>
     </div>
     <div class="bg-white p-6 rounded-2xl shadow-lg">
-      <h3 class="text-xl font-bold mb-2">After Recommendation</h3>
+      <h3 class="text-xl font-bold mb-2">Forecast Error After</h3>
       <canvas id="afterChart" height="200"></canvas>
     </div>
-  </div>
+  </section>
 
-</section>
+</main>
 
 <script>
 const evCtx = document.getElementById('evChart').getContext('2d');
 new Chart(evCtx, {
-  type: 'line',
-  data: {
-    labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-    datasets:[
-      {label:"Forecast", data:[120,150,180,240,300,360,400,420], borderColor:"rgb(34,197,94)", fill:false, tension:0.2},
-      {label:"Actual", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
-    ]
-  },
-  options:{responsive:true, plugins:{legend:{position:'top'}}}
+    type: 'line',
+    data: {
+        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+        datasets:[
+            {label:"Forecast", data:[120,150,180,240,300,360,400,420], borderColor:"rgb(34,197,94)", fill:false, tension:0.2},
+            {label:"Actual", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
+        ]
+    },
+    options:{responsive:true, plugins:{legend:{position:'top'}}}
 });
 
 const invCtx = document.getElementById('inventoryChart').getContext('2d');
 new Chart(invCtx,{
-  type:'bar',
-  data:{
-    labels:["North","South","East","West","Central","Berlin"],
-    datasets:[
-      {label:"Inventory Before", data:[350,300,420,370,340,310], backgroundColor:"rgba(239,68,68,0.5)"},
-      {label:"Inventory After", data:[300,250,400,350,320,280], backgroundColor:"rgba(34,197,94,0.6)"}
-    ]
-  },
-  options:{responsive:true, plugins:{legend:{position:'top'}}}
+    type:'bar',
+    data:{
+        labels:["North","South","East","West","Central","Berlin"],
+        datasets:[
+            {label:"Before", data:[350,300,420,370,340,310], backgroundColor:"rgba(239,68,68,0.5)"},
+            {label:"After", data:[300,250,400,350,320,280], backgroundColor:"rgba(34,197,94,0.6)"}
+        ]
+    },
+    options:{responsive:true, plugins:{legend:{position:'top'}}}
 });
 
-// Before / After Simulation
 const beforeCtx = document.getElementById('beforeChart').getContext('2d');
-new Chart(beforeCtx, {
-  type:'line',
-  data:{
-    labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-    datasets:[
-      {label:"Forecast Error Before", data:[30,28,32,35,40,38,36,33], borderColor:"rgb(239,68,68)", fill:false, tension:0.2}
-    ]
-  },
-  options:{responsive:true, plugins:{legend:{position:'top'}}}
+new Chart(beforeCtx,{
+    type:'line',
+    data:{
+        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+        datasets:[{label:"Forecast Error Before", data:[30,28,32,35,40,38,36,33], borderColor:"rgb(239,68,68)", fill:false, tension:0.2}]
+    },
+    options:{responsive:true, plugins:{legend:{position:'top'}}}
 });
 
 const afterCtx = document.getElementById('afterChart').getContext('2d');
-new Chart(afterCtx, {
-  type:'line',
-  data:{
-    labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
-    datasets:[
-      {label:"Forecast Error After", data:[22,20,18,19,21,17,15,14], borderColor:"rgb(34,197,94)", fill:false, tension:0.2}
-    ]
-  },
-  options:{responsive:true, plugins:{legend:{position:'top'}}}
+new Chart(afterCtx,{
+    type:'line',
+    data:{
+        labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
+        datasets:[{label:"Forecast Error After", data:[22,20,18,19,21,17,15,14], borderColor:"rgb(34,197,94)", fill:false, tension:0.2}]
+    },
+    options:{responsive:true, plugins:{legend:{position:'top'}}}
 });
 </script>
+
+</body>
+</html>
