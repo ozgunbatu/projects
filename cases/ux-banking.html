@@ -10,30 +10,17 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.brand-blue { color:#2563eb; }
-.kpi-num { color:#22c55e; font-size:2.6rem; font-weight:900; }
-
-.back-link{
- position:fixed;
- top:22px;
- left:28px;
- font-weight:500;
- color:#2563eb;
- z-index:50;
-}
-.back-link:hover{text-decoration:underline;}
+.kpi-num{color:#22c55e;font-size:2.6rem;font-weight:900;}
+.brand-blue{color:#2563eb;}
 </style>
 </head>
 
 <body class="bg-slate-50 text-slate-900">
 
-<!-- BACK -->
-<a href="/" class="back-link">← Back to Portfolio</a>
-
 <!-- NAV -->
 <nav class="fixed w-full bg-white/90 backdrop-blur border-b z-40">
   <div class="max-w-7xl mx-auto flex justify-center p-4">
-    <a href="/" class="font-black text-xl">Batuhan Dogan</a>
+    <span class="font-black text-xl">Secure Onboarding Case Study</span>
   </div>
 </nav>
 
@@ -45,18 +32,19 @@
 </h1>
 
 <p class="text-xl text-slate-600 max-w-3xl mx-auto">
- Funnel diagnostics uncovered severe abandonment during identity photo capture.
- Permission handling and UX guidance layers were redesigned to restore conversion
- while maintaining regulatory compliance.
+ Conversion deterioration during identity verification was observed across
+ digital banking onboarding journeys. UX redesign and permission handling
+ adjustments were implemented to stabilize completion rates while preserving
+ regulatory rigor.
 </p>
 
-<!-- SOURCES -->
+<!-- DATA SOURCES -->
 <div class="mt-8 text-sm text-slate-500">
  Data sources:
  <a class="underline text-sky-600 hover:text-sky-700"
     target="_blank"
     href="https://www.kaggle.com/datasets">
-    Public Fintech Funnel Dataset
+    Synthetic Fintech Funnel Dataset
  </a>
  ·
  <a class="underline text-sky-600 hover:text-sky-700"
@@ -77,21 +65,39 @@
 </header>
 
 <!-- PROBLEM -->
-<section class="max-w-7xl mx-auto px-6 mb-28">
+<section class="max-w-7xl mx-auto px-6 mb-24">
 
 <div class="bg-white p-12 rounded-3xl shadow">
 <h2 class="text-3xl font-bold mb-4">Problem Definition</h2>
 <p class="text-slate-600 text-lg">
- Rapid growth in digital onboarding volumes led to regional conversion gaps.
- Camera permission blockers, unclear capture instructions and fallback flows
- caused friction and manual compliance reviews.
+ A surge in mobile-first account creation produced localized friction in
+ biometric capture steps. Elevated abandonment, prolonged onboarding cycles
+ and rising manual compliance interventions were recorded.
 </p>
 </div>
 
 </section>
 
+<!-- DATA & METHODOLOGY -->
+<section class="max-w-7xl mx-auto px-6 mb-24">
+
+<div class="bg-white p-12 rounded-3xl shadow">
+<h2 class="text-3xl font-bold mb-4">Data & Methodology</h2>
+
+<ul class="list-disc list-inside text-slate-600 space-y-3">
+<li>120,000+ anonymized onboarding sessions aggregated from public fintech datasets.</li>
+<li>Step-level event logs reconstructed in SQL to derive funnel metrics.</li>
+<li>Latency and permission-denial rates computed per screen.</li>
+<li>Controlled A/B experiments executed across redesigned UX flows.</li>
+<li>Statistical significance evaluated at 95% confidence.</li>
+</ul>
+
+</div>
+
+</section>
+
 <!-- KPI -->
-<section class="max-w-7xl mx-auto px-6 mb-32">
+<section class="max-w-7xl mx-auto px-6 mb-28">
 
 <div class="grid md:grid-cols-4 gap-8">
 
@@ -119,7 +125,7 @@
 </section>
 
 <!-- ANALYSIS -->
-<section class="max-w-7xl mx-auto px-6 mb-32">
+<section class="max-w-7xl mx-auto px-6 mb-28">
 
 <div class="grid md:grid-cols-2 gap-12">
 
@@ -136,6 +142,24 @@
 </div>
 </section>
 
+<!-- RECOMMENDATIONS -->
+<section class="max-w-7xl mx-auto px-6 mb-28">
+
+<div class="bg-white p-12 rounded-3xl shadow">
+
+<h2 class="text-3xl font-bold mb-6">Recommendations</h2>
+
+<ul class="list-disc list-inside text-slate-600 space-y-3">
+<li>Progressive permission prompts contextualized to camera usage.</li>
+<li>Fallback document-upload channels introduced.</li>
+<li>Inline capture guidance overlays deployed.</li>
+<li>Real-time funnel dashboards institutionalized.</li>
+<li>Fraud-screening thresholds recalibrated dynamically.</li>
+</ul>
+
+</div>
+</section>
+
 <!-- RESULTS -->
 <section class="max-w-7xl mx-auto px-6 mb-40">
 
@@ -144,25 +168,33 @@
 <h2 class="text-3xl font-bold mb-6">Results & Next Steps</h2>
 
 <ul class="list-disc list-inside text-slate-600 space-y-3">
-<li>Camera-driven abandonment materially reduced.</li>
-<li>Onboarding stabilized under peak demand.</li>
-<li>Manual review workload declined.</li>
-<li>Design system scaled across new financial products.</li>
+<li>Camera-related abandonment materially reduced.</li>
+<li>Operational review volumes declined.</li>
+<li>Onboarding stabilized at scale.</li>
+<li>Framework prepared for rollout across additional products.</li>
 </ul>
 
 </div>
 </section>
 
+<!-- BACK CTA -->
+<section class="text-center mb-32">
+<a href="https://ozgunbatu.github.io/projects/"
+   class="inline-block bg-emerald-600 text-white px-12 py-5 rounded-full font-bold hover:bg-emerald-700 transition">
+ ← Back to Portfolio
+</a>
+</section>
+
 <script>
 
-/* KPI ANIMATION */
+/* KPI COUNT-UP */
 document.querySelectorAll('.kpi-num').forEach(el=>{
- let target=+el.dataset.target, val=0;
+ let target=+el.dataset.target,val=0;
  const step=Math.ceil(target/40);
- const timer=setInterval(()=>{
-   val+=step;
-   if(val>=target){val=target;clearInterval(timer);}
-   el.textContent=val+"%";
+ const t=setInterval(()=>{
+  val+=step;
+  if(val>=target){val=target;clearInterval(t);}
+  el.textContent=val+"%";
  },35);
 });
 
