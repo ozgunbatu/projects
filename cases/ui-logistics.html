@@ -1,1 +1,18 @@
+<div class="flex items-center gap-4">
+  <img src="assets/images/avatar.jpg" alt="Batuhan Dogan" class="w-16 h-16 rounded-full border-2 border-slate-300 cursor-pointer" id="avatar">
+  <div class="relative">
+    <div id="cvTooltip" class="absolute top-20 left-0 bg-white p-4 rounded-lg shadow-lg hidden w-64 z-50">
+      <h4 class="font-bold mb-2">Batuhan Dogan</h4>
+      <p class="text-sm mb-2">Skills intersecting this project: SQL, Power BI, UX, Product Strategy</p>
+      <a href="assets/Batuhan_Dogan_CV.pdf" class="text-blue-600 underline text-sm" target="_blank">View full CV</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const avatar = document.getElementById('avatar');
+  const tooltip = document.getElementById('cvTooltip');
+  avatar.addEventListener('mouseenter', () => { tooltip.classList.remove('hidden'); });
+  avatar.addEventListener('mouseleave', () => { tooltip.classList.add('hidden'); });
+</script>
 
