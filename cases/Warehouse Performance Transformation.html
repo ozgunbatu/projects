@@ -3,25 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <title>Warehouse Operational Excellence – Lean Six Sigma Case</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-:root {
-  --green:#1fa971;
-  --blue:#2f6fed;
-  --dark:#0f172a;
-  --muted:#64748b;
-  --bg:#f8fafc;
-}
 
-* { box-sizing:border-box; }
+:root {
+  --green:#1f9d55;
+  --blue:#2563eb;
+  --bg:#f5f7f6;
+}
 
 body {
   margin:0;
-  font-family: Inter, system-ui, sans-serif;
-  background:var(--bg);
+  font-family: Inter, system-ui;
+  background: var(--bg);
   color:#0f172a;
 }
 
@@ -29,320 +27,339 @@ body {
 
 header {
   background:white;
-  padding:18px 48px;
-  border-bottom:1px solid #e5e7eb;
+  padding:20px 60px;
   display:flex;
+  justify-content:space-between;
   align-items:center;
-  gap:16px;
-}
-
-.back {
-  font-size:20px;
-  text-decoration:none;
-  color:var(--green);
-  font-weight:700;
-}
-
-.brand {
-  font-weight:700;
-  font-size:20px;
-}
-
-/* SECTIONS */
-
-.container {
-  max-width:1200px;
-  margin:64px auto;
-  padding:0 32px;
-}
-
-h1 {
-  font-size:48px;
-  margin-bottom:12px;
-}
-
-.subtitle {
-  color:var(--muted);
-  max-width:700px;
-  font-size:18px;
-}
-
-/* KPI GRID */
-
-.kpis {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  margin:56px 0;
-}
-
-.kpi {
-  background:white;
-  padding:28px;
-  border-radius:18px;
   box-shadow:0 6px 18px rgba(0,0,0,.05);
 }
 
-.kpi span {
-  font-size:34px;
-  font-weight:800;
+.logo-wrap {
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.back-btn {
+  text-decoration:none;
+  font-size:22px;
+  color:#111;
+}
+
+.logo {
+  font-weight:700;
+  font-size:18px;
+}
+
+/* LANG TOGGLE */
+
+.lang-toggle {
+  display:flex;
+  gap:8px;
+  border:1px solid var(--green);
+  border-radius:20px;
+  padding:4px;
+}
+
+.lang-toggle button {
+  background:none;
+  border:none;
+  padding:6px 14px;
+  cursor:pointer;
+  font-weight:600;
+  border-radius:16px;
   color:var(--green);
 }
 
-.kpi p {
-  margin:6px 0 0;
-  color:var(--muted);
+.lang-toggle button.active {
+  background:var(--green);
+  color:white;
 }
 
-/* CARD */
+/* LAYOUT */
 
-.card {
+main {
+  max-width:1200px;
+  margin:80px auto;
+  padding:0 40px;
+}
+
+.hero {
+  text-align:center;
+}
+
+.hero h1 {
+  font-size:46px;
+}
+
+.white-box {
   background:white;
-  padding:56px;
   border-radius:28px;
-  margin:64px 0;
-  box-shadow:0 12px 30px rgba(0,0,0,.05);
+  padding:60px;
+  margin-top:80px;
+  box-shadow:0 20px 60px rgba(0,0,0,.06);
 }
 
-h2 {
-  font-size:34px;
-  margin-bottom:16px;
+.section-intro {
+  max-width:800px;
+  margin:20px auto 0;
+  text-align:center;
+  opacity:.8;
 }
 
-h3 {
-  margin-top:40px;
-}
+/* KPI */
 
-.grid-2 {
+.kpi-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:48px;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
+  margin-top:60px;
 }
 
-/* CHARTS */
+.kpi {
+  background:#f8faf9;
+  padding:40px;
+  border-radius:22px;
+  text-align:center;
+}
 
-.chart-box {
-  background:#f1f5f9;
+.kpi .value {
+  font-size:42px;
+  font-weight:700;
+  color:var(--green);
+}
+
+/* PARETO */
+
+canvas {
+  max-width:900px;
+  margin:50px auto 0;
+  display:block;
+}
+
+/* DMAIC */
+
+.dmaic-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+  margin-top:60px;
+}
+
+.dmaic-step {
+  background:#f8faf9;
   padding:28px;
-  border-radius:18px;
+  border-radius:22px;
+  transition:.3s;
+  cursor:pointer;
+}
+
+.dmaic-step:hover {
+  transform:translateY(-6px);
+}
+
+.dmaic-step.active {
+  border:2px solid var(--green);
+}
+
+/* RESULTS */
+
+.results ul {
+  max-width:720px;
+  margin:40px auto;
+  line-height:1.9;
 }
 
 /* FOOTER */
 
 footer {
   text-align:center;
-  padding:80px 0;
+  margin:120px 0;
 }
 
-.back-btn {
-  display:inline-block;
+footer a {
+  text-decoration:none;
   background:var(--green);
   color:white;
-  padding:16px 36px;
-  border-radius:40px;
-  text-decoration:none;
-  font-weight:700;
+  padding:18px 36px;
+  border-radius:30px;
+  font-weight:600;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-  <a class="back" href="https://ozgunbatu.github.io/projects/">←</a>
-  <div class="brand">Batuhan Doğan</div>
+  <div class="logo-wrap">
+    <a class="back-btn" href="https://ozgunbatu.github.io/projects/">←</a>
+    <div class="logo">Batuhan Dogan</div>
+  </div>
+
+  <div class="lang-toggle">
+    <button id="lang-en" class="active">EN</button>
+    <button id="lang-de">DE</button>
+  </div>
 </header>
 
-<div class="container">
+<main>
 
-<h1>Warehouse Operational Excellence</h1>
-<p class="subtitle">
-Lean Six Sigma transformation of a large omnichannel distribution center focused on
-lead-time reduction, quality improvement and labor productivity.
+<section class="hero">
+<h1 data-en="Warehouse Operational Excellence"
+    data-de="Operative Exzellenz im Lager">
+Warehouse Operational Excellence</h1>
+
+<p class="section-intro"
+data-en="A Lean Six Sigma case study focused on throughput improvement, labor balancing and service-level recovery in large distribution centers."
+data-de="Eine Lean-Six-Sigma-Fallstudie zur Durchsatzsteigerung, Personalbalancierung und Servicelevel-Stabilisierung in großen Distributionszentren.">
 </p>
-
-<!-- KPI -->
-
-<div class="kpis">
-  <div class="kpi"><span>-32%</span><p>Order Lead Time</p></div>
-  <div class="kpi"><span>+28%</span><p>UPH Productivity</p></div>
-  <div class="kpi"><span>-45%</span><p>Picking Errors</p></div>
-  <div class="kpi"><span>€1.5M</span><p>Annual Savings</p></div>
-</div>
-
-<!-- CONTEXT -->
-
-<div class="card">
-<h2>Operating Context</h2>
-
-<p>
-The facility is a 45,000 m² omnichannel distribution center serving both B2C and B2B flows.
-It processes more than 42,000 order lines per day across 18,000 SKUs with semi-automated
-picking and three operational shifts.
-</p>
-
-<h3>Value Stream</h3>
-<p>
-Inbound → Quality Check → Put-Away → Storage → Replenishment → Picking → Packing → Sortation → Shipping
-</p>
-
-</div>
+</section>
 
 <!-- PROBLEM -->
 
-<div class="card">
-<h2>Business Problem</h2>
+<section class="white-box">
 
-<p>
-During peak seasons the site experienced growing backlogs, overtime costs and declining
-customer satisfaction. Executive management launched a Lean Six Sigma initiative to
-restore service level while controlling cost.
+<h2 data-en="Problem Definition"
+data-de="Problemdefinition">Problem Definition</h2>
+
+<p class="section-intro"
+data-en="Rapid e-commerce growth drove order volumes beyond designed warehouse capacity. Service levels dropped, overtime costs rose and picking queues became unstable across shifts."
+data-de="Starkes E-Commerce-Wachstum überlastete Lagerkapazitäten. Servicelevel sanken, Überstunden stiegen und Kommissionierschlangen wurden instabil.">
 </p>
 
-<ul>
-<li>Order Lead Time: 19.4h vs 12h target</li>
-<li>Picking Accuracy: 97.8%</li>
-<li>Dock-to-Stock: 9.2h</li>
-<li>Overtime cost +22%</li>
-</ul>
+<div class="kpi-grid">
+
+<div class="kpi">
+<div class="value" data-value="18">0%</div>
+<div data-en="Lead Time Reduction"
+data-de="Durchlaufzeit-Reduktion">Lead Time Reduction</div>
 </div>
 
-<!-- DATA -->
-
-<div class="card">
-<h2>Data & Measurement</h2>
-
-<div class="grid-2">
-<div>
-<h3>Sources</h3>
-<ul>
-<li>WMS timestamps</li>
-<li>Scan logs</li>
-<li>Labor system</li>
-<li>Dock scheduling</li>
-</ul>
+<div class="kpi">
+<div class="value" data-value="22">0%</div>
+<div data-en="Labor Productivity"
+data-de="Arbeitsproduktivität">Labor Productivity</div>
 </div>
 
-<div>
-<h3>Sample</h3>
-<ul>
-<li>6 weeks history</li>
-<li>3.2M pick lines</li>
-<li>14,500 pallets inbound</li>
-</ul>
-</div>
+<div class="kpi">
+<div class="value" data-value="14">0%</div>
+<div data-en="Service Level Gain"
+data-de="Servicelevel-Steigerung">Service Level Gain</div>
 </div>
 
 </div>
 
-<!-- ANALYSIS -->
+</section>
 
-<div class="card">
-<h2>Root Cause Analysis</h2>
+<!-- PARETO -->
 
-<div class="grid-2">
+<section class="white-box">
 
-<div class="chart-box">
-<h3>Pareto – Error Drivers</h3>
-<canvas id="pareto"></canvas>
+<h2 data-en="Root Cause Analysis – Pareto"
+data-de="Ursachenanalyse – Pareto"></h2>
+
+<p class="section-intro"
+data-en="Delay drivers were decomposed using Six Sigma tools. Three operational failures explained over 75% of missed orders."
+data-de="Verzögerungstreiber wurden zerlegt. Drei operative Ursachen erklärten über 75% der Fehlmengen.">
+</p>
+
+<canvas id="paretoChart"></canvas>
+
+</section>
+
+<!-- DMAIC -->
+
+<section class="white-box">
+
+<h2 data-en="Six Sigma Roadmap (DMAIC)"
+data-de="Six-Sigma-Verbesserungsfahrplan"></h2>
+
+<div class="dmaic-grid">
+
+<div class="dmaic-step active"><h3>Define</h3><p>Service drop to 86%.</p></div>
+<div class="dmaic-step"><h3>Measure</h3><p>Cycle time & utilization captured.</p></div>
+<div class="dmaic-step"><h3>Analyze</h3><p>Pareto & regression models.</p></div>
+<div class="dmaic-step"><h3>Improve</h3><p>Slotting, shifts, AGVs.</p></div>
+<div class="dmaic-step"><h3>Control</h3><p>Dashboards & SPC charts.</p></div>
+
 </div>
 
-<div class="chart-box">
-<h3>Dock-to-Stock SPC</h3>
-<canvas id="spc"></canvas>
-</div>
+</section>
 
-<div class="chart-box">
-<h3>Simulation Impact</h3>
-<canvas id="sim"></canvas>
-</div>
+<!-- RESULTS -->
 
-<div class="chart-box">
-<h3>Labor Utilization</h3>
-<canvas id="labor"></canvas>
-</div>
+<section class="white-box results">
 
-</div>
-
-</div>
-
-<!-- IMPROVE -->
-
-<div class="card">
-<h2>Improvement Initiatives</h2>
+<h2 data-en="Results & Impact"
+data-de="Ergebnisse & Wirkung"></h2>
 
 <ul>
-<li>Slotting redesign and fast-mover relocation</li>
-<li>Pick-to-light pilot in small-parts zone</li>
-<li>Dock appointment leveling</li>
-<li>Poka-Yoke scanning & weight checks</li>
-<li>Standard work sheets and skill matrix</li>
+<li data-en="18% faster order fulfillment."
+data-de="18% schnellere Auftragsabwicklung."></li>
+<li data-en="22% productivity increase per picker."
+data-de="22% höhere Produktivität pro Mitarbeiter."></li>
+<li data-en="Stabilized dock operations."
+data-de="Stabilisierte Rampenprozesse."></li>
+<li data-en="Permanent SPC monitoring deployed."
+data-de="Dauerhafte SPC-Überwachung eingeführt."></li>
 </ul>
 
-</div>
+</section>
 
-<!-- IMPACT -->
-
-<div class="card">
-<h2>Business Impact</h2>
-
-<ul>
-<li>Overtime reduced by €0.9M/year</li>
-<li>Rework cost −55%</li>
-<li>Throughput +18%</li>
-<li>Customer complaints −34%</li>
-</ul>
-
-</div>
-
-</div>
+</main>
 
 <footer>
-<a class="back-btn" href="https://ozgunbatu.github.io/projects/">← Back to Portfolio</a>
+<a href="https://ozgunbatu.github.io/projects/">Back to Portfolio</a>
 </footer>
 
 <script>
 
-new Chart(pareto,{
- type:'bar',
- data:{
-  labels:['Zone A','Mis-slotting','Packaging','Training','System'],
-  datasets:[{
-   data:[42,26,14,10,8],
-   backgroundColor:'#2f6fed'
-  }]
- }
+/* KPI COUNTER */
+
+document.querySelectorAll(".value").forEach(el=>{
+  const target=+el.dataset.value;
+  let i=0;
+  const timer=setInterval(()=>{
+    i++;
+    el.textContent=i+"%";
+    if(i===target) clearInterval(timer);
+  },25);
 });
 
-new Chart(spc,{
- type:'line',
- data:{
-  labels:['W1','W2','W3','W4','W5','W6'],
-  datasets:[{
-   data:[9.5,10.2,8.9,7.1,6.8,6.2],
-   borderColor:'#2f6fed'
-  }]
- }
+/* LANG */
+
+const els=document.querySelectorAll("[data-en]");
+const en=document.getElementById("lang-en");
+const de=document.getElementById("lang-de");
+
+function setLang(l){
+  els.forEach(e=>e.textContent=e.dataset[l]);
+  en.classList.toggle("active",l==="en");
+  de.classList.toggle("active",l==="de");
+}
+
+en.onclick=()=>setLang("en");
+de.onclick=()=>setLang("de");
+
+/* PARETO */
+
+new Chart(paretoChart,{
+type:"bar",
+data:{
+labels:["Slotting","Labor balance","Dock congestion","IT","Rework"],
+datasets:[{data:[34,26,18,12,10]}]
+},
+options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
 });
 
-new Chart(sim,{
- type:'bar',
- data:{
-  labels:['Lead Time','Errors','UPH'],
-  datasets:[
-   {data:[0,-32,-28],backgroundColor:'#1fa971'}
-  ]
- }
-});
+/* DMAIC */
 
-new Chart(labor,{
- type:'line',
- data:{
-  labels:['Mon','Tue','Wed','Thu','Fri'],
-  datasets:[
-   {data:[68,71,75,82,85],borderColor:'#2f6fed'}
-  ]
- }
+document.querySelectorAll(".dmaic-step").forEach(s=>{
+s.onmouseenter=()=>{
+document.querySelectorAll(".dmaic-step").forEach(x=>x.classList.remove("active"));
+s.classList.add("active");
+};
 });
 
 </script>
