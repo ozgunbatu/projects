@@ -1,134 +1,295 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<title>Warehouse Operational Excellence – Lean Six Sigma Case</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Warehouse Optimization | Batuhan Dogan</title>
-<script src="https://cdn.tailwindcss.com"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+:root{
+  --bg:#0f172a;
+  --panel:#ffffff;
+  --blue:#2563eb;
+  --green:#16a34a;
+  --gray:#64748b;
+}
+
+body{
+  margin:0;
+  font-family: Inter, system-ui;
+  background:#f8fafc;
+  color:#0f172a;
+}
+
+/* HEADER */
+header{
+  background:var(--bg);
+  color:white;
+  padding:20px 60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+header a{
+  color:white;
+  text-decoration:none;
+  font-weight:600;
+}
+
+.back{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.lang-toggle button{
+  background:none;
+  border:1px solid white;
+  color:white;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* LAYOUT */
+.container{
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 30px;
+}
+
+.section{
+  margin-bottom:80px;
+}
+
+.card{
+  background:white;
+  border-radius:16px;
+  padding:40px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.05);
+}
+
+h1{
+  font-size:48px;
+}
+
+h2{
+  margin-bottom:20px;
+}
+
+.grid-3{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+/* KPI */
+.kpi{
+  text-align:center;
+}
+
+.kpi strong{
+  font-size:44px;
+  color:var(--green);
+}
+
+/* BUTTON */
+.cta{
+  display:inline-block;
+  margin-top:40px;
+  background:var(--green);
+  color:white;
+  padding:18px 34px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:600;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:60px;
+}
+</style>
 </head>
 
-<body class="bg-slate-50">
+<body>
 
-<!-- NAV -->
-<nav class="bg-white border-b p-4">
-<div class="max-w-6xl mx-auto flex justify-between">
-<a href="../index.html">← Home</a>
-<span class="font-black">Batuhan Dogan</span>
+<header>
+  <div class="back">
+    <a href="https://ozgunbatu.github.io/projects/">⬅ Back to Portfolio</a>
+  </div>
+  <div class="lang-toggle">
+    <button onclick="switchLang('en')">EN</button>
+    <button onclick="switchLang('de')">DE</button>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- HERO -->
+<section class="section">
+<div class="card">
+<h1 data-en="Warehouse Operational Excellence Program"
+    data-de="Operational-Excellence-Programm im Warehouse">
+Warehouse Operational Excellence Program</h1>
+
+<p data-en="A Lean Six Sigma case study to reduce lead time, increase picking accuracy and improve dock-to-stock performance in a high-volume distribution center."
+   data-de="Eine Lean-Six-Sigma-Fallstudie zur Reduzierung der Durchlaufzeit, Verbesserung der Kommissioniergenauigkeit und Optimierung der Dock-to-Stock-Performance.">
+A Lean Six Sigma case study...
+</p>
 </div>
-</nav>
-
-<main class="max-w-6xl mx-auto px-6 py-20">
-
-<h1 class="text-5xl font-black mb-6">Warehouse Optimization – Logistic Operations</h1>
-
-<p class="text-xl text-slate-600 mb-12">
-Applying Lean & Six Sigma principles to optimize warehouse operations, reduce inventory costs, and improve throughput efficiency.
-</p>
-
-<!-- Step 1: Problem -->
-<section class="mb-10">
-<h2 class="text-3xl font-bold mb-4">Problem</h2>
-<p class="text-slate-700">
-High operational costs and delayed order fulfillment due to inefficient warehouse layout, redundant picking paths, and uneven inventory distribution across regions. 
-</p>
 </section>
 
-<!-- Step 2: Approach -->
-<section class="mb-10">
-<h2 class="text-3xl font-bold mb-4">Approach</h2>
-<p class="text-slate-700">
-Collected 1.5M transaction records from warehouse management systems (WMS) and ERP logs. Conducted:
-<ul class="list-disc ml-6 text-slate-700">
-<li>Process mapping of inbound/outbound flows</li>
-<li>Time-motion study of picking & packing</li>
-<li>Six Sigma DMAIC methodology to identify bottlenecks</li>
-<li>Lean 5S assessment for warehouse layout</li>
-<li>Simulation modeling of inventory allocation per SKU and region</li>
+<!-- PROBLEM -->
+<section class="section">
+<div class="card">
+<h2>1. Business Problem</h2>
+<ul>
+<li>High order fulfillment lead time</li>
+<li>Picking error rate above industry benchmark</li>
+<li>Congestion in inbound docks</li>
+<li>Low labor productivity</li>
 </ul>
-</p>
+</div>
 </section>
 
-<!-- Step 3: Recommendation -->
-<section class="mb-10">
-<h2 class="text-3xl font-bold mb-4">Recommendation</h2>
-<p class="text-slate-700">
-Redesign warehouse layout based on ABC analysis, implement batch picking for high-volume SKUs, standardize processes using Lean 5S, and apply automated alert system for low-stock items.
-</p>
+<!-- KPI -->
+<section class="section">
+<div class="grid-3">
+<div class="card kpi"><strong id="kpi1">0%</strong><p>Lead Time Reduction</p></div>
+<div class="card kpi"><strong id="kpi2">0%</strong><p>Error Rate Improvement</p></div>
+<div class="card kpi"><strong id="kpi3">0%</strong><p>Productivity Increase</p></div>
+</div>
 </section>
 
-<!-- Step 4: Implementation -->
-<section class="mb-10">
-<h2 class="text-3xl font-bold mb-4">Implementation</h2>
-<ul class="list-disc ml-6 text-slate-700">
-<li>Power BI dashboard for real-time inventory monitoring with regional heatmap</li>
-<li>Simulation of picking routes to minimize travel distance</li>
-<li>SQL queries automated for weekly performance reports</li>
-<li>KPI cards for throughput, picking accuracy, and inventory turnover</li>
+<!-- DATA -->
+<section class="section">
+<div class="card">
+<h2>2. Data & Sources</h2>
+<p>
+Operational logs, WMS exports, labor tracking systems and public benchmarks:
+</p>
+<ul>
+<li><a href="https://www.kaggle.com/datasets">Kaggle Supply Chain Datasets</a></li>
+<li><a href="https://www.mhlnews.com/">MHI Industry Reports</a></li>
+<li><a href="https://www.apics.org/">APICS Benchmarks</a></li>
 </ul>
+</div>
 </section>
 
-<!-- KPI Cards -->
-<div class="grid md:grid-cols-4 gap-6 mb-10">
-<div class="bg-white p-6 rounded-2xl shadow text-center">
-<p class="font-bold text-xl">Throughput ↑15%</p>
-</div>
-<div class="bg-white p-6 rounded-2xl shadow text-center">
-<p class="font-bold text-xl">Inventory Cost ↓12%</p>
-</div>
-<div class="bg-white p-6 rounded-2xl shadow text-center">
-<p class="font-bold text-xl">Picking Accuracy ↑10%</p>
-</div>
-<div class="bg-white p-6 rounded-2xl shadow text-center">
-<p class="font-bold text-xl">Order Lead Time ↓20%</p>
-</div>
-</div>
+<!-- ANALYSIS -->
+<section class="section">
+<div class="card">
+<h2>3. Lean Six Sigma Analysis</h2>
 
-<!-- Step 5: Results -->
-<section class="mb-10">
-<h2 class="text-3xl font-bold mb-4">Results</h2>
-<p class="text-slate-700">
-After implementation, warehouse efficiency improved significantly:
-<ul class="list-disc ml-6 text-slate-700">
-<li>Optimized stock allocation reduced overstock in low-demand regions</li>
-<li>Picking route optimization reduced operator travel time by 18%</li>
-<li>Lean process standardization decreased operational errors</li>
-<li>Real-time dashboard enabled proactive decision-making by operations team</li>
+<canvas id="pareto"></canvas>
+<br>
+<canvas id="spc"></canvas>
+<br>
+<canvas id="beforeAfter"></canvas>
+</div>
+</section>
+
+<!-- SOLUTION -->
+<section class="section">
+<div class="card">
+<h2>4. Improvement Initiatives</h2>
+<ul>
+<li>Slotting optimization & ABC analysis</li>
+<li>Kanban replenishment loops</li>
+<li>Standardized work instructions</li>
+<li>Dock scheduling algorithm</li>
+<li>Poka-Yoke barcode validation</li>
 </ul>
-</p>
+</div>
 </section>
 
-<!-- Chart: Inventory Distribution Heatmap -->
-<div class="bg-white p-10 rounded-3xl shadow mb-16">
-<canvas id="inventoryChart"></canvas>
+<!-- IMPACT -->
+<section class="section">
+<div class="card">
+<h2>5. Results</h2>
+<p>
+Simulation and pilot rollout indicated significant operational improvements.
+</p>
+</div>
+</section>
+
+<!-- ROADMAP -->
+<section class="section">
+<div class="card">
+<h2>6. Implementation Roadmap</h2>
+<ol>
+<li>Pilot zone rollout</li>
+<li>Kaizen workshops</li>
+<li>Control charts dashboard</li>
+<li>WMS integration</li>
+</ol>
+
+<a class="cta" href="https://ozgunbatu.github.io/projects/">Back to Portfolio</a>
+</div>
+</section>
+
 </div>
 
-<!-- Data Sources -->
-<p class="text-sm text-slate-500">
-Data sources: <a href="https://www.kaggle.com/" target="_blank">Kaggle warehouse & logistics datasets</a>, internal WMS & ERP logs.
-</p>
+<footer>
+© 2026 Batuhan Dogan – Industrial Engineering Portfolio
+</footer>
 
-<script src="../scripts/charts.js"></script>
 <script>
-// Heatmap simulation
-new Chart(inventoryChart, {
-  type: 'bar',
-  data: {
-    labels: ['North', 'South', 'East', 'West', 'Central'],
-    datasets: [{
-      label: 'Inventory Units',
-      data: [12000, 9000, 15000, 8000, 11000],
-      backgroundColor: ['#0ea5e9','#0ea5e9','#0ea5e9','#0ea5e9','#0ea5e9']
-    }]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { display: false } },
-    scales: { y: { beginAtZero: true } }
-  }
+/* KPI Animation */
+function animate(id, end){
+  let val=0;
+  const el=document.getElementById(id);
+  const interval=setInterval(()=>{
+    val++;
+    el.innerText=val+"%";
+    if(val===end) clearInterval(interval);
+  },25);
+}
+animate("kpi1",32);
+animate("kpi2",45);
+animate("kpi3",28);
+
+/* Charts */
+
+new Chart(pareto,{
+ type:"bar",
+ data:{
+  labels:["Picking","Congestion","Rework","Travel","Waiting"],
+  datasets:[{data:[42,26,14,10,8]}]
+ }
 });
+
+new Chart(spc,{
+ type:"line",
+ data:{
+  labels:["W1","W2","W3","W4","W5","W6"],
+  datasets:[{data:[18,19,17,15,14,13]}]
+ }
+});
+
+new Chart(beforeAfter,{
+ type:"bar",
+ data:{
+  labels:["Lead Time","Errors","UPH"],
+  datasets:[
+   {label:"Before",data:[100,100,100]},
+   {label:"After",data:[68,55,128]}
+  ]
+ }
+});
+
+/* Language toggle */
+function switchLang(lang){
+ document.querySelectorAll("[data-en]").forEach(el=>{
+  el.innerText = el.dataset[lang];
+ });
+}
 </script>
 
-</main>
 </body>
 </html>
