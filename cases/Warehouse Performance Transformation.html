@@ -1,249 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Warehouse Transformation – Interactive Ops Case</title>
-
+<meta charset="UTF-8" />
+<title>Lean Six Sigma Warehouse Optimization</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <style>
-:root{
- --bg:#020617;
- --card:#020617;
- --border:#1e293b;
- --green:#22c55e;
- --blue:#38bdf8;
- --muted:#94a3b8;
- --text:#e5e7eb;
+body {
+  font-family: Inter, system-ui;
+  background:#0b0f14;
+  color:#eaeef5;
+  margin:0;
 }
-
-*{box-sizing:border-box;font-family:Inter,system-ui;}
-
-body{
- margin:0;
- background:radial-gradient(circle at top,#0f172a,#020617);
- color:var(--text);
+header {
+  background:#101826;
+  padding:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
-
-header{
- padding:22px 8%;
- display:flex;
- justify-content:space-between;
- align-items:center;
- border-bottom:1px solid var(--border);
- position:sticky;
- top:0;
- background:#020617ee;
- z-index:10;
+button {
+  background:#3b82f6;
+  color:white;
+  border:none;
+  padding:10px 18px;
+  border-radius:10px;
+  cursor:pointer;
 }
-
-header .left{
- display:flex;
- gap:14px;
- align-items:center;
+section {
+  padding:60px 12%;
 }
-
-.back{
- font-size:1.4rem;
+h1,h2 {color:#60a5fa}
+.card {
+  background:#111827;
+  border-radius:18px;
+  padding:24px;
+  margin-top:20px;
 }
-
-a{color:var(--green);text-decoration:none}
-
-.toggle{
- border:1px solid var(--border);
- border-radius:999px;
- display:flex;
- overflow:hidden;
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  gap:22px;
 }
-
-.toggle button{
- background:none;
- border:none;
- color:var(--text);
- padding:6px 14px;
- cursor:pointer;
+canvas {background:#0f172a;border-radius:12px;padding:10px;}
+.timeline div {
+  border-left:4px solid #3b82f6;
+  padding-left:18px;
+  margin:20px 0;
 }
-
-.toggle button.active{
- background:var(--green);
- color:#020617;
+.kpi {
+  font-size:34px;
+  font-weight:700;
 }
-
-section{padding:90px 8%}
-
-.hero h1{font-size:3rem}
-.hero p{max-width:720px;color:var(--muted)}
-
-.grid{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
- gap:24px;
-}
-
-.card{
- background:var(--card);
- border:1px solid var(--border);
- padding:28px;
- border-radius:22px;
- box-shadow:0 12px 40px #00000066;
-}
-
-canvas{max-height:260px}
-
-.optimizer{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:30px;
-}
-
-.layout{
- background:#020617;
- border:1px dashed var(--border);
- border-radius:18px;
- height:380px;
- position:relative;
-}
-
-.cell{
- position:absolute;
- border:1px solid #1e293b;
- border-radius:8px;
- background:#020617;
-}
-
-.route{
- position:absolute;
- background:var(--green);
- height:4px;
- transform-origin:left center;
-}
-
-.controls label{
- display:block;
- margin:12px 0 6px;
-}
-
-input[type=range]{
- width:100%;
-}
-
-footer{
- padding:60px 8%;
- text-align:center;
- border-top:1px solid var(--border);
-}
+small {color:#94a3b8}
 </style>
 </head>
 
 <body>
 
 <header>
- <div class="left">
-   <a class="back" href="https://ozgunbatu.github.io/projects/">←</a>
-   <strong>Warehouse Analytics Case</strong>
- </div>
-
- <div class="toggle">
-   <button class="active" onclick="setLang('en')">EN</button>
-   <button onclick="setLang('de')">DE</button>
- </div>
+<h1>Warehouse Lean Six Sigma Case</h1>
+<button onclick="toggleLang()">DE / EN</button>
 </header>
 
-<section class="hero">
-<h1 data-en="Interactive Warehouse Transformation"
-    data-de="Interaktive Lageroptimierung">
-Interactive Warehouse Transformation
-</h1>
-
-<p data-en="Lean Six Sigma driven redesign using layout simulation and slotting optimization."
-   data-de="Lean-Six-Sigma-basierte Neugestaltung mit Layout-Simulation und Slotting-Optimierung.">
-Lean Six Sigma driven redesign using layout simulation and slotting optimization.
-</p>
-</section>
-
-<!-- OPTIMIZER -->
 <section>
-<h2 class="section-title"
- data-en="Interactive Layout Optimizer"
- data-de="Interaktiver Layout-Optimizer">
-Interactive Layout Optimizer</h2>
+<h2 id="introTitle">Executive Introduction</h2>
+<div class="card" id="introText"></div>
+</section>
 
-<div class="optimizer">
-
-<div class="layout" id="layout">
-
-<div class="cell" style="top:40px;left:60px;width:90px;height:70px"></div>
-<div class="cell" style="top:160px;left:220px;width:90px;height:70px"></div>
-<div class="cell" style="top:90px;left:400px;width:90px;height:70px"></div>
-
-<div id="route" class="route"></div>
-
-</div>
-
-<div class="card controls">
-<h3 data-en="Scenario Controls"
-    data-de="Szenario-Parameter">Scenario Controls</h3>
-
-<label data-en="Pick Density"
-       data-de="Pick-Dichte"></label>
-<input type="range" min="1" max="10" value="5" id="density"/>
-
-<label data-en="Automation Level"
-       data-de="Automatisierungsgrad"></label>
-<input type="range" min="0" max="100" value="30" id="automation"/>
-
-<p>
-<span data-en="Productivity Score"
-      data-de="Produktivitäts-Score">Productivity Score</span>:
-<strong id="score">78</strong>
-</p>
-
-</div>
+<section>
+<h2 id="dataTitle">Operational Dataset</h2>
+<div class="card">
+<p>Click-run simulation dataset used for analysis:</p>
+<pre id="datasetBox"></pre>
 </div>
 </section>
 
-<footer>
-<p data-en="Industrial Engineering • Operations Strategy • Analytics"
-   data-de="Wirtschaftsingenieurwesen • Operations-Strategie • Analytics">
-Industrial Engineering • Operations Strategy • Analytics</p>
-</footer>
+<section>
+<h2>Pareto – Root Causes of Errors</h2>
+<div class="grid">
+<canvas id="paretoChart"></canvas>
+</div>
+</section>
+
+<section>
+<h2>Regression – Walking Distance vs Pick Time</h2>
+<canvas id="regChart"></canvas>
+</section>
+
+<section>
+<h2>Before / After KPI Impact</h2>
+<canvas id="kpiChart"></canvas>
+</section>
+
+<section>
+<h2>Improvement Roadmap</h2>
+<div class="timeline card" id="roadmap"></div>
+</section>
 
 <script>
-let lang="en";
 
-function setLang(l){
- lang=l;
- document.querySelectorAll("[data-en]").forEach(el=>{
-  el.textContent = el.dataset[l];
- });
- document.querySelectorAll(".toggle button")
- .forEach(b=>b.classList.remove("active"));
- document.querySelector(`.toggle button[onclick="setLang('${l}')"]`)
- .classList.add("active");
+/* ================= DATA ================= */
+
+const warehouseData = [
+ {error:"Wrong SKU",count:120},
+ {error:"Wrong Qty",count:90},
+ {error:"Location Confusion",count:65},
+ {error:"Scanner Fail",count:40},
+ {error:"Damaged",count:20}
+];
+
+const walkingData = [
+ {dist:0.4,time:8},{dist:0.6,time:11},{dist:0.8,time:14},
+ {dist:1.0,time:17},{dist:1.2,time:19},{dist:1.5,time:24}
+];
+
+const kpiBefore = {orders:3.3,time:18.4,dist:1.2,accuracy:97.1};
+const kpiAfter  = {orders:5.2,time:11.9,dist:0.7,accuracy:99.4};
+
+/* ================= LANGUAGE ================= */
+
+let lang="EN";
+
+const introContent={
+EN:`Industry: FMCG Logistics<br>
+Objective: Increase picking productivity & accuracy.<br>
+Role: Industrial Engineer – analytics & redesign.<br>
+Tools: SQL, Power BI, Minitab, AutoCAD.`,
+DE:`Industrie: FMCG Logistik<br>
+Ziel: Produktivität und Qualität steigern.<br>
+Rolle: Industrial Engineer – Analyse & Prozessdesign.<br>
+Tools: SQL, Power BI, Minitab, AutoCAD.`
+};
+
+function toggleLang(){
+ lang=lang==="EN"?"DE":"EN";
+ renderIntro();
 }
 
-const density=document.getElementById("density");
-const automation=document.getElementById("automation");
-const scoreEl=document.getElementById("score");
-const route=document.getElementById("route");
-
-function updateOptimizer(){
- const d=+density.value;
- const a=+automation.value;
-
- const score=Math.min(100,
-   Math.round(50 + d*3 + a*0.25)
- );
- scoreEl.textContent=score;
-
- route.style.width=(120 + d*15)+"px";
- route.style.top=(80 + (10-d)*12)+"px";
- route.style.left="80px";
+function renderIntro(){
+ document.getElementById("introText").innerHTML=introContent[lang];
 }
 
-density.oninput=automation.oninput=updateOptimizer;
-updateOptimizer();
+renderIntro();
+
+/* ================= DATASET VIEW ================= */
+
+document.getElementById("datasetBox").innerText =
+JSON.stringify({warehouseData,walkingData},null,2);
+
+/* ================= PARETO ================= */
+
+const sorted=[...warehouseData].sort((a,b)=>b.count-a.count);
+const total=sorted.reduce((s,x)=>s+x.count,0);
+let cum=0;
+const cumulative=sorted.map(x=>{
+ cum+=x.count;
+ return Math.round(cum/total*100);
+});
+
+new Chart(paretoChart,{
+ type:"bar",
+ data:{
+  labels:sorted.map(x=>x.error),
+  datasets:[
+   {label:"Errors",data:sorted.map(x=>x.count)},
+   {label:"Cumulative %",data:cumulative,type:"line"}
+  ]
+ }
+});
+
+/* ================= REGRESSION ================= */
+
+const xs=walkingData.map(x=>x.dist);
+const ys=walkingData.map(x=>x.time);
+
+const n=xs.length;
+const slope =
+ (n*xs.reduce((s,x,i)=>s+x*ys[i],0)-xs.reduce((a,b)=>a+b,0)*ys.reduce((a,b)=>a+b,0))/
+ (n*xs.reduce((s,x)=>s+x*x,0)-Math.pow(xs.reduce((a,b)=>a+b,0),2));
+
+const intercept = ys.reduce((a,b)=>a+b,0)/n - slope*xs.reduce((a,b)=>a+b,0)/n;
+
+new Chart(regChart,{
+ type:"scatter",
+ data:{
+  datasets:[
+   {label:"Actual",data:walkingData.map(x=>({x:x.dist,y:x.time}))},
+   {label:"Trend",type:"line",
+    data:xs.map(x=>({x,y:slope*x+intercept}))}
+  ]
+ }
+});
+
+/* ================= KPI ================= */
+
+new Chart(kpiChart,{
+ type:"bar",
+ data:{
+  labels:["Orders/hr","Pick Time","Distance","Accuracy"],
+  datasets:[
+   {label:"Before",data:Object.values(kpiBefore)},
+   {label:"After",data:Object.values(kpiAfter)}
+  ]
+ }
+});
+
+/* ================= ROADMAP ================= */
+
+const roadmapSteps=[
+ {p:"Phase 1 – Diagnose",t:"Pareto, VSM, regression, congestion mapping"},
+ {p:"Phase 2 – Improve",t:"Slotting redesign, wave picking, poka-yoke"},
+ {p:"Phase 3 – Pilot",t:"Pick-to-light, SOPs, KPI dashboards"},
+ {p:"Phase 4 – Scale",t:"Roll-out all zones, training academy"},
+ {p:"Phase 5 – Control",t:"SPC charts, monthly Kaizen, audits"}
+];
+
+document.getElementById("roadmap").innerHTML =
+roadmapSteps.map(x=>`<div><b>${x.p}</b><br>${x.t}</div>`).join("");
+
 </script>
 
 </body>
