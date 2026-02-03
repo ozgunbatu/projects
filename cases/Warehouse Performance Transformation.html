@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Lean Six Sigma Warehouse Optimization</title>
+<title>Lean Six Sigma Warehouse Case</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 body {
@@ -17,6 +17,10 @@ header {
   display:flex;
   justify-content:space-between;
   align-items:center;
+}
+header h1 {
+  cursor:pointer;
+  color:#60a5fa;
 }
 button {
   background:#3b82f6;
@@ -42,23 +46,23 @@ h1,h2 {color:#60a5fa}
   gap:22px;
 }
 canvas {background:#0f172a;border-radius:12px;padding:10px;}
-.timeline div {
-  border-left:4px solid #3b82f6;
-  padding-left:18px;
-  margin:20px 0;
-}
 .kpi {
   font-size:34px;
   font-weight:700;
 }
 small {color:#94a3b8}
+.timeline div {
+  border-left:4px solid #3b82f6;
+  padding-left:18px;
+  margin:20px 0;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>Warehouse Lean Six Sigma Case</h1>
+<h1 onclick="window.location.href='https://ozgunbatu.github.io/projects/'">Batuhan Doğan ←</h1>
 <button onclick="toggleLang()">DE / EN</button>
 </header>
 
@@ -68,59 +72,50 @@ small {color:#94a3b8}
 </section>
 
 <section>
-<h2 id="dataTitle">Operational Dataset</h2>
-<div class="card">
-<p>Click-run simulation dataset used for analysis:</p>
-<pre id="datasetBox"></pre>
+<h2 id="problemTitle">Problem Statement</h2>
+<div class="card" id="problemText"></div>
+</section>
+
+<section>
+<h2 id="kpiTitle">Key KPIs</h2>
+<div class="grid card">
+<canvas id="kpiChart"></canvas>
 </div>
 </section>
 
 <section>
-<h2>Pareto – Root Causes of Errors</h2>
-<div class="grid">
+<h2 id="paretoTitle">Pareto – Error Causes</h2>
+<div class="grid card">
 <canvas id="paretoChart"></canvas>
 </div>
 </section>
 
 <section>
-<h2>Regression – Walking Distance vs Pick Time</h2>
+<h2>Travel Distance vs Pick Time</h2>
+<div class="grid card">
 <canvas id="regChart"></canvas>
+</div>
 </section>
 
 <section>
-<h2>Before / After KPI Impact</h2>
-<canvas id="kpiChart"></canvas>
+<h2>Throughput vs Time</h2>
+<div class="grid card">
+<canvas id="throughputChart"></canvas>
+</div>
 </section>
 
 <section>
-<h2>Improvement Roadmap</h2>
-<div class="timeline card" id="roadmap"></div>
+<h2>Recommendations & Roadmap</h2>
+<div class="card timeline" id="roadmap"></div>
 </section>
+
+<footer style="text-align:center;padding:40px 0;background:#101826">
+<button onclick="window.location.href='https://ozgunbatu.github.io/projects/'">Back to Portfolio</button>
+</footer>
 
 <script>
-
-/* ================= DATA ================= */
-
-const warehouseData = [
- {error:"Wrong SKU",count:120},
- {error:"Wrong Qty",count:90},
- {error:"Location Confusion",count:65},
- {error:"Scanner Fail",count:40},
- {error:"Damaged",count:20}
-];
-
-const walkingData = [
- {dist:0.4,time:8},{dist:0.6,time:11},{dist:0.8,time:14},
- {dist:1.0,time:17},{dist:1.2,time:19},{dist:1.5,time:24}
-];
-
-const kpiBefore = {orders:3.3,time:18.4,dist:1.2,accuracy:97.1};
-const kpiAfter  = {orders:5.2,time:11.9,dist:0.7,accuracy:99.4};
-
-/* ================= LANGUAGE ================= */
-
+// LANGUAGE
 let lang="EN";
-
 const introContent={
 EN:`Industry: FMCG Logistics<br>
 Objective: Increase picking productivity & accuracy.<br>
@@ -132,90 +127,110 @@ Rolle: Industrial Engineer – Analyse & Prozessdesign.<br>
 Tools: SQL, Power BI, Minitab, AutoCAD.`
 };
 
+const problemContent={
+EN:`Warehouse experienced excessive walking distances, aisle congestion, high overtime costs, and picking errors causing missed outbound cut-offs.`,
+DE:`Das Lager hatte übermäßige Laufwege, Engpässe in den Gängen, hohe Überstundenkosten und Kommissionierfehler, die zu verpassten Versandzeiten führten.`
+};
+
 function toggleLang(){
  lang=lang==="EN"?"DE":"EN";
- renderIntro();
+ renderContent();
 }
 
-function renderIntro(){
+function renderContent(){
  document.getElementById("introText").innerHTML=introContent[lang];
+ document.getElementById("problemText").innerHTML=problemContent[lang];
 }
+renderContent();
 
-renderIntro();
+/* ================= KPI ================= */
+const kpiBefore = {Orders:3.3, PickTime:18.4, Distance:1.2, Accuracy:97.1};
+const kpiAfter  = {Orders:5.2, PickTime:11.9, Distance:0.7, Accuracy:99.4};
 
-/* ================= DATASET VIEW ================= */
-
-document.getElementById("datasetBox").innerText =
-JSON.stringify({warehouseData,walkingData},null,2);
-
-/* ================= PARETO ================= */
-
-const sorted=[...warehouseData].sort((a,b)=>b.count-a.count);
-const total=sorted.reduce((s,x)=>s+x.count,0);
-let cum=0;
-const cumulative=sorted.map(x=>{
- cum+=x.count;
- return Math.round(cum/total*100);
+new Chart(document.getElementById('kpiChart'),{
+ type:'bar',
+ data:{
+  labels:Object.keys(kpiBefore),
+  datasets:[
+   {label:'Before',data:Object.values(kpiBefore),backgroundColor:'#10b981'},
+   {label:'After',data:Object.values(kpiAfter),backgroundColor:'#047857'}
+  ]
+ },
+ options:{responsive:true,plugins:{legend:{position:'top'}}}
 });
 
-new Chart(paretoChart,{
- type:"bar",
+/* ================= PARETO ================= */
+const paretoData=[
+ {error:"Wrong SKU",count:120},
+ {error:"Wrong Qty",count:90},
+ {error:"Location Confusion",count:65},
+ {error:"Scanner Fail",count:40},
+ {error:"Damaged",count:20}
+];
+const sorted=[...paretoData].sort((a,b)=>b.count-a.count);
+const total=sorted.reduce((s,x)=>s+x.count,0);
+let cum=0;
+const cumulative=sorted.map(x=>{cum+=x.count;return Math.round(cum/total*100);});
+
+new Chart(document.getElementById('paretoChart'),{
+ type:'bar',
  data:{
   labels:sorted.map(x=>x.error),
   datasets:[
-   {label:"Errors",data:sorted.map(x=>x.count)},
-   {label:"Cumulative %",data:cumulative,type:"line"}
+   {label:'Errors',data:sorted.map(x=>x.count),backgroundColor:'#3b82f6'},
+   {label:'Cumulative %',data:cumulative,type:'line',borderColor:'#facc15',tension:0.3}
   ]
  }
 });
 
 /* ================= REGRESSION ================= */
-
+const walkingData=[
+ {dist:0.4,time:8},{dist:0.6,time:11},{dist:0.8,time:14},
+ {dist:1.0,time:17},{dist:1.2,time:19},{dist:1.5,time:24}
+];
 const xs=walkingData.map(x=>x.dist);
 const ys=walkingData.map(x=>x.time);
-
 const n=xs.length;
-const slope =
- (n*xs.reduce((s,x,i)=>s+x*ys[i],0)-xs.reduce((a,b)=>a+b,0)*ys.reduce((a,b)=>a+b,0))/
- (n*xs.reduce((s,x)=>s+x*x,0)-Math.pow(xs.reduce((a,b)=>a+b,0),2));
+const slope=(n*xs.reduce((s,x,i)=>s+x*ys[i],0)-xs.reduce((a,b)=>a+b,0)*ys.reduce((a,b)=>a+b,0))/
+        (n*xs.reduce((s,x)=>s+x*x,0)-Math.pow(xs.reduce((a,b)=>a+b,0),2));
+const intercept=ys.reduce((a,b)=>a+b,0)/n - slope*xs.reduce((a,b)=>a+b,0)/n;
 
-const intercept = ys.reduce((a,b)=>a+b,0)/n - slope*xs.reduce((a,b)=>a+b,0)/n;
-
-new Chart(regChart,{
- type:"scatter",
+new Chart(document.getElementById('regChart'),{
+ type:'scatter',
  data:{
   datasets:[
-   {label:"Actual",data:walkingData.map(x=>({x:x.dist,y:x.time}))},
-   {label:"Trend",type:"line",
-    data:xs.map(x=>({x,y:slope*x+intercept}))}
+   {label:'Actual',data:walkingData.map(x=>({x:x.dist,y:x.time})),backgroundColor:'#f97316'},
+   {label:'Trend',type:'line',data:xs.map(x=>({x,y:slope*x+intercept})),borderColor:'#60a5fa',fill:false}
   ]
  }
 });
 
-/* ================= KPI ================= */
-
-new Chart(kpiChart,{
- type:"bar",
+/* ================= THROUGHPUT ================= */
+const throughputData=[
+ {day:'Mon',throughput:1500},
+ {day:'Tue',throughput:1650},
+ {day:'Wed',throughput:1580},
+ {day:'Thu',throughput:1700},
+ {day:'Fri',throughput:1750}
+];
+new Chart(document.getElementById('throughputChart'),{
+ type:'line',
  data:{
-  labels:["Orders/hr","Pick Time","Distance","Accuracy"],
-  datasets:[
-   {label:"Before",data:Object.values(kpiBefore)},
-   {label:"After",data:Object.values(kpiAfter)}
-  ]
+  labels:throughputData.map(x=>x.day),
+  datasets:[{label:'Orders processed',data:throughputData.map(x=>x.throughput),borderColor:'#3b82f6',tension:0.3}]
  }
 });
 
 /* ================= ROADMAP ================= */
-
 const roadmapSteps=[
- {p:"Phase 1 – Diagnose",t:"Pareto, VSM, regression, congestion mapping"},
- {p:"Phase 2 – Improve",t:"Slotting redesign, wave picking, poka-yoke"},
- {p:"Phase 3 – Pilot",t:"Pick-to-light, SOPs, KPI dashboards"},
- {p:"Phase 4 – Scale",t:"Roll-out all zones, training academy"},
- {p:"Phase 5 – Control",t:"SPC charts, monthly Kaizen, audits"}
+ {p:'Phase 1 – Diagnose',t:'Pareto, VSM, regression, congestion mapping'},
+ {p:'Phase 2 – Improve',t:'Slotting redesign, wave picking, poka-yoke'},
+ {p:'Phase 3 – Pilot',t:'Pick-to-light, SOPs, KPI dashboards'},
+ {p:'Phase 4 – Scale',t:'Roll-out all zones, training academy'},
+ {p:'Phase 5 – Control',t:'SPC charts, monthly Kaizen, audits'}
 ];
 
-document.getElementById("roadmap").innerHTML =
+document.getElementById('roadmap').innerHTML =
 roadmapSteps.map(x=>`<div><b>${x.p}</b><br>${x.t}</div>`).join("");
 
 </script>
