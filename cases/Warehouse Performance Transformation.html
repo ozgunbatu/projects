@@ -2,269 +2,364 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Warehouse Operational Excellence — Lean Six Sigma Case</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Warehouse Operational Excellence – Lean Six Sigma Case</title>
 
-<link rel="stylesheet" href="../style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
-/* ================= DMAIC INTERACTIVE ================= */
-
-.dmaic-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:22px;
-  margin-top:32px;
+:root {
+  --green:#1f9d55;
+  --blue:#2563eb;
+  --bg:#f5f7f6;
 }
 
-.dmaic-step{
-  background:#fff;
-  border-radius:14px;
-  padding:22px;
-  cursor:pointer;
-  box-shadow:0 8px 22px rgba(0,0,0,.06);
-  transition:.25s;
-}
-
-.dmaic-step:hover{
-  transform:translateY(-3px);
-}
-
-.dmaic-step h3{
+body {
   margin:0;
-  font-size:1.25rem;
+  font-family: Inter, system-ui;
+  background: var(--bg);
+  color:#0f172a;
 }
 
-.dmaic-step p{
-  opacity:.75;
-  margin-top:6px;
+/* HEADER */
+
+header {
+  background:white;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 6px 18px rgba(0,0,0,.05);
 }
 
-/* accordion */
-
-.dmaic-detail{
-  max-height:0;
-  overflow:hidden;
-  transition:.35s ease;
-  opacity:0;
-  margin-top:14px;
+.logo-wrap {
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
-.dmaic-step.open .dmaic-detail{
-  max-height:700px;
-  opacity:1;
+.back-btn {
+  text-decoration:none;
+  font-size:22px;
+  color:#111;
 }
 
-.dmaic-detail ul{
-  margin:8px 0 18px;
-  padding-left:18px;
+.logo {
+  font-weight:700;
+  font-size:18px;
 }
 
-.dmaic-detail strong{
-  display:block;
-  margin-top:12px;
+/* LANG TOGGLE */
+
+.lang-toggle {
+  display:flex;
+  gap:8px;
+  border:1px solid var(--green);
+  border-radius:20px;
+  padding:4px;
+}
+
+.lang-toggle button {
+  background:none;
+  border:none;
+  padding:6px 14px;
+  cursor:pointer;
+  font-weight:600;
+  border-radius:16px;
   color:var(--green);
 }
 
-/* ===================================================== */
+.lang-toggle button.active {
+  background:var(--green);
+  color:white;
+}
+
+/* LAYOUT */
+
+main {
+  max-width:1200px;
+  margin:80px auto;
+  padding:0 40px;
+}
+
+.hero {
+  text-align:center;
+}
+
+.hero h1 {
+  font-size:46px;
+}
+
+.white-box {
+  background:white;
+  border-radius:28px;
+  padding:60px;
+  margin-top:80px;
+  box-shadow:0 20px 60px rgba(0,0,0,.06);
+}
+
+.section-intro {
+  max-width:800px;
+  margin:20px auto 0;
+  text-align:center;
+  opacity:.8;
+}
+
+/* KPI */
+
+.kpi-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:32px;
+  margin-top:60px;
+}
+
+.kpi {
+  background:#f8faf9;
+  padding:40px;
+  border-radius:22px;
+  text-align:center;
+}
+
+.kpi .value {
+  font-size:42px;
+  font-weight:700;
+  color:var(--green);
+}
+
+/* PARETO */
+
+canvas {
+  max-width:900px;
+  margin:50px auto 0;
+  display:block;
+}
+
+/* DMAIC */
+
+.dmaic-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:26px;
+  margin-top:60px;
+}
+
+.dmaic-step {
+  background:#f8faf9;
+  padding:28px;
+  border-radius:22px;
+  transition:.3s;
+  cursor:pointer;
+}
+
+.dmaic-step:hover {
+  transform:translateY(-6px);
+}
+
+.dmaic-step.active {
+  border:2px solid var(--green);
+}
+
+/* RESULTS */
+
+.results ul {
+  max-width:720px;
+  margin:40px auto;
+  line-height:1.9;
+}
+
+/* FOOTER */
+
+footer {
+  text-align:center;
+  margin:120px 0;
+}
+
+footer a {
+  text-decoration:none;
+  background:var(--green);
+  color:white;
+  padding:18px 36px;
+  border-radius:30px;
+  font-weight:600;
+}
 
 </style>
 </head>
 
 <body>
 
-<header class="case-header">
-  <a href="https://ozgunbatu.github.io/projects/" class="back-link">← Back to Portfolio</a>
-  <h1>Warehouse Operational Excellence</h1>
-  <p class="subtitle">Lean Six Sigma transformation of logistics operations</p>
+<header>
+  <div class="logo-wrap">
+    <a class="back-btn" href="https://ozgunbatu.github.io/projects/">←</a>
+    <div class="logo">Batuhan Dogan</div>
+  </div>
+
+  <div class="lang-toggle">
+    <button id="lang-en" class="active">EN</button>
+    <button id="lang-de">DE</button>
+  </div>
 </header>
 
-<main class="case-container">
+<main>
 
-<section class="case-box">
-<h2>Problem Definition</h2>
-<p>
-A European distribution center faced deteriorating service levels, rising overtime
-costs, and dock congestion during peak demand windows.
-Despite stable demand volumes, on-time shipment performance fell below 90%.
-Root causes were unknown and improvement initiatives lacked prioritization.
+<section class="hero">
+<h1 data-en="Warehouse Operational Excellence"
+    data-de="Operative Exzellenz im Lager">
+Warehouse Operational Excellence</h1>
+
+<p class="section-intro"
+data-en="A Lean Six Sigma case study focused on throughput improvement, labor balancing and service-level recovery in large distribution centers."
+data-de="Eine Lean-Six-Sigma-Fallstudie zur Durchsatzsteigerung, Personalbalancierung und Servicelevel-Stabilisierung in großen Distributionszentren.">
 </p>
 </section>
 
-<section class="case-box">
+<!-- PROBLEM -->
 
-<h2>DMAIC Improvement Framework</h2>
-<p>
-A classical Six Sigma DMAIC structure was applied to ensure data-driven
-root-cause identification, structured experimentation, and sustainable results.
-Each phase combined industrial-engineering methods with operational analytics.
+<section class="white-box">
+
+<h2 data-en="Problem Definition"
+data-de="Problemdefinition">Problem Definition</h2>
+
+<p class="section-intro"
+data-en="Rapid e-commerce growth drove order volumes beyond designed warehouse capacity. Service levels dropped, overtime costs rose and picking queues became unstable across shifts."
+data-de="Starkes E-Commerce-Wachstum überlastete Lagerkapazitäten. Servicelevel sanken, Überstunden stiegen und Kommissionierschlangen wurden instabil.">
 </p>
+
+<div class="kpi-grid">
+
+<div class="kpi">
+<div class="value" data-value="18">0%</div>
+<div data-en="Lead Time Reduction"
+data-de="Durchlaufzeit-Reduktion">Lead Time Reduction</div>
+</div>
+
+<div class="kpi">
+<div class="value" data-value="22">0%</div>
+<div data-en="Labor Productivity"
+data-de="Arbeitsproduktivität">Labor Productivity</div>
+</div>
+
+<div class="kpi">
+<div class="value" data-value="14">0%</div>
+<div data-en="Service Level Gain"
+data-de="Servicelevel-Steigerung">Service Level Gain</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- PARETO -->
+
+<section class="white-box">
+
+<h2 data-en="Root Cause Analysis – Pareto"
+data-de="Ursachenanalyse – Pareto"></h2>
+
+<p class="section-intro"
+data-en="Delay drivers were decomposed using Six Sigma tools. Three operational failures explained over 75% of missed orders."
+data-de="Verzögerungstreiber wurden zerlegt. Drei operative Ursachen erklärten über 75% der Fehlmengen.">
+</p>
+
+<canvas id="paretoChart"></canvas>
+
+</section>
+
+<!-- DMAIC -->
+
+<section class="white-box">
+
+<h2 data-en="Six Sigma Roadmap (DMAIC)"
+data-de="Six-Sigma-Verbesserungsfahrplan"></h2>
 
 <div class="dmaic-grid">
 
-<div class="dmaic-step">
-<h3>Define</h3>
-<p>Service drop to 86%</p>
-
-<div class="dmaic-detail">
-<strong>What was done</strong>
-<ul>
-<li>Voice-of-Customer interviews with logistics planners</li>
-<li>SLA breach decomposition</li>
-<li>Critical-to-Quality tree construction</li>
-</ul>
-
-<strong>Tools</strong>
-<ul>
-<li>SIPOC</li>
-<li>Stakeholder map</li>
-<li>CTQ Tree</li>
-</ul>
-
-<strong>Outcome</strong>
-<ul>
-<li>Approved problem charter</li>
-<li>Target: +15pp service level</li>
-</ul>
-</div>
-</div>
-
-<div class="dmaic-step">
-<h3>Measure</h3>
-<p>Cycle time & utilization captured</p>
-
-<div class="dmaic-detail">
-<strong>What was done</strong>
-<ul>
-<li>Time studies in pick-pack-ship flows</li>
-<li>WMS transaction extraction</li>
-<li>Labor standard creation</li>
-</ul>
-
-<strong>Tools</strong>
-<ul>
-<li>Value stream mapping</li>
-<li>Spaghetti diagrams</li>
-<li>OEE logic</li>
-</ul>
-
-<strong>Outcome</strong>
-<ul>
-<li>Baseline takt time</li>
-<li>Bottleneck workstations identified</li>
-</ul>
-</div>
-</div>
-
-<div class="dmaic-step">
-<h3>Analyze</h3>
-<p>Pareto & regression modeling</p>
-
-<div class="dmaic-detail">
-<strong>What was done</strong>
-<ul>
-<li>Pareto ranking of delay drivers</li>
-<li>Regression of congestion vs overtime</li>
-<li>Layout inefficiency quantification</li>
-</ul>
-
-<strong>Tools</strong>
-<ul>
-<li>Pareto charts</li>
-<li>Ishikawa diagrams</li>
-<li>Regression analysis</li>
-</ul>
-
-<strong>Outcome</strong>
-<ul>
-<li>3 causes explaining 76% of delays</li>
-<li>Improvement focus areas selected</li>
-</ul>
-</div>
-</div>
-
-<div class="dmaic-step">
-<h3>Improve</h3>
-<p>Slotting & dock redesign</p>
-
-<div class="dmaic-detail">
-<strong>What was done</strong>
-<ul>
-<li>ABC-based SKU re-slotting</li>
-<li>Shift smoothing</li>
-<li>Dock appointment system rollout</li>
-</ul>
-
-<strong>Tools</strong>
-<ul>
-<li>Kaizen workshops</li>
-<li>Discrete-event simulation</li>
-<li>5S audits</li>
-</ul>
-
-<strong>Outcome</strong>
-<ul>
-<li>+18% throughput</li>
-<li>-21% congestion</li>
-</ul>
-</div>
-</div>
-
-<div class="dmaic-step">
-<h3>Control</h3>
-<p>SPC dashboards & audits</p>
-
-<div class="dmaic-detail">
-<strong>What was done</strong>
-<ul>
-<li>Control plans per process step</li>
-<li>Statistical dashboards</li>
-<li>Supervisor escalation rules</li>
-</ul>
-
-<strong>Tools</strong>
-<ul>
-<li>SPC charts</li>
-<li>Visual management boards</li>
-<li>KPI trees</li>
-</ul>
-
-<strong>Outcome</strong>
-<ul>
-<li>Stable performance maintained</li>
-<li>Audit-ready operating system</li>
-</ul>
-</div>
-</div>
+<div class="dmaic-step active"><h3>Define</h3><p>Service drop to 86%.</p></div>
+<div class="dmaic-step"><h3>Measure</h3><p>Cycle time & utilization captured.</p></div>
+<div class="dmaic-step"><h3>Analyze</h3><p>Pareto & regression models.</p></div>
+<div class="dmaic-step"><h3>Improve</h3><p>Slotting, shifts, AGVs.</p></div>
+<div class="dmaic-step"><h3>Control</h3><p>Dashboards & SPC charts.</p></div>
 
 </div>
 
 </section>
 
-<section class="case-box">
-<h2>Results</h2>
-<p>
-After twelve weeks of implementation the site achieved sustained service-level
-improvements, lower labor volatility and increased dock utilization.
-The Lean Six Sigma roadmap is now used as a blueprint for further European
-warehouse rollouts.
-</p>
+<!-- RESULTS -->
+
+<section class="white-box results">
+
+<h2 data-en="Results & Impact"
+data-de="Ergebnisse & Wirkung"></h2>
+
+<ul>
+<li data-en="18% faster order fulfillment."
+data-de="18% schnellere Auftragsabwicklung."></li>
+<li data-en="22% productivity increase per picker."
+data-de="22% höhere Produktivität pro Mitarbeiter."></li>
+<li data-en="Stabilized dock operations."
+data-de="Stabilisierte Rampenprozesse."></li>
+<li data-en="Permanent SPC monitoring deployed."
+data-de="Dauerhafte SPC-Überwachung eingeführt."></li>
+</ul>
+
 </section>
 
 </main>
 
+<footer>
+<a href="https://ozgunbatu.github.io/projects/">Back to Portfolio</a>
+</footer>
+
 <script>
 
-/* DMAIC accordion */
+/* KPI COUNTER */
 
-document.querySelectorAll(".dmaic-step").forEach(step=>{
-  step.addEventListener("click",()=>{
-    document.querySelectorAll(".dmaic-step").forEach(s=>{
-      if(s!==step) s.classList.remove("open");
-    });
-    step.classList.toggle("open");
-  });
+document.querySelectorAll(".value").forEach(el=>{
+  const target=+el.dataset.value;
+  let i=0;
+  const timer=setInterval(()=>{
+    i++;
+    el.textContent=i+"%";
+    if(i===target) clearInterval(timer);
+  },25);
+});
+
+/* LANG */
+
+const els=document.querySelectorAll("[data-en]");
+const en=document.getElementById("lang-en");
+const de=document.getElementById("lang-de");
+
+function setLang(l){
+  els.forEach(e=>e.textContent=e.dataset[l]);
+  en.classList.toggle("active",l==="en");
+  de.classList.toggle("active",l==="de");
+}
+
+en.onclick=()=>setLang("en");
+de.onclick=()=>setLang("de");
+
+/* PARETO */
+
+new Chart(paretoChart,{
+type:"bar",
+data:{
+labels:["Slotting","Labor balance","Dock congestion","IT","Rework"],
+datasets:[{data:[34,26,18,12,10]}]
+},
+options:{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}
+});
+
+/* DMAIC */
+
+document.querySelectorAll(".dmaic-step").forEach(s=>{
+s.onmouseenter=()=>{
+document.querySelectorAll(".dmaic-step").forEach(x=>x.classList.remove("active"));
+s.classList.add("active");
+};
 });
 
 </script>
