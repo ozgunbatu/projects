@@ -7,23 +7,25 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+  body { font-family: sans-serif; background-color: #f8fafc; }
   .kpi-number { font-variant-numeric: tabular-nums; }
   .kpi-card { transition: transform 0.3s; cursor: default; }
   .kpi-card:hover { transform: scale(1.05); }
   a { text-decoration: underline; color: rgb(14,165,233); }
   a:hover { color: rgb(34,197,94); }
+  header a.portfolio-link { position: absolute; top: 1rem; right: 1rem; font-weight: bold; }
 </style>
 </head>
-<body class="bg-slate-50 font-sans text-slate-900">
+<body>
 
-<header class="max-w-6xl mx-auto px-6 py-10 text-center">
-  <h1 class="text-4xl font-black mb-2">EV Demand Forecast – Germany</h1>
-  <p class="text-slate-600 max-w-3xl mx-auto">
-    The rapid adoption of electric vehicles in Germany creates regional supply imbalances. 
-    Some areas have excess stock while others face shortages, increasing operational costs and delaying deliveries.
-    We analyzed historical sales and registration data to optimize inventory allocation, improve forecast accuracy, and accelerate decision-making.
+<header class="max-w-6xl mx-auto px-6 py-10 relative text-center">
+  <h1 class="text-4xl font-black mb-4">EV Demand Forecast – Germany</h1>
+  <a href="../index.html" class="portfolio-link portfolio-link hover:text-emerald-600">← Back to Portfolio</a>
+  <p class="text-slate-600 max-w-3xl mx-auto text-lg">
+    Germany is experiencing rapid growth in electric vehicle adoption, creating regional imbalances in inventory. 
+    Certain regions face excess stock, while others struggle with shortages, leading to operational inefficiencies and increased logistics costs. 
+    Using historical sales and registration data, we analyzed and optimized inventory allocation to improve forecast accuracy and enable faster, data-driven decisions.
   </p>
-  <a href="../index.html" class="text-emerald-600 hover:underline mt-4 inline-block">← Back to Portfolio</a>
 </header>
 
 <main class="max-w-6xl mx-auto px-6 space-y-12">
@@ -32,8 +34,9 @@
   <section class="bg-white p-6 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-4">Problem</h2>
     <p>
-      Example: In Hamburg, stock was 20 vehicles vs. 50 orders, causing delays and extra costs. 
-      Similar imbalances existed elsewhere. The goal: optimize inventory, improve forecast accuracy, and enable rapid data-driven decisions.
+      Regional demand for electric vehicles varies significantly. For example, Hamburg experienced excess stock due to slower adoption, 
+      while Munich faced shortages as demand outpaced supply. These discrepancies increased operational costs and slowed delivery times. 
+      The challenge was to provide an optimized forecast model that accounts for both overstock and understock situations.
     </p>
   </section>
 
@@ -41,17 +44,10 @@
   <section class="bg-white p-6 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-4">Data Sources & Cleaning</h2>
     <ul class="list-disc list-inside space-y-2">
-      <li><a href="https://www.autoscout24.com/" target="_blank">AutoScout24</a>: EV sales & listing data</li>
-      <li><a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank">ZSW Electromobility</a>: Regional EV registration & trends</li>
-      <li>Total dataset: 2.3M rows, cleaned via SQL (duplicates removed, nulls fixed, dates normalized)</li>
+      <li><a href="https://www.autoscout24.com/" target="_blank">AutoScout24</a> – Historical EV sales & listings</li>
+      <li><a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank">ZSW Electromobility</a> – Regional EV registration trends</li>
+      <li>Dataset: 2.3M rows, cleaned in SQL (removed duplicates, normalized dates, handled null values)</li>
     </ul>
-  </section>
-
-  <!-- Slider -->
-  <section class="bg-white p-6 rounded-2xl shadow-lg text-center">
-    <h2 class="text-2xl font-bold mb-4">Demand Scenario Simulation</h2>
-    <input type="range" id="demandSlider" min="-20" max="20" value="0" step="1" class="w-full">
-    <p class="mt-2 text-slate-600">Adjust forecast ±%: <span id="sliderValue">0</span>%</p>
   </section>
 
   <!-- Charts -->
@@ -72,24 +68,24 @@
       <h4 class="font-bold text-xl mb-1">Inventory Change</h4>
       <p class="text-emerald-600 text-3xl font-black kpi-number" data-target="-7">0</p>
       <p class="text-sm text-slate-500">%</p>
-      <p class="text-slate-500 text-xs mt-1">Net reduction in excess stock, balanced with low-stock regions</p>
+      <p class="text-slate-500 text-xs mt-1">Net reduction in overstock while balancing shortages</p>
     </div>
     <div class="kpi-card bg-blue-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Forecast Error</h4>
       <p class="text-blue-600 text-3xl font-black kpi-number" data-target="22">0</p>
       <p class="text-sm text-slate-500">%</p>
-      <p class="text-slate-500 text-xs mt-1">Difference between predicted vs actual demand reduced by historical data analysis</p>
+      <p class="text-slate-500 text-xs mt-1">Deviation between predicted vs actual demand reduced through modeling</p>
     </div>
     <div class="kpi-card bg-yellow-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Decision Speed</h4>
       <p class="text-yellow-600 text-3xl font-black kpi-number" data-target="15">0</p>
       <p class="text-sm text-slate-500">%</p>
-      <p class="text-slate-500 text-xs mt-1">Faster decisions via interactive dashboard and scenario simulation</p>
+      <p class="text-slate-500 text-xs mt-1">Accelerated decisions enabled via dashboard insights</p>
     </div>
     <div class="kpi-card bg-purple-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Regions Optimized</h4>
       <p class="text-purple-600 text-3xl font-black kpi-number" data-target="6">0</p>
-      <p class="text-slate-500 text-xs mt-1">Hamburg, Berlin, North, South, East, West</p>
+      <p class="text-slate-500 text-xs mt-1">Hamburg, Berlin, München, Köln, Frankfurt, Stuttgart</p>
     </div>
   </section>
 
@@ -109,7 +105,7 @@ function animateKPI(){
       if(count >= Math.abs(target)){
         counter.textContent = isNegative ? `-${Math.round(Math.abs(target))}` : Math.round(target);
         clearInterval(interval);
-      } else counter.textContent = isNegative ? `-${Math.round(count)}` : Math.round(count);
+      } else counter.textContent = isNegative ? `-${Math.round(count))}` : Math.round(count);
     },30);
   });
 }
@@ -117,7 +113,7 @@ animateKPI();
 
 // Forecast vs Actual
 const evCtx = document.getElementById('evChart').getContext('2d');
-const evChart = new Chart(evCtx, {
+new Chart(evCtx, {
     type:'line',
     data:{
         labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
@@ -126,21 +122,23 @@ const evChart = new Chart(evCtx, {
             {label:"Actual", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
         ]
     },
-    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index', intersect:false}}}
+    options:{
+        responsive:true,
+        plugins:{legend:{position:'top'}, tooltip:{mode:'index', intersect:false}}
+    }
 });
 
-// Regional Inventory with Before/After simulation
+// Regional Inventory
 const invCtx = document.getElementById('inventoryChart').getContext('2d');
-const inventoryData = {
-    labels:["Hamburg","Berlin","North","South","East","West"],
-    datasets:[
-        {label:"Before", data:[20,30,50,40,35,25], backgroundColor:"rgba(239,68,68,0.5)"},
-        {label:"After", data:[50,35,45,42,37,27], backgroundColor:"rgba(34,197,94,0.6)"}
-    ]
-};
-const inventoryChart = new Chart(invCtx,{
+new Chart(invCtx, {
     type:'bar',
-    data: inventoryData,
+    data:{
+        labels:["Hamburg","Berlin","München","Köln","Frankfurt","Stuttgart"],
+        datasets:[
+            {label:"Before", data:[20,30,50,40,35,25], backgroundColor:"rgba(239,68,68,0.5)"},
+            {label:"After", data:[15,28,45,38,33,22], backgroundColor:"rgba(34,197,94,0.6)"}
+        ]
+    },
     options:{
         responsive:true,
         plugins:{
@@ -149,27 +147,13 @@ const inventoryChart = new Chart(invCtx,{
                 callbacks:{
                     label:function(context){
                         const value = context.parsed.y;
-                        const before = inventoryData.datasets[0].data[context.dataIndex];
-                        const after = inventoryData.datasets[1].data[context.dataIndex];
-                        return `${context.dataset.label}: ${value} vehicles | Before: ${before}, After: ${after}`;
+                        const before = context.datasetIndex === 0 ? value : context.chart.data.datasets[0].data[context.dataIndex];
+                        return `${context.dataset.label}: ${value} vehicles | Before: ${before}`;
                     }
                 }
             }
-        },
-        animation:{duration:800}
+        }
     }
-});
-
-// Slider simulation
-const slider = document.getElementById('demandSlider');
-const sliderValue = document.getElementById('sliderValue');
-
-slider.addEventListener('input', ()=>{
-    const percent = +slider.value;
-    sliderValue.textContent = percent;
-    const baseForecast = [120,150,180,240,300,360,400,420];
-    evChart.data.datasets[0].data = baseForecast.map(v => v * (1 + percent/100));
-    evChart.update();
 });
 </script>
 
