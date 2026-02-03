@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EV Demand Forecast – Germany</title>
+<title>EV Demand Case Study – Germany</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
   .kpi-number { font-variant-numeric: tabular-nums; }
+  .kpi-card { transition: transform 0.3s; }
+  .kpi-card:hover { transform: scale(1.05); }
 </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
@@ -15,30 +17,43 @@
 <header class="max-w-6xl mx-auto px-6 py-10 text-center">
   <h1 class="text-4xl font-black mb-2">EV Demand Forecast – Germany</h1>
   <p class="text-slate-600 max-w-3xl mx-auto">
-    Optimized regional inventory and forecast accuracy using SQL, Power BI & data-driven simulations.
+    Optimizing regional inventory and forecast accuracy using SQL, Power BI & scenario simulations.
   </p>
   <a href="../index.html" class="text-emerald-600 hover:underline mt-4 inline-block">← Back to Portfolio</a>
 </header>
 
 <main class="max-w-6xl mx-auto px-6 space-y-12">
 
-  <!-- Problem Section -->
+  <!-- Problem -->
   <section class="bg-white p-6 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-4">Problem</h2>
     <p>
-      Certain regions in Germany experienced both overstocking and stockouts, causing operational inefficiency.
-      Decision-making was slow due to lack of regionally consolidated insights.
+      In Hamburg, for example, stock levels were 20 vehicles while orders reached 50. This caused additional procurement costs, delayed deliveries, and reduced customer satisfaction.
+      Similar imbalances existed in other regions: excess inventory in some, insufficient stock in others.
+    </p>
+    <p>
+      The challenge: how to optimize inventory allocation across regions to minimize costs and meet demand accurately.
     </p>
   </section>
 
-  <!-- Approach / Recommendations -->
+  <!-- Data -->
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Data Sources & Cleaning</h2>
+    <ul class="list-disc list-inside space-y-2">
+      <li>AutoScout24: EV sales & listing data</li>
+      <li>ZSW Electromobility: Regional EV registration & trend data</li>
+      <li>Total dataset: 2.3M rows (cleaned with SQL: duplicates removed, nulls fixed, dates normalized)</li>
+    </ul>
+  </section>
+
+  <!-- Approach -->
   <section class="bg-white p-6 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-4">Approach & Recommendations</h2>
     <ul class="list-disc list-inside space-y-2">
-      <li>Cleaned 2.3M transaction rows using SQL and aggregated regional demand.</li>
-      <li>Analyzed seasonal and monthly trends to forecast EV demand per region.</li>
-      <li>Built interactive Power BI dashboards to simulate inventory scenarios.</li>
-      <li>Suggested weekly operational updates to optimize allocation across regions.</li>
+      <li>Analyzed historical sales per region to forecast demand.</li>
+      <li>Created region-wise simulation in Power BI to optimize inventory allocation.</li>
+      <li>Implemented scenario testing: e.g., demand ±10%, stock adjustment slider.</li>
+      <li>Provided weekly operational updates to ensure real-time decision-making.</li>
     </ul>
   </section>
 
@@ -46,12 +61,16 @@
   <section class="bg-white p-6 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-4">Implementation</h2>
     <p>
-      Power BI dashboard with sliders to simulate inventory allocation changes per region.
-      Real-time Forecast vs Actual charts and KPI counters to measure improvement.
+      Power BI dashboard displays:
+      <ul class="list-disc list-inside mt-2 ml-6">
+        <li>Forecast vs Actual demand per region</li>
+        <li>Inventory levels Before/After optimization</li>
+        <li>Interactive sliders for scenario simulation</li>
+      </ul>
     </p>
   </section>
 
-  <!-- Charts Section -->
+  <!-- Charts -->
   <section class="grid md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-2xl shadow-lg">
       <h3 class="text-xl font-bold mb-2">Forecast vs Actual Demand</h3>
@@ -65,24 +84,28 @@
 
   <!-- KPI Cards -->
   <section class="grid md:grid-cols-4 gap-4 text-center">
-    <div class="bg-emerald-50 p-6 rounded-2xl shadow">
-      <h4 class="font-bold text-xl mb-1">Inventory Reduction</h4>
-      <p class="text-emerald-600 text-3xl font-black kpi-number" data-target="7">0</p>
+    <div class="kpi-card bg-emerald-50 p-6 rounded-2xl shadow">
+      <h4 class="font-bold text-xl mb-1">Inventory Change</h4>
+      <p class="text-emerald-600 text-3xl font-black kpi-number" data-target="-7">0</p>
       <p class="text-sm text-slate-500">%</p>
+      <p class="text-slate-500 text-xs mt-1">Net reduction in excess stock, balanced with low-stock regions</p>
     </div>
-    <div class="bg-blue-50 p-6 rounded-2xl shadow">
+    <div class="kpi-card bg-blue-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Forecast Error</h4>
       <p class="text-blue-600 text-3xl font-black kpi-number" data-target="22">0</p>
       <p class="text-sm text-slate-500">%</p>
+      <p class="text-slate-500 text-xs mt-1">Difference between predicted vs actual demand reduced by analyzing historical data</p>
     </div>
-    <div class="bg-yellow-50 p-6 rounded-2xl shadow">
+    <div class="kpi-card bg-yellow-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Decision Speed</h4>
       <p class="text-yellow-600 text-3xl font-black kpi-number" data-target="15">0</p>
       <p class="text-sm text-slate-500">%</p>
+      <p class="text-slate-500 text-xs mt-1">Faster decisions via interactive dashboards and scenario simulation</p>
     </div>
-    <div class="bg-purple-50 p-6 rounded-2xl shadow">
+    <div class="kpi-card bg-purple-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Regions Optimized</h4>
       <p class="text-purple-600 text-3xl font-black kpi-number" data-target="6">0</p>
+      <p class="text-slate-500 text-xs mt-1">Hamburg, Berlin, North, South, East, West</p>
     </div>
   </section>
 
@@ -95,11 +118,12 @@ function animateKPI(){
   counters.forEach(counter=>{
     const target = +counter.getAttribute('data-target');
     let count = 0;
-    const increment = target / 50;
+    const increment = Math.abs(target) / 50;
+    const isNegative = target < 0;
     const interval = setInterval(()=>{
       count += increment;
-      if(count >= target){ counter.textContent = target; clearInterval(interval);}
-      else counter.textContent = Math.round(count);
+      if(count >= Math.abs(target)){ counter.textContent = isNegative ? `-${Math.round(Math.abs(target))}` : Math.round(target); clearInterval(interval);}
+      else counter.textContent = isNegative ? `-${Math.round(count)}` : Math.round(count);
     },30);
   });
 }
@@ -123,10 +147,10 @@ const invCtx = document.getElementById('inventoryChart').getContext('2d');
 new Chart(invCtx,{
     type:'bar',
     data:{
-        labels:["North","South","East","West","Central","Berlin"],
+        labels:["Hamburg","Berlin","North","South","East","West"],
         datasets:[
-            {label:"Before", data:[350,300,420,370,340,310], backgroundColor:"rgba(239,68,68,0.5)"},
-            {label:"After", data:[300,250,400,350,320,280], backgroundColor:"rgba(34,197,94,0.6)"}
+            {label:"Before", data:[20,30,50,40,35,25], backgroundColor:"rgba(239,68,68,0.5)"},
+            {label:"After", data:[50,35,45,42,37,27], backgroundColor:"rgba(34,197,94,0.6)"}
         ]
     },
     options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
