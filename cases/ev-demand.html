@@ -6,35 +6,49 @@
 <title>EV Demand Forecast – Germany</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
   .kpi-number { font-variant-numeric: tabular-nums; }
-  #germanyMap { height: 500px; }
 </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
 
 <header class="max-w-6xl mx-auto px-6 py-10 text-center">
   <h1 class="text-4xl font-black mb-2">EV Demand Forecast – Germany</h1>
-  <p class="text-slate-600 max-w-3xl mx-auto">Optimized regional inventory and forecast accuracy using SQL, Power BI & data-driven simulations.</p>
+  <p class="text-slate-600 max-w-3xl mx-auto">
+    Optimized regional inventory and forecast accuracy using SQL, Power BI & data-driven simulations.
+  </p>
   <a href="../index.html" class="text-emerald-600 hover:underline mt-4 inline-block">← Back to Portfolio</a>
 </header>
 
 <main class="max-w-6xl mx-auto px-6 space-y-12">
 
-  <!-- Problem / Approach -->
+  <!-- Problem Section -->
   <section class="bg-white p-6 rounded-2xl shadow-lg">
     <h2 class="text-2xl font-bold mb-4">Problem</h2>
-    <p>Overstocking in some regions and stockouts in others led to operational inefficiency. Management required a predictive model to optimize inventory allocation across Germany.</p>
-    
-    <h2 class="text-2xl font-bold mt-6 mb-4">Approach</h2>
+    <p>
+      Certain regions in Germany experienced both overstocking and stockouts, causing operational inefficiency.
+      Decision-making was slow due to lack of regionally consolidated insights.
+    </p>
+  </section>
+
+  <!-- Approach / Recommendations -->
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Approach & Recommendations</h2>
     <ul class="list-disc list-inside space-y-2">
-      <li>Collected 2.3M transaction rows from <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a> & <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>.</li>
-      <li>Cleaned & aggregated data in SQL; performed seasonal trend analysis.</li>
-      <li>Implemented Power BI dashboards to simulate regional inventory allocation.</li>
-      <li>Forecast vs actual demand visualization and interactive scenario analysis.</li>
+      <li>Cleaned 2.3M transaction rows using SQL and aggregated regional demand.</li>
+      <li>Analyzed seasonal and monthly trends to forecast EV demand per region.</li>
+      <li>Built interactive Power BI dashboards to simulate inventory scenarios.</li>
+      <li>Suggested weekly operational updates to optimize allocation across regions.</li>
     </ul>
+  </section>
+
+  <!-- Implementation -->
+  <section class="bg-white p-6 rounded-2xl shadow-lg">
+    <h2 class="text-2xl font-bold mb-4">Implementation</h2>
+    <p>
+      Power BI dashboard with sliders to simulate inventory allocation changes per region.
+      Real-time Forecast vs Actual charts and KPI counters to measure improvement.
+    </p>
   </section>
 
   <!-- Charts Section -->
@@ -49,7 +63,7 @@
     </div>
   </section>
 
-  <!-- KPI Cards with counter -->
+  <!-- KPI Cards -->
   <section class="grid md:grid-cols-4 gap-4 text-center">
     <div class="bg-emerald-50 p-6 rounded-2xl shadow">
       <h4 class="font-bold text-xl mb-1">Inventory Reduction</h4>
@@ -70,12 +84,6 @@
       <h4 class="font-bold text-xl mb-1">Regions Optimized</h4>
       <p class="text-purple-600 text-3xl font-black kpi-number" data-target="6">0</p>
     </div>
-  </section>
-
-  <!-- Germany Map -->
-  <section class="bg-white p-6 rounded-2xl shadow-lg">
-    <h3 class="text-xl font-bold mb-4">Regional Inventory Map</h3>
-    <div id="germanyMap"></div>
   </section>
 
 </main>
@@ -123,30 +131,7 @@ new Chart(invCtx,{
     },
     options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
 });
-
-// Leaflet Map
-const map = L.map('germanyMap').setView([51.1657, 10.4515], 6); // Germany center
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution:'© OpenStreetMap'}).addTo(map);
-
-// Simple polygon placeholders for regions (normally shapefile / GeoJSON ideal)
-const regions = {
-  "North": [[54.0,9.0],[54.0,11.0],[53.0,11.0],[53.0,9.0]],
-  "South": [[48.5,10.0],[48.5,13.0],[47.0,13.0],[47.0,10.0]],
-  "East": [[51.0,12.0],[51.0,15.0],[50.0,15.0],[50.0,12.0]],
-  "West": [[51.0,6.0],[51.0,9.0],[50.0,9.0],[50.0,6.0]],
-  "Central": [[51.0,9.0],[51.0,12.0],[50.0,12.0],[50.0,9.0]],
-  "Berlin": [[52.6,13.2],[52.6,13.5],[52.3,13.5],[52.3,13.2]]
-};
-
-const inventoryBefore = {North:350, South:420, East:370, West:340, Central:310, Berlin:310};
-const inventoryAfter  = {North:300, South:400, East:350, West:320, Central:280, Berlin:280};
-
-for(const [region, coords] of Object.entries(regions)){
-  const colorBefore = inventoryBefore[region] > inventoryAfter[region] ? 'rgba(239,68,68,0.5)' : 'rgba(34,197,94,0.6)';
-  const poly = L.polygon(coords, {color:colorBefore, fillOpacity:0.5}).addTo(map);
-  poly.bindTooltip(`<b>${region}</b><br>Inventory Before: ${inventoryBefore[region]}<br>Inventory After: ${inventoryAfter[region]}`);
-}
-
 </script>
+
 </body>
 </html>
