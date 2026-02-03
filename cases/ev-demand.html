@@ -6,62 +6,69 @@
 <title>EV Demand Forecast – Germany</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+/* KPI counter animation */
+.kpi-number { font-variant-numeric: tabular-nums; }
+</style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
 
-<header class="max-w-5xl mx-auto px-6 py-10 text-center">
-  <h1 class="text-4xl font-black mb-4">EV Demand Forecast – Germany</h1>
-  <a href="../index.html" class="text-emerald-600 hover:underline">← Back to Portfolio</a>
+<header class="max-w-6xl mx-auto px-6 py-10 text-center">
+  <h1 class="text-4xl font-black mb-2">EV Demand Forecast – Germany</h1>
+  <p class="text-slate-600 max-w-3xl mx-auto">Optimized regional inventory and forecast accuracy using SQL, Power BI & data-driven simulations.</p>
+  <a href="../index.html" class="text-emerald-600 hover:underline mt-4 inline-block">← Back to Portfolio</a>
 </header>
 
-<main class="max-w-5xl mx-auto px-6 space-y-10">
+<main class="max-w-6xl mx-auto px-6 space-y-12">
 
-  <!-- Overview -->
+  <!-- Problem / Approach -->
   <section class="bg-white p-6 rounded-2xl shadow-lg">
-    <h2 class="text-2xl font-bold mb-2">Problem</h2>
-    <p>Over-stocking in some regions and stockouts in others caused inefficiencies and lost sales. 
-       Management needed a predictive model to optimize inventory allocation across Germany.</p>
-  </section>
-
-  <section class="bg-white p-6 rounded-2xl shadow-lg">
-    <h2 class="text-2xl font-bold mb-2">Approach</h2>
-    <p>Collected 2.3M transaction rows from 
-       <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a> and
-       <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>. 
-       Performed SQL cleaning, seasonal trend analysis, and simulated stock allocation per region.</p>
+    <h2 class="text-2xl font-bold mb-4">Problem</h2>
+    <p>Overstocking in some regions and stockouts in others led to operational inefficiency. Management required a predictive model to optimize inventory allocation across Germany.</p>
+    
+    <h2 class="text-2xl font-bold mt-6 mb-4">Approach</h2>
+    <ul class="list-disc list-inside space-y-2">
+      <li>Collected 2.3M transaction rows from <a href="https://www.autoscout24.com/" target="_blank" class="underline text-blue-600">AutoScout24</a> & <a href="https://www.zsw-bw.de/en/media-center/data-service.html" target="_blank" class="underline text-blue-600">ZSW Electromobility</a>.</li>
+      <li>Cleaned & aggregated data in SQL; performed seasonal trend analysis.</li>
+      <li>Implemented Power BI dashboards to simulate regional inventory allocation.</li>
+      <li>Forecast vs actual demand visualization and interactive scenario analysis.</li>
+    </ul>
   </section>
 
   <!-- Charts Section -->
   <section class="grid md:grid-cols-2 gap-6">
     <div class="bg-white p-6 rounded-2xl shadow-lg">
       <h3 class="text-xl font-bold mb-2">Forecast vs Actual Demand</h3>
-      <canvas id="evChart" height="200"></canvas>
+      <canvas id="evChart" height="220"></canvas>
     </div>
     <div class="bg-white p-6 rounded-2xl shadow-lg">
-      <h3 class="text-xl font-bold mb-2">Regional Inventory Levels (Before & After)</h3>
-      <canvas id="inventoryChart" height="200"></canvas>
+      <h3 class="text-xl font-bold mb-2">Regional Inventory Levels</h3>
+      <canvas id="inventoryChart" height="220"></canvas>
     </div>
   </section>
 
-  <!-- KPI Mini Cards -->
-  <div class="grid md:grid-cols-4 gap-4 mb-10 text-center">
-    <div class="bg-emerald-50 p-4 rounded-xl shadow">
-      <h4 class="font-bold text-xl">Inventory</h4>
-      <p class="text-emerald-600 text-2xl font-black">-7%</p>
+  <!-- KPI Cards with counter -->
+  <section class="grid md:grid-cols-4 gap-4 text-center">
+    <div class="bg-emerald-50 p-6 rounded-2xl shadow">
+      <h4 class="font-bold text-xl mb-1">Inventory Reduction</h4>
+      <p class="text-emerald-600 text-3xl font-black kpi-number" data-target="7">0</p>
+      <p class="text-sm text-slate-500">%</p>
     </div>
-    <div class="bg-blue-50 p-4 rounded-xl shadow">
-      <h4 class="font-bold text-xl">Forecast Error</h4>
-      <p class="text-blue-600 text-2xl font-black">-22%</p>
+    <div class="bg-blue-50 p-6 rounded-2xl shadow">
+      <h4 class="font-bold text-xl mb-1">Forecast Error</h4>
+      <p class="text-blue-600 text-3xl font-black kpi-number" data-target="22">0</p>
+      <p class="text-sm text-slate-500">%</p>
     </div>
-    <div class="bg-yellow-50 p-4 rounded-xl shadow">
-      <h4 class="font-bold text-xl">Decision Speed</h4>
-      <p class="text-yellow-600 text-2xl font-black">+15%</p>
+    <div class="bg-yellow-50 p-6 rounded-2xl shadow">
+      <h4 class="font-bold text-xl mb-1">Decision Speed</h4>
+      <p class="text-yellow-600 text-3xl font-black kpi-number" data-target="15">0</p>
+      <p class="text-sm text-slate-500">%</p>
     </div>
-    <div class="bg-purple-50 p-4 rounded-xl shadow">
-      <h4 class="font-bold text-xl">Regions Optimized</h4>
-      <p class="text-purple-600 text-2xl font-black">6</p>
+    <div class="bg-purple-50 p-6 rounded-2xl shadow">
+      <h4 class="font-bold text-xl mb-1">Regions Optimized</h4>
+      <p class="text-purple-600 text-3xl font-black kpi-number" data-target="6">0</p>
     </div>
-  </div>
+  </section>
 
   <!-- Before / After Charts -->
   <section class="grid md:grid-cols-2 gap-6">
@@ -78,6 +85,25 @@
 </main>
 
 <script>
+// KPI counter animation
+function animateKPI(){
+  const counters = document.querySelectorAll('.kpi-number');
+  counters.forEach(counter=>{
+    const target = +counter.getAttribute('data-target');
+    let count = 0;
+    const increment = target / 50; // adjust speed
+    const interval = setInterval(()=>{
+      count += increment;
+      if(count >= target){
+        counter.textContent = target;
+        clearInterval(interval);
+      } else counter.textContent = Math.round(count);
+    },30);
+  });
+}
+animateKPI();
+
+// Chart.js
 const evCtx = document.getElementById('evChart').getContext('2d');
 new Chart(evCtx, {
     type: 'line',
@@ -88,7 +114,7 @@ new Chart(evCtx, {
             {label:"Actual", data:[110,145,170,230,310,355,390,430], borderColor:"rgb(14,165,233)", fill:false, tension:0.2}
         ]
     },
-    options:{responsive:true, plugins:{legend:{position:'top'}}}
+    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index', intersect:false}}}
 });
 
 const invCtx = document.getElementById('inventoryChart').getContext('2d');
@@ -101,7 +127,7 @@ new Chart(invCtx,{
             {label:"After", data:[300,250,400,350,320,280], backgroundColor:"rgba(34,197,94,0.6)"}
         ]
     },
-    options:{responsive:true, plugins:{legend:{position:'top'}}}
+    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
 });
 
 const beforeCtx = document.getElementById('beforeChart').getContext('2d');
@@ -111,7 +137,7 @@ new Chart(beforeCtx,{
         labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
         datasets:[{label:"Forecast Error Before", data:[30,28,32,35,40,38,36,33], borderColor:"rgb(239,68,68)", fill:false, tension:0.2}]
     },
-    options:{responsive:true, plugins:{legend:{position:'top'}}}
+    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
 });
 
 const afterCtx = document.getElementById('afterChart').getContext('2d');
@@ -121,7 +147,7 @@ new Chart(afterCtx,{
         labels:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug"],
         datasets:[{label:"Forecast Error After", data:[22,20,18,19,21,17,15,14], borderColor:"rgb(34,197,94)", fill:false, tension:0.2}]
     },
-    options:{responsive:true, plugins:{legend:{position:'top'}}}
+    options:{responsive:true, plugins:{legend:{position:'top'}, tooltip:{mode:'index'}}}
 });
 </script>
 
