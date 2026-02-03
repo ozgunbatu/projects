@@ -1,1 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mobile App UX Research – Banking Flow | Batuhan Dogan Portfolio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  .kpi { font-size: 2rem; font-weight: bold; color: #16a34a; }
+  .kpi-label { font-size: 1rem; color: #374151; }
+  .card { background:white; border-radius:1.5rem; padding:1.5rem; box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+  .hover-link { color:#2563eb; text-decoration:underline; }
+</style>
+</head>
+
+<body class="bg-slate-50 text-slate-900">
+
+<!-- NAV -->
+<nav class="fixed w-full bg-white/90 backdrop-blur border-b z-50">
+  <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+    <span class="font-black text-xl">Batuhan Dogan</span>
+    <button id="langBtn" class="border px-3 py-1 rounded-full hover:bg-slate-100">EN/DE</button>
+  </div>
+</nav>
+
+<!-- EXECUTIVE SUMMARY -->
+<header class="pt-32 max-w-6xl mx-auto px-6 mb-10 text-center">
+  <h1 id="heroTitle" class="text-4xl md:text-5xl font-extrabold mb-4">
+    Mobile App UX Research – Banking Flow
+  </h1>
+  <p id="heroSub" class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-4">
+    Drop-offs were observed during identity verification and onboarding. User interviews and journey mapping were conducted, and Figma prototypes were tested with 42 participants. UX improvements were derived to enhance completion rates and user satisfaction.
+  </p>
+  <p class="text-slate-500 text-sm">
+    <span class="font-semibold">Data sources:</span>
+    <a href="https://www.figma.com/proto/EXAMPLE" target="_blank" class="hover-link">Figma Prototype</a>
+  </p>
+</header>
+
+<!-- PROBLEM DEFINITION -->
+<section class="max-w-6xl mx-auto px-6 mb-10">
+  <h2 class="text-2xl font-bold mb-4" id="problemTitle">Problem Definition</h2>
+  <p id="problemText" class="text-slate-700 mb-6">
+    High drop-off rates were observed during user identity verification and onboarding processes. Completion rates were inconsistent, and user frustration was recorded in qualitative interviews.
+  </p>
+
+  <!-- KPI ANIMATION -->
+  <div class="flex justify-around text-center">
+    <div class="card">
+      <p class="kpi" id="completionRate">0%</p>
+      <p class="kpi-label">Completion Rate Increase</p>
+    </div>
+    <div class="card">
+      <p class="kpi" id="dropOffReduction">0%</p>
+      <p class="kpi-label">Drop-Off Reduction</p>
+    </div>
+    <div class="card">
+      <p class="kpi" id="usabilityScore">0%</p>
+      <p class="kpi-label">Usability Score</p>
+    </div>
+  </div>
+</section>
+
+<!-- DATA & METHODOLOGY -->
+<section class="max-w-6xl mx-auto px-6 mb-10">
+  <h2 class="text-2xl font-bold mb-4">Data & Methodology</h2>
+  <ul class="list-disc list-inside text-slate-700 space-y-2">
+    <li>User journeys were mapped and analyzed to detect friction points.</li>
+    <li>Figma wireframes and interactive prototypes were tested with 42 participants.</li>
+    <li>Qualitative feedback was coded to identify recurring pain points.</li>
+    <li>Completion metrics and drop-off rates were measured and compared before and after UX interventions.</li>
+  </ul>
+</section>
+
+<!-- GRAPHS -->
+<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-2 gap-8">
+  <div class="card">
+    <h3 class="text-xl font-bold mb-4 text-center">Completion Rate Over Steps</h3>
+    <canvas id="completionChart"></canvas>
+  </div>
+  <div class="card">
+    <h3 class="text-xl font-bold mb-4 text-center">Drop-Off By Step</h3>
+    <canvas id="dropOffChart"></canvas>
+  </div>
+</section>
+
+<!-- RECOMMENDATIONS & RESULTS -->
+<section class="max-w-6xl mx-auto px-6 mb-20 grid md:grid-cols-2 gap-8">
+  <div class="card">
+    <h3 class="text-xl font-bold mb-4">Recommendations</h3>
+    <ul class="list-disc list-inside text-slate-700 space-y-2">
+      <li>Identity verification steps were simplified and inline validation was implemented.</li>
+      <li>Progress indicators and clear error feedback were incorporated.</li>
+      <li>Prototype iterations were used to refine onboarding flows.</li>
+      <li>User testing was scheduled continuously to validate improvements.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3 class="text-xl font-bold mb-4">Results</h3>
+    <ul class="list-disc list-inside text-slate-700 space-y-2">
+      <li>Drop-off rates were reduced by 18%</li>
+      <li>Completion rates increased by 20%</li>
+      <li>Positive usability feedback was recorded from all participants</li>
+    </ul>
+  </div>
+</section>
+
+<!-- BACK TO PORTFOLIO -->
+<section class="max-w-6xl mx-auto px-6 mb-40 text-center">
+  <a href="../index.html" class="bg-emerald-600 px-8 py-4 rounded-full font-bold text-white hover:bg-emerald-700">Back to Portfolio</a>
+</section>
+
+<!-- JS -->
+<script>
+// LANG TOGGLE
+let de=false;
+langBtn.onclick=()=>{
+  de=!de;
+  heroTitle.textContent = de ? "Mobile App UX Research – Banking Flow (DE)" : "Mobile App UX Research – Banking Flow";
+  heroSub.textContent = de ? "Hohe Abbruchraten wurden während der Identitätsprüfung und Onboarding-Prozesse beobachtet. Benutzerinterviews und Journey-Mapping wurden durchgeführt und Figma-Prototypen mit 42 Teilnehmern getestet. UX-Verbesserungen wurden abgeleitet, um Abschlussraten und Benutzerzufriedenheit zu steigern." :
+                             "Drop-offs were observed during identity verification and onboarding. User interviews and journey mapping were conducted, and Figma prototypes were tested with 42 participants. UX improvements were derived to enhance completion rates and user satisfaction.";
+};
+
+// KPI Animation
+function animateValue(id,start,end,duration){
+  let obj=document.getElementById(id);let range=end-start;let current=start;let increment=range/(duration/50);
+  let timer=setInterval(function(){current+=increment;if((increment>0&&current>=end)||(increment<0&&current<=end)){current=end;clearInterval(timer);}
+  obj.textContent=Math.round(current)+"%";},50);
+}
+animateValue("completionRate",0,20,1500);
+animateValue("dropOffReduction",0,18,1500);
+animateValue("usabilityScore",0,95,1500);
+
+// Charts
+const ctxCompletion=document.getElementById('completionChart').getContext('2d');
+new Chart(ctxCompletion,{
+  type:'line',
+  data:{labels:["Step 1","Step 2","Step 3","Step 4","Step 5"],datasets:[{label:"Completion Rate",data:[100,92,85,78,80],borderColor:"rgb(34,197,94)",fill:false,tension:0.3}]},
+  options:{responsive:true,plugins:{legend:{position:"top"}},scales:{y:{beginAtZero:true,max:100}}}
+});
+
+const ctxDropOff=document.getElementById('dropOffChart').getContext('2d');
+new Chart(ctxDropOff,{
+  type:'bar',
+  data:{labels:["Step 1","Step 2","Step 3","Step 4","Step 5"],datasets:[{label:"Drop-Off %",data:[0,8,15,22,20],backgroundColor:"rgb(248,113,113)"}]},
+  options:{responsive:true,plugins:{legend:{position:"top"}},scales:{y:{beginAtZero:true,max:25}}}
+});
+</script>
+
+</body>
+</html>
 
