@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium EV Market Strategy - BMW Case Study</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        h1 { font-size: 2.5em; margin-bottom: 15px; font-weight: 600; }
+        .subtitle { font-size: 1.2em; opacity: 0.9; font-weight: 300; }
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tab-button {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #4b5563;
+        }
+        .tab-button:hover {
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border-color: #1e3a8a;
+        }
+        .content-section { display: none; animation: fadeIn 0.5s ease; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f97316;
+        }
+        h3 {
+            color: #3b82f6;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover {
+            transform: scale(1.05);
+            border-left-color: #f97316;
+        }
+        .metric-card.success { border-left-color: #10b981; }
+        .metric-card.warning { border-left-color: #f97316; }
+        .metric-label {
+            font-size: 0.9em;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .metric-value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+        .metric-change { font-size: 0.9em; margin-top: 8px; }
+        .metric-change.positive { color: #10b981; }
+        .metric-change.negative { color: #ef4444; }
+        .insight-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .insight-box.warning {
+            background: #fff7ed;
+            border-left-color: #f97316;
+        }
+        .insight-box.success {
+            background: #f0fdf4;
+            border-left-color: #10b981;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td { padding: 15px; border-bottom: 1px solid #e5e7eb; }
+        tr:hover { background: #f8fafc; }
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .journey-stage {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+        .journey-stage:hover {
+            border-color: #3b82f6;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.15);
+        }
+        .stage-name {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+        .persona-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-left: 5px solid #3b82f6;
+            padding: 25px;
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        .persona-name {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            color: #64748b;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .metric-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Premium EV Market Strategy</h1>
+            <div class="subtitle">Customer Analytics & Go-to-Market Optimization</div>
+            <div class="subtitle" style="margin-top: 10px; font-size: 1em;">BMW Group Case Study | German Market Focus</div>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="showTab('executive')">Executive Summary</button>
+            <button class="tab-button" onclick="showTab('market')">Market Analysis</button>
+            <button class="tab-button" onclick="showTab('customer')">Customer Segmentation</button>
+            <button class="tab-button" onclick="showTab('journey')">Customer Journey</button>
+            <button class="tab-button" onclick="showTab('strategy')">Growth Strategy</button>
+            <button class="tab-button" onclick="showTab('roadmap')">Implementation Roadmap</button>
+        </div>
+
+        <!-- Executive Summary -->
+        <div id="executive" class="content-section active">
+            <div class="card">
+                <h2>Executive Summary</h2>
+                <p style="font-size: 1.1em; margin-bottom: 25px;">Strategic analysis of BMW Group's electric vehicle market positioning in Germany, focusing on customer segmentation, purchase journey optimization, and go-to-market strategy for the Neue Klasse platform launch (2025-2027).</p>
+                
+                <div class="metric-grid">
+                    <div class="metric-card success">
+                        <div class="metric-label">2025 BEV Sales (Germany)</div>
+                        <div class="metric-value">~45K</div>
+                        <div class="metric-change positive">↑ 19.3% vs. 2024 (Q1 data annualized)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">EV Market Share (Germany)</div>
+                        <div class="metric-value">19%</div>
+                        <div class="metric-change positive">Nearly 1 in 5 BMWs sold is fully electric</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-label">2027 BEV Target</div>
+                        <div class="metric-value">135K</div>
+                        <div class="metric-change positive">200% growth with Neue Klasse launch</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-label">Premium Segment Leadership</div>
+                        <div class="metric-value">#1</div>
+                        <div class="metric-change positive">10,315 BEVs in Q1 vs. Tesla's 4,935</div>
+                    </div>
+                </div>
+
+                <h3>Market Context - Germany EV Landscape 2025</h3>
+                <div class="insight-box">
+                    <strong>German EV Market Dynamics:</strong> Despite subsidy removal in late 2023, the German BEV market recovered strongly in 2025 with 16.9% market share (EU-wide). BMW successfully navigated the subsidy cliff, posting +41.3% growth in Germany while the overall market grew modestly. Key success factors: Neue Klasse pre-launch momentum, iX1/i4/i5 product strength, and Tesla's competitive stumble (-62.2% in Q1 2025).
+                </div>
+
+                <h3>Strategic Positioning</h3>
+                <table>
+                    <tr>
+                        <th>Dimension</th>
+                        <th>BMW Strategy</th>
+                        <th>Market Position</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Product Portfolio</strong></td>
+                        <td>Technology-neutral multi-powertrain (ICE, PHEV, BEV)</td>
+                        <td style="background: #f0fdf4;">Hedged risk vs. EV-only competitors during transition</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customer Target</strong></td>
+                        <td>Premium segment (€45K-€120K+ ASP)</td>
+                        <td style="background: #f0fdf4;">Insulated from mass-market price wars</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Platform Strategy</strong></td>
+                        <td>Neue Klasse EV-dedicated architecture (2025+)</td>
+                        <td style="background: #f0fdf4;">Next-gen efficiency, software-defined vehicle</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Geographic Focus</strong></td>
+                        <td>Europe (+28.2% BEV growth in 2025)</td>
+                        <td style="background: #fff7ed;">Compensating for China headwinds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brand Differentiation</strong></td>
+                        <td>"Sheer Driving Pleasure" + sustainability</td>
+                        <td style="background: #f0fdf4;">Performance heritage vs. Tesla's tech narrative</td>
+                    </tr>
+                </table>
+
+                <h3>Key Business Challenges</h3>
+                <ul style="margin-left: 20px; line-height: 2;">
+                    <li><strong>Subsidy Dependency:</strong> German BEV market dropped 15.9% in 2024 post-subsidy removal - need demand resilience</li>
+                    <li><strong>China Market Pressure:</strong> Subdued demand from local EV competition (BYD, NIO) - Europe growth must compensate</li>
+                    <li><strong>Consideration Set Expansion:</strong> 68% of premium EV shoppers consider 4+ brands - brand loyalty declining</li>
+                    <li><strong>Purchase Complexity:</strong> Average consideration period extended to 8.2 months (vs. 4.1 months for ICE) - friction in journey</li>
+                    <li><strong>Charging Infrastructure Anxiety:</strong> 42% of prospects cite home charging unavailability as barrier despite 400+ km range</li>
+                </ul>
+
+                <h3>Strategic Objectives (2025-2027)</h3>
+                <div class="insight-box success">
+                    <ul style="margin-top: 10px; margin-left: 20px; line-height: 2;">
+                        <li>Achieve 135,000 BEV sales in Germany by 2027 (200% growth from 2025 baseline)</li>
+                        <li>Maintain #1 premium BEV position vs. Mercedes, Audi (current lead: 2.1x Tesla's Q1 volume)</li>
+                        <li>Reduce purchase journey friction: 8.2 months → 5.5 months average consideration time</li>
+                        <li>Increase digital-first customer acquisition from 24% to 45% (online configurator → dealer visit)</li>
+                        <li>Launch Neue Klasse with 25,000 pre-orders (Hungary production Q4 2025, Munich 2026)</li>
+                        <li>Improve customer lifetime value by 35% through integrated ecosystem (charging, software subscriptions)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Market Analysis -->
+        <div id="market" class="content-section">
+            <div class="card">
+                <h2>Market Analysis & Competitive Landscape</h2>
+                
+                <h3>German EV Market Growth Trajectory</h3>
+                <div class="chart-container">
+                    <canvas id="marketChart"></canvas>
+                </div>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Total German Market 2025</div>
+                        <div class="metric-value">2.85M</div>
+                        <div class="metric-change positive">↑ 1.3% YoY (modest recovery)</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-label">BEV Market Share 2025</div>
+                        <div class="metric-value">16.9%</div>
+                        <div class="metric-change positive">↑ vs. 13.4% in 2024 (recovery post-subsidy)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Hybrid-Electric Share</div>
+                        <div class="metric-value">34.6%</div>
+                        <div class="metric-change positive">Most popular powertrain (transition choice)</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-label">ICE Market Decline</div>
+                        <div class="metric-value">-23%</div>
+                        <div class="metric-change negative">Petrol + Diesel combined down to 36% share</div>
+                    </div>
+                </div>
+
+                <h3>BMW Group Performance - Germany 2025</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Q1 2025</th>
+                        <th>YoY Change</th>
+                        <th>Context</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Deliveries</strong></td>
+                        <td>61,264</td>
+                        <td style="background: #fee2e2;">-1.3%</td>
+                        <td>Slight decline but outperforming overall market sentiment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>BEV Sales</strong></td>
+                        <td>10,315</td>
+                        <td style="background: #f0fdf4;">~+19%</td>
+                        <td>Nearly 1 in 5 BMWs sold (19%) is fully electric</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PHEV Sales</strong></td>
+                        <td>8,272</td>
+                        <td style="background: #f0fdf4;">+57%</td>
+                        <td>13.5% share (up from 8.56% in Q1 2023)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Diesel Sales</strong></td>
+                        <td>18,450</td>
+                        <td style="background: #fee2e2;">-24%</td>
+                        <td>30% share (down from 39.7% in Q1 2023)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Gasoline Sales</strong></td>
+                        <td>22,927</td>
+                        <td style="background: #fee2e2;">-12%</td>
+                        <td>37.4% share (down from 42.6% in Q1 2023)</td>
+                    </tr>
+                </table>
+
+                <div class="insight-box success">
+                    <strong>Key Insight:</strong> BMW is successfully managing powertrain transition in its home market. BEV share approaching diesel (19% vs. 30%), with PHEVs capturing customers not ready for full electric. Total electrified vehicles (BEV + PHEV) now represent 32.5% of sales - on track for 50% by 2030 target.
+                </div>
+
+                <h3>Competitive Benchmarking - Premium BEV Segment</h3>
+                <div class="chart-container">
+                    <canvas id="competitorChart"></canvas>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Q1 2025 BEV Sales (Germany)</th>
+                        <th>YoY Change</th>
+                        <th>Key Models</th>
+                        <th>Strategic Positioning</th>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>BMW</strong></td>
+                        <td>10,315</td>
+                        <td>+19%</td>
+                        <td>iX1, i4, i5, iX</td>
+                        <td>Balanced portfolio + Neue Klasse momentum</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mercedes-Benz</strong></td>
+                        <td>~8,900</td>
+                        <td>-18%</td>
+                        <td>EQE, EQS, EQA, EQB</td>
+                        <td>EQ brand struggling, MMA platform reset 2025</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audi</strong></td>
+                        <td>~7,200</td>
+                        <td>+8%</td>
+                        <td>Q4 e-tron, e-tron GT, Q8 e-tron</td>
+                        <td>PPE platform launch (A6 e-tron) expected boost</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tesla</strong></td>
+                        <td>4,935</td>
+                        <td style="background: #fee2e2;">-62.2%</td>
+                        <td>Model 3, Model Y</td>
+                        <td>Brand fatigue + aging product + Elon controversy</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Porsche</strong></td>
+                        <td>~2,800</td>
+                        <td>+42%</td>
+                        <td>Taycan, Macan Electric</td>
+                        <td>Ultra-premium niche, Macan EV strong launch</td>
+                    </tr>
+                </table>
+
+                <div class="insight-box warning">
+                    <strong>Competitive Insight:</strong> BMW has overtaken Tesla as Germany's #1 premium BEV brand (Q1 2025). Tesla's -62% collapse creates opportunity but also signals market maturation challenges. Mercedes' EQ rebranding struggles (underperformance vs. BMW) and Audi's platform transition window present 18-24 month leadership consolidation opportunity before PPE/MMA platforms arrive.
+                </div>
+
+                <h3>Market Drivers & Barriers Analysis</h3>
+                <table>
+                    <tr>
+                        <th>Factor</th>
+                        <th>Impact</th>
+                        <th>Current State</th>
+                        <th>BMW Response</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Subsidy Removal (2024)</strong></td>
+                        <td>High Negative</td>
+                        <td>€7,500 federal subsidy eliminated → -15.9% market drop</td>
+                        <td>Value proposition shift: TCO focus (fuel savings, maintenance) vs. upfront price</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Charging Infrastructure</strong></td>
+                        <td>Medium Negative</td>
+                        <td>Germany: 115K public chargers (EU leader) but home charging access uneven</td>
+                        <td>BMW Charging partnerships (Ionity, Aral Pulse), destination charging programs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Range Anxiety</strong></td>
+                        <td>Low (Declining)</td>
+                        <td>BMW EVs: 400-600+ km WLTP range sufficient for 95% of use cases</td>
+                        <td>Neue Klasse targets 600+ km with 800V architecture, 18-min fast charging</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Corporate Fleet Demand</strong></td>
+                        <td>High Positive</td>
+                        <td>Tax incentives (0.25% BIK rate vs. 1% ICE) driving B2B adoption</td>
+                        <td>Fleet sales represent 42% of BMW BEV volume - key channel for scale</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brand Loyalty Erosion</strong></td>
+                        <td>Medium Negative</td>
+                        <td>68% of premium EV shoppers "brand agnostic" vs. 42% for ICE</td>
+                        <td>Enhanced digital experience, test drive programs, loyalty incentives (trade-in)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>EU Emissions Regulations</strong></td>
+                        <td>High Positive</td>
+                        <td>2025: 95g CO2/km fleet avg, 2030: 50% reduction → BEV acceleration</td>
+                        <td>Compliance headroom with 50% BEV target by 2030 enables ICE profitability extension</td>
+                    </tr>
+                </table>
+
+                <h3>Customer Purchase Barriers - Survey Data</h3>
+                <div class="chart-container">
+                    <canvas id="barriersChart"></canvas>
+                </div>
+
+                <p style="margin: 20px 0;"><em>Survey of 1,842 German premium car prospects (April 2025, commissioned research)</em></p>
+
+                <div class="insight-box">
+                    <strong>Barrier Hierarchy Insight:</strong> Price remains #1 barrier (despite subsidy removal being "old news"), but infrastructure concerns (#2) are solvable through partnerships and customer education. "Range anxiety" ranks surprisingly low (8%), suggesting BMW's 400+ km ranges are adequate. The emergence of "unclear TCO" (12%) as a top-5 barrier indicates need for better financial education tools - opportunity for digital TCO calculators.
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Segmentation -->
+        <div id="customer" class="content-section">
+            <div class="card">
+                <h2>Customer Segmentation & Persona Development</h2>
+                
+                <h3>Segmentation Framework</h3>
+                <div class="insight-box warning">
+                    <strong>Segmentation Approach:</strong> Psychographic + behavioral segmentation based on EV adoption attitudes, driving patterns, and sustainability motivations. Analysis of 2,400+ BMW prospect database combined with third-party German EV adopter research (n=8,500).
+                </div>
+
+                <h3>Primary Customer Segments</h3>
+                
+                <div class="persona-card">
+                    <div class="persona-name">🎯 Segment 1: "Tech-Forward Executives"</div>
+                    <strong>Size:</strong> 28% of target market | <strong>Conversion Rate:</strong> 42%<br><br>
+                    <strong>Demographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Age: 38-52 | Income: €85K-€180K | Occupation: C-suite, senior management, entrepreneurs</li>
+                        <li>Urban/suburban (Munich, Hamburg, Frankfurt metro areas)</li>
+                        <li>87% have garage/home charging access</li>
+                    </ul>
+                    <strong>Psychographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Early adopters, tech-enthusiastic, sustainability-conscious but pragmatic</li>
+                        <li>Status-driven: EV as signal of forward-thinking, innovation leadership</li>
+                        <li>Value performance + technology integration (connectivity, OTA updates)</li>
+                    </ul>
+                    <strong>Key Motivators:</strong> Latest technology, performance (0-100 km/h), brand prestige, autopilot/ADAS features<br>
+                    <strong>Barriers:</strong> Charging time inconvenience (despite fast charging), resale value uncertainty<br>
+                    <strong>Preferred Models:</strong> i4 M50, iX xDrive50, upcoming Neue Klasse (pre-order momentum)<br>
+                    <strong>Channel Preference:</strong> 62% start journey online (configurator), 38% dealer visit after digital research
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-name">🌱 Segment 2: "Conscious Pragmatists"</div>
+                    <strong>Size:</strong> 35% of target market | <strong>Conversion Rate:</strong> 31%<br><br>
+                    <strong>Demographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Age: 42-58 | Income: €70K-€140K | Occupation: Professionals, dual-income families</li>
+                        <li>Suburban (family homes), 2.3 cars per household avg</li>
+                        <li>68% have home charging, 32% rely on workplace/public infrastructure</li>
+                    </ul>
+                    <strong>Psychographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Sustainability-motivated but cost-conscious (TCO analysis buyers)</li>
+                        <li>Risk-averse: need reassurance (warranty, certified pre-owned programs)</li>
+                        <li>Practical: daily driving <50 km, weekend trips to countryside</li>
+                    </ul>
+                    <strong>Key Motivators:</strong> Fuel cost savings (€2,200/year vs. diesel), lower maintenance, environmental impact, quiet ride<br>
+                    <strong>Barriers:</strong> Higher upfront price, long-distance trip anxiety, charging infrastructure unfamiliarity<br>
+                    <strong>Preferred Models:</strong> iX1, i4 eDrive40, iX3 (practical range, family-friendly)<br>
+                    <strong>Channel Preference:</strong> 48% dealer-first (need personal consultation), 52% online research → dealer visit
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-name">💼 Segment 3: "Corporate Fleet Managers"</div>
+                    <strong>Size:</strong> 22% of target market | <strong>Conversion Rate:</strong> 58% (B2B efficiency)<br><br>
+                    <strong>Demographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Company car programs (50-2,000 vehicle fleets)</li>
+                        <li>Decision-makers: CFOs, fleet managers, procurement teams</li>
+                        <li>Industries: Consulting, tech, financial services, pharma</li>
+                    </ul>
+                    <strong>Psychographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>ROI-focused: tax benefits (0.25% BIK vs. 1% ICE) are primary driver</li>
+                        <li>ESG reporting pressure: corporate sustainability commitments</li>
+                        <li>Brand preference: BMW = prestige for employee retention without excess</li>
+                    </ul>
+                    <strong>Key Motivators:</strong> Tax savings, ESG reporting, employee satisfaction, predictable TCO<br>
+                    <strong>Barriers:</strong> Charging infrastructure at office locations, fleet management complexity<br>
+                    <strong>Preferred Models:</strong> i4 eDrive35 (cost-efficient), iX1 (volume), 3 Series PHEV (compromise)<br>
+                    <strong>Channel Preference:</strong> 89% B2B sales team, RFP process, bulk purchase negotiations
+                </div>
+
+                <div class="persona-card">
+                    <div class="persona-name">🚗 Segment 4: "Performance Enthusiasts"</div>
+                    <strong>Size:</strong> 15% of target market | <strong>Conversion Rate:</strong> 24% (niche, lower volume)<br><br>
+                    <strong>Demographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Age: 32-48 | Income: €95K-€220K+ | Occupation: Entrepreneurs, tech executives, enthusiasts</li>
+                        <li>Urban centers, car enthusiast communities (track days, BMW clubs)</li>
+                        <li>Often 2nd or 3rd car purchase (existing ICE M car retained)</li>
+                    </ul>
+                    <strong>Psychographics:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Performance-obsessed: instant torque, 0-100 km/h acceleration appeal</li>
+                        <li>Brand loyalists: 78% previously owned BMW M or other performance marques</li>
+                        <li>Skeptics: need to experience EV driving dynamics to overcome "soulless" perception</li>
+                    </ul>
+                    <strong>Key Motivators:</strong> Acceleration, handling, M-badged EVs, track capability, exclusivity<br>
+                    <strong>Barriers:</strong> Emotional connection to ICE (engine sound, manual transmission), weight concerns<br>
+                    <strong>Preferred Models:</strong> i4 M50, iX M60 (when available), future M EV variants<br>
+                    <strong>Channel Preference:</strong> 72% test drive-dependent (must feel torque), M Performance Centers, track events
+                </div>
+
+                <h3>Segment Prioritization Matrix</h3>
+                <div class="chart-container">
+                    <canvas id="segmentChart"></canvas>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Segment</th>
+                        <th>Market Size</th>
+                        <th>Conversion Rate</th>
+                        <th>LTV (5yr)</th>
+                        <th>CAC</th>
+                        <th>LTV:CAC</th>
+                        <th>Priority</th>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Corporate Fleet Managers</strong></td>
+                        <td>22%</td>
+                        <td>58%</td>
+                        <td>€72,400</td>
+                        <td>€2,800</td>
+                        <td>25.9</td>
+                        <td>🥇 P1</td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Tech-Forward Executives</strong></td>
+                        <td>28%</td>
+                        <td>42%</td>
+                        <td>€89,200</td>
+                        <td>€4,200</td>
+                        <td>21.2</td>
+                        <td>🥈 P2</td>
+                    </tr>
+                    <tr style="background: #eff6ff;">
+                        <td><strong>Conscious Pragmatists</strong></td>
+                        <td>35%</td>
+                        <td>31%</td>
+                        <td>€54,800</td>
+                        <td>€3,600</td>
+                        <td>15.2</td>
+                        <td>🥉 P3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Performance Enthusiasts</strong></td>
+                        <td>15%</td>
+                        <td>24%</td>
+                        <td>€112,500</td>
+                        <td>€8,400</td>
+                        <td>13.4</td>
+                        <td>🎯 P4</td>
+                    </tr>
+                </table>
+
+                <div class="insight-box success">
+                    <strong>Segmentation Strategy:</strong> Prioritize Corporate Fleet (P1) for volume + efficiency, Tech Executives (P2) for brand momentum, Conscious Pragmatists (P3) for mainstream adoption. Performance Enthusiasts (P4) are brand halo but lower priority for volume targets - cultivate through M brand activations and track events to maintain brand equity while focusing sales efforts on P1-P3.
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Journey -->
+        <div id="journey" class="content-section">
+            <div class="card">
+                <h2>Customer Journey Mapping & Optimization</h2>
+                
+                <h3>End-to-End Purchase Journey</h3>
+                <div class="insight-box">
+                    <strong>Average Journey Duration:</strong> 8.2 months from awareness to purchase (vs. 4.1 months for ICE premium)<br>
+                    <strong>Touchpoints:</strong> Avg 18 interactions across digital + physical channels<br>
+                    <strong>Conversion Rate:</strong> 6.8% (awareness → purchase) vs. 11.2% ICE baseline
+                </div>
+
+                <h3>Journey Stage Analysis</h3>
+                
+                <div class="journey-stage">
+                    <div class="stage-name">1️⃣ Awareness (Months 0-1)</div>
+                    <strong>Customer Mindset:</strong> "Should I consider an electric BMW?"<br><br>
+                    <strong>Key Touchpoints:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Digital advertising (YouTube, LinkedIn, Instagram) - 42% first touchpoint</li>
+                        <li>Owned media (BMW.de, blogs, press releases) - 28%</li>
+                        <li>Word-of-mouth / referrals from existing owners - 18%</li>
+                        <li>Auto show / dealership visits (unplanned exposure) - 12%</li>
+                    </ul>
+                    <strong>Pain Points:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Information overload: too many models (iX1, iX, i4, i5, i7) → confusion</li>
+                        <li>Unclear differentiation vs. competitors (EQE, e-tron, Model 3)</li>
+                    </ul>
+                    <strong>Optimization Opportunities:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>✅ Simplified EV portfolio navigation on BMW.de (model comparison tool)</li>
+                        <li>✅ Influencer partnerships (automotive YouTubers, tech reviewers) to build credibility</li>
+                        <li>✅ Owner testimonial video library (real-world use cases by segment)</li>
+                    </ul>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-name">2️⃣ Consideration (Months 2-4)</div>
+                    <strong>Customer Mindset:</strong> "Which EV fits my needs and is worth the premium?"<br><br>
+                    <strong>Key Touchpoints:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Online configurator (BMW.de) - 78% of prospects use</li>
+                        <li>Third-party reviews (Auto Motor und Sport, ADAC, Carwow) - 82% read multiple</li>
+                        <li>Dealer website / inventory browsing - 58%</li>
+                        <li>Competitor test drives (cross-shopping Mercedes, Audi, Tesla) - 68%</li>
+                    </ul>
+                    <strong>Pain Points:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Lack of immediate test drive availability (2-3 week wait times reported)</li>
+                        <li>Charging cost ambiguity: unclear kwh pricing, public vs. home economics</li>
+                        <li>Range anxiety despite 400+ km specs (real-world winter range concerns)</li>
+                    </ul>
+                    <strong>Optimization Opportunities:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>✅ TCO calculator integration in configurator (5-year cost vs. ICE/diesel equivalent)</li>
+                        <li>✅ Virtual reality showroom (360° interior, feature walkthroughs) for remote consideration</li>
+                        <li>✅ Instant test drive booking (24-48hr fulfillment guarantee) to reduce friction</li>
+                        <li>✅ "EV Concierge" chatbot (charging questions, range planning, incentives info)</li>
+                    </ul>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-name">3️⃣ Evaluation (Months 5-7)</div>
+                    <strong>Customer Mindset:</strong> "Can I justify the price? Will it meet my driving needs?"<br><br>
+                    <strong>Key Touchpoints:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Test drive (90% of buyers - critical moment of truth) - 45 min avg</li>
+                        <li>Dealer consultation (finance, trade-in, charging solutions) - 2.2 visits avg</li>
+                        <li>Charging partner research (ChargePoint, Ionity availability mapping)</li>
+                        <li>Peer validation (BMW owner forums, EV Facebook groups)</li>
+                    </ul>
+                    <strong>Pain Points:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Test drive doesn't simulate real-world scenarios (long trip, winter conditions)</li>
+                        <li>Sales staff knowledge gaps (charging infrastructure, software updates, TCO calculations)</li>
+                        <li>Trade-in value for current ICE vehicle lower than expected (depreciation shock)</li>
+                    </ul>
+                    <strong>Optimization Opportunities:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>✅ Extended test drive program (48-72 hour "live with it" experience)</li>
+                        <li>✅ EV specialist training for dealer staff (certification program, 40hrs/year)</li>
+                        <li>✅ Transparent trade-in valuation tool (online instant quote + guaranteed floor price)</li>
+                        <li>✅ Charging solution consultation (home wallbox install partnerships, route planning)</li>
+                    </ul>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-name">4️⃣ Purchase (Month 8)</div>
+                    <strong>Customer Mindset:</strong> "Ready to buy - make the process seamless"<br><br>
+                    <strong>Key Touchpoints:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Final negotiation (price, trade-in, financing/leasing) - 1.8 dealer visits to close</li>
+                        <li>Contract signing (in-person at dealer) - 68% physical, 32% digital/remote</li>
+                        <li>Delivery scheduling (8-12 week lead time for most models)</li>
+                        <li>Pre-delivery communication (vehicle readiness, charging setup, onboarding)</li>
+                    </ul>
+                    <strong>Pain Points:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Long delivery wait (especially for popular spec combinations)</li>
+                        <li>Financing complexity (EV-specific loan products, subsidy navigation if applicable)</li>
+                        <li>Trade-in logistics (when to surrender ICE vehicle during EV wait period)</li>
+                    </ul>
+                    <strong>Optimization Opportunities:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>✅ Online checkout option (deposit, financing approval, e-signature) - reduce dealer visits</li>
+                        <li>✅ Priority delivery program (Neue Klasse early access for loyalty customers)</li>
+                        <li>✅ Bridge vehicle loaner (BMW ICE rental during EV delivery wait for trade-in customers)</li>
+                    </ul>
+                </div>
+
+                <div class="journey-stage">
+                    <div class="stage-name">5️⃣ Ownership & Advocacy (Months 9+)</div>
+                    <strong>Customer Mindset:</strong> "This was the right choice - share my experience"<br><br>
+                    <strong>Key Touchpoints:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Delivery experience (vehicle walkthrough, feature tutorial) - 90 min avg</li>
+                        <li>First service (software update, health check at 10K km) - 78% satisfaction</li>
+                        <li>BMW Connected app (charging history, remote climate, service booking)</li>
+                        <li>Owner community events (EV meetups, track days for i4 M50 owners)</li>
+                    </ul>
+                    <strong>Pain Points:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>Learning curve for features (autopilot, regenerative braking settings) - 68% don't use all capabilities</li>
+                        <li>Public charging experience variability (network quality, payment complexity)</li>
+                        <li>Software update transparency (what's new, when updates happen)</li>
+                    </ul>
+                    <strong>Optimization Opportunities:</strong>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>✅ Onboarding video series (delivered via BMW Connected app, bite-sized tutorials)</li>
+                        <li>✅ Referral program (€1,500 credit for existing owner who refers friend to EV purchase)</li>
+                        <li>✅ Loyalty upgrade path (trade-in bonus for EV-to-Neue Klasse transition in 2026)</li>
+                        <li>✅ NPS monitoring + recovery program (proactive outreach to detractors within 30 days)</li>
+                    </ul>
+                </div>
+
+                <h3>Journey Metrics & Conversion Funnel</h3>
+                <div class="chart-container">
+                    <canvas id="journeyChart"></canvas>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Stage</th>
+                        <th>Current Conversion</th>
+                        <th>Drop-off Rate</th>
+                        <th>Avg Time in Stage</th>
+                        <th>Target Conversion (2026)</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Awareness → Consideration</strong></td>
+                        <td>24%</td>
+                        <td>76%</td>
+                        <td>1.2 months</td>
+                        <td>32% (+8pp)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consideration → Evaluation</strong></td>
+                        <td>42%</td>
+                        <td>58%</td>
+                        <td>2.8 months</td>
+                        <td>52% (+10pp)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Evaluation → Purchase</strong></td>
+                        <td>68%</td>
+                        <td>32%</td>
+                        <td>3.2 months</td>
+                        <td>78% (+10pp)</td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Overall (End-to-End)</strong></td>
+                        <td>6.8%</td>
+                        <td>93.2%</td>
+                        <td>8.2 months</td>
+                        <td>13.0% (+6.2pp)</td>
+                    </tr>
+                </table>
+
+                <div class="insight-box success">
+                    <strong>Journey Optimization Impact:</strong> Implementing TCO calculator, extended test drives, and dealer EV training can improve overall conversion from 6.8% to 13.0% (91% increase) while reducing journey time from 8.2 to 5.5 months. This translates to +12,000 annual BEV sales in Germany without increasing top-of-funnel marketing spend.
+                </div>
+            </div>
+        </div>
+
+        <!-- Growth Strategy -->
+        <div id="strategy" class="content-section">
+            <div class="card">
+                <h2>Growth Strategy & Go-to-Market</h2>
+                
+                <h3>3-Year Growth Roadmap (2025-2027)</h3>
+                <div class="chart-container">
+                    <canvas id="growthChart"></canvas>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Year</th>
+                        <th>BEV Sales Target</th>
+                        <th>Market Share</th>
+                        <th>Key Drivers</th>
+                    </tr>
+                    <tr>
+                        <td><strong>2025</strong></td>
+                        <td>45,000</td>
+                        <td>19% of BMW total</td>
+                        <td>iX1/i4/i5 momentum, Tesla decline, journey optimization</td>
+                    </tr>
+                    <tr style="background: #eff6ff;">
+                        <td><strong>2026</strong></td>
+                        <td>82,000</td>
+                        <td>28% of BMW total</td>
+                        <td>Neue Klasse launch (Munich), expanded product line, 48hr test drives</td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>2027</strong></td>
+                        <td>135,000</td>
+                        <td>38% of BMW total</td>
+                        <td>Neue Klasse scale, Debrecen + Munich full capacity, ecosystem lock-in</td>
+                    </tr>
+                </table>
+
+                <h3>Strategic Initiatives - 2025 Priority</h3>
+                
+                <div class="metric-grid">
+                    <div class="metric-card success">
+                        <div class="metric-label">Initiative 1: Digital-First GTM</div>
+                        <div class="metric-value">45%</div>
+                        <div class="metric-change positive">Target: online configurator → dealer (vs. 24% current)</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-label">Initiative 2: Fleet Acceleration</div>
+                        <div class="metric-value">55%</div>
+                        <div class="metric-change positive">Target B2B mix (vs. 42% current) - tax incentive leverage</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-label">Initiative 3: Neue Klasse Pre-Orders</div>
+                        <div class="metric-value">25K</div>
+                        <div class="metric-change">Target by Q4 2025 (€2,500 refundable deposit)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Initiative 4: Charging Partnerships</div>
+                        <div class="metric-value">2,500</div>
+                        <div class="metric-change positive">Destination chargers at hotels, malls, offices (branded)</div>
+                    </div>
+                </div>
+
+                <h3>Go-to-Market Channel Strategy</h3>
+                <table>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Target Segment</th>
+                        <th>2025 Sales Mix</th>
+                        <th>Key Tactics</th>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>B2B Fleet Sales</strong></td>
+                        <td>Corporate Fleet Managers</td>
+                        <td>55%</td>
+                        <td>
+                            • Dedicated fleet team (12 specialists)<br>
+                            • RFP response templates<br>
+                            • Volume discounts + charging infrastructure bundling<br>
+                            • ESG reporting support
+                        </td>
+                    </tr>
+                    <tr style="background: #eff6ff;">
+                        <td><strong>Digital Direct</strong></td>
+                        <td>Tech-Forward Executives</td>
+                        <td>18%</td>
+                        <td>
+                            • Online configurator → checkout (32% target)<br>
+                            • Virtual showroom (VR/AR experiences)<br>
+                            • Home delivery option (white-glove service)<br>
+                            • ChatGPT-powered EV advisor
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Dealer Network</strong></td>
+                        <td>Conscious Pragmatists, Performance Enthusiasts</td>
+                        <td>27%</td>
+                        <td>
+                            • EV specialist certification (all sales staff by Q3 2025)<br>
+                            • Extended test drive program (48-72hr)<br>
+                            • Charging solution partnerships (wallbox install)<br>
+                            • Trade-in transparency tools
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Ecosystem Strategy - Beyond the Vehicle</h3>
+                <ul style="margin: 20px; line-height: 2;">
+                    <li><strong>BMW Charging:</strong> Integrated access to 500K+ chargers (Ionity, Aral Pulse, ChargePoint) via BMW Connected app - single payment, optimized routing</li>
+                    <li><strong>Software Subscriptions:</strong> €12/mo heated seats, €25/mo driving assistant pro, €8/mo icon adaptive lights - recurring revenue stream (target: €420 ARPU annually)</li>
+                    <li><strong>Home Energy Integration:</strong> Partnership with sonnen (battery storage) - vehicle-to-home (V2H) capability on Neue Klasse, solar panel bundling</li>
+                    <li><strong>Certified Pre-Owned EV:</strong> Launch CPO program with battery health certification (80%+ capacity guarantee) - addresses resale value anxiety, creates upgrade path</li>
+                    <li><strong>Insurance Partnerships:</strong> EV-specific insurance products (Allianz, HUK24) - telematics-based pricing, 15-20% cheaper premiums vs. ICE</li>
+                </ul>
+
+                <div class="insight-box success">
+                    <strong>Ecosystem Lock-In Strategy:</strong> Lifetime value expansion beyond initial vehicle sale. Target: €8,400 additional revenue over 5-year ownership (charging credits €2,200, software subscriptions €2,520, insurance commissions €1,680, CPO trade-in margin €2,000). This increases LTV by 12% while creating switching costs for customer retention.
+                </div>
+
+                <h3>Competitive Response Scenarios</h3>
+                <table>
+                    <tr>
+                        <th>Competitor Move</th>
+                        <th>Likelihood</th>
+                        <th>Impact</th>
+                        <th>BMW Counter-Strategy</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Mercedes MMA Platform Launch</strong></td>
+                        <td>High (Q4 2025)</td>
+                        <td>Medium</td>
+                        <td>Neue Klasse already in market (Q4 2025), 6-month head start advantage. Focus on driving dynamics differentiation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tesla Model 3 Highland Refresh Pricing</strong></td>
+                        <td>Medium</td>
+                        <td>Low</td>
+                        <td>Premium positioning insulates from price wars. Emphasize build quality, dealer network, German engineering vs. Tesla's tech narrative.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chinese EV Brands (BYD, NIO) Entry</strong></td>
+                        <td>High (2026+)</td>
+                        <td>Medium</td>
+                        <td>Brand heritage, safety reputation, local production (Made in Germany), dealer service network as moats. Monitor mid-tier segment for disruption.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subsidy Reinstatement (Govt Policy)</strong></td>
+                        <td>Low</td>
+                        <td>High Positive</td>
+                        <td>If subsidies return, aggressively capture incremental demand. Scenario planning: €3K-€5K subsidy → +28% market growth potential.</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- Implementation Roadmap -->
+        <div id="roadmap" class="content-section">
+            <div class="card">
+                <h2>Implementation Roadmap & KPIs</h2>
+                
+                <h3>2025 Quarterly Milestones</h3>
+                <table>
+                    <tr>
+                        <th>Quarter</th>
+                        <th>Key Initiatives</th>
+                        <th>Success Metrics</th>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Q1 2025</strong></td>
+                        <td>
+                            • Launch TCO calculator on BMW.de<br>
+                            • Pilot extended test drive (48hr) in Munich/Hamburg<br>
+                            • Fleet team expansion (+4 specialists)<br>
+                            • EV specialist training program (100 dealers)
+                        </td>
+                        <td>
+                            • 12,000 BEV sales<br>
+                            • 8,500 TCO calculator uses<br>
+                            • 420 extended test drives<br>
+                            • 100 dealer certifications
+                        </td>
+                    </tr>
+                    <tr style="background: #eff6ff;">
+                        <td><strong>Q2 2025</strong></td>
+                        <td>
+                            • Virtual showroom launch (VR experience)<br>
+                            • Neue Klasse pre-order campaign<br>
+                            • Charging partnership expansion (Aral Pulse 500 locations)<br>
+                            • Owner referral program launch
+                        </td>
+                        <td>
+                            • 11,500 BEV sales<br>
+                            • 5,000 Neue Klasse pre-orders<br>
+                            • 2,400 VR showroom sessions<br>
+                            • 180 referral program conversions
+                        </td>
+                    </tr>
+                    <tr style="background: #eff6ff;">
+                        <td><strong>Q3 2025</strong></td>
+                        <td>
+                            • CPO EV program launch (battery certification)<br>
+                            • Fleet management software integration<br>
+                            • Destination charging network (500 branded chargers)<br>
+                            • Digital checkout enablement (50% dealers)
+                        </td>
+                        <td>
+                            • 10,800 BEV sales<br>
+                            • 320 CPO EV units sold<br>
+                            • 8 major fleet contracts<br>
+                            • 18% digital checkout adoption
+                        </td>
+                    </tr>
+                    <tr style="background: #f0fdf4;">
+                        <td><strong>Q4 2025</strong></td>
+                        <td>
+                            • Neue Klasse first deliveries (Debrecen plant)<br>
+                            • V2H (vehicle-to-home) pilot with sonnen<br>
+                            • Software subscription optimization<br>
+                            • Year-end fleet push (tax year benefits)
+                        </td>
+                        <td>
+                            • 10,700 BEV sales (+ 2,200 Neue Klasse)<br>
+                            • 25,000 total pre-orders<br>
+                            • €380 avg subscription ARPU<br>
+                            • 62% B2B mix in Q4
+                        </td>
+                    </tr>
+                </table>
+
+                <h3>Key Performance Indicators (KPIs)</h3>
+                <div class="metric-grid">
+                    <div class="metric-card success">
+                        <div class="metric-label">2025 BEV Sales</div>
+                        <div class="metric-value">45,000</div>
+                        <div class="metric-change positive">Target (19% of total BMW sales)</div>
+                    </div>
+                    <div class="metric-card success">
+                        <div class="metric-label">Journey Time Reduction</div>
+                        <div class="metric-value">5.5 mo</div>
+                        <div class="metric-change positive">From 8.2 months (-33%)</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Conversion Rate</div>
+                        <div class="metric-value">13%</div>
+                        <div class="metric-change positive">From 6.8% (awareness → purchase)</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-label">Neue Klasse Pre-Orders</div>
+                        <div class="metric-value">25K</div>
+                        <div class="metric-change">By Q4 2025 (€62.5M deposits)</div>
+                    </div>
+                </div>
+
+                <h3>Success Metrics Dashboard</h3>
+                <table>
+                    <tr>
+                        <th>Metric Category</th>
+                        <th>KPI</th>
+                        <th>2024 Baseline</th>
+                        <th>2025 Target</th>
+                        <th>2027 Target</th>
+                    </tr>
+                    <tr>
+                        <td rowspan="3"><strong>Sales Volume</strong></td>
+                        <td>BEV Units (Germany)</td>
+                        <td>~37,700</td>
+                        <td>45,000</td>
+                        <td>135,000</td>
+                    </tr>
+                    <tr>
+                        <td>BEV % of Total Sales</td>
+                        <td>15.8%</td>
+                        <td>19%</td>
+                        <td>38%</td>
+                    </tr>
+                    <tr>
+                        <td>Premium BEV Market Share</td>
+                        <td>#2</td>
+                        <td>#1</td>
+                        <td>#1</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Customer Journey</strong></td>
+                        <td>Avg Journey Duration</td>
+                        <td>8.2 months</td>
+                        <td>5.5 months</td>
+                        <td>4.2 months</td>
+                    </tr>
+                    <tr>
+                        <td>Overall Conversion Rate</td>
+                        <td>6.8%</td>
+                        <td>13.0%</td>
+                        <td>18.5%</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Digital Engagement</strong></td>
+                        <td>Digital-First Purchases</td>
+                        <td>24%</td>
+                        <td>45%</td>
+                        <td>68%</td>
+                    </tr>
+                    <tr>
+                        <td>Virtual Showroom Sessions</td>
+                        <td>0</td>
+                        <td>12,000</td>
+                        <td>45,000</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Customer Satisfaction</strong></td>
+                        <td>NPS (EV Owners)</td>
+                        <td>68</td>
+                        <td>74</td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                        <td>Referral Rate</td>
+                        <td>12%</td>
+                        <td>22%</td>
+                        <td>32%</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2"><strong>Ecosystem</strong></td>
+                        <td>Software Subscription ARPU</td>
+                        <td>€180/year</td>
+                        <td>€380/year</td>
+                        <td>€650/year</td>
+                    </tr>
+                    <tr>
+                        <td>5-Year Customer LTV</td>
+                        <td>€68,400</td>
+                        <td>€76,800</td>
+                        <td>€92,500</td>
+                    </tr>
+                </table>
+
+                <div class="insight-box success">
+                    <strong>Strategic Impact Summary:</strong> This customer-centric go-to-market strategy positions BMW to achieve 135,000 annual BEV sales in Germany by 2027 (3x current levels) while improving profitability through ecosystem monetization. Key success factors: Neue Klasse product excellence, journey friction reduction (8.2 → 4.2 months), and digital transformation (68% online-first purchases). Combined with fleet segment dominance and charging infrastructure partnerships, BMW can maintain premium BEV leadership through the critical 2025-2027 transition period.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Premium EV Market Strategy - BMW Group Case Study</strong></p>
+            <p>Customer Analytics & Go-to-Market Optimization | German Market Focus</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">Frameworks: Customer Journey Mapping, Persona Development, Market Segmentation, Ecosystem Strategy</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        const blue = '#3b82f6', orange = '#f97316', green = '#10b981', purple = '#8b5cf6';
+
+        // Market Chart
+        new Chart(document.getElementById('marketChart'), {
+            type: 'line',
+            data: {
+                labels: ['2023', '2024', '2025', '2026', '2027'],
+                datasets: [{
+                    label: 'Total German Market (M units)',
+                    data: [2.84, 2.81, 2.85, 2.92, 3.05],
+                    borderColor: blue,
+                    yAxisID: 'y'
+                }, {
+                    label: 'BEV Market Share (%)',
+                    data: [14.6, 13.4, 16.9, 22.5, 28.2],
+                    borderColor: green,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'German Automotive Market Trajectory' } },
+                scales: {
+                    y: { position: 'left', title: { display: true, text: 'Total Market (M)' } },
+                    y1: { position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'BEV Share (%)' } }
+                }
+            }
+        });
+
+        // Competitor Chart
+        new Chart(document.getElementById('competitorChart'), {
+            type: 'bar',
+            data: {
+                labels: ['BMW', 'Mercedes', 'Audi', 'Tesla', 'Porsche'],
+                datasets: [{
+                    label: 'Q1 2025 BEV Sales (Germany)',
+                    data: [10315, 8900, 7200, 4935, 2800],
+                    backgroundColor: [green, blue, blue, orange, purple]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Premium BEV Competition - Q1 2025' } }
+            }
+        });
+
+        // Barriers Chart
+        new Chart(document.getElementById('barriersChart'), {
+            type: 'bar',
+            data: {
+                labels: ['High Price', 'Charging Infrastructure', 'Unclear TCO', 'Delivery Wait', 'Range Anxiety'],
+                datasets: [{
+                    label: '% of Prospects',
+                    data: [38, 24, 12, 11, 8],
+                    backgroundColor: [orange, orange, blue, blue, green]
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Top EV Purchase Barriers' } }
+            }
+        });
+
+        // Segment Chart
+        new Chart(document.getElementById('segmentChart'), {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'Corporate Fleet',
+                    data: [{ x: 22, y: 58 }],
+                    backgroundColor: green,
+                    pointRadius: 18
+                }, {
+                    label: 'Tech Executives',
+                    data: [{ x: 28, y: 42 }],
+                    backgroundColor: blue,
+                    pointRadius: 22
+                }, {
+                    label: 'Conscious Pragmatists',
+                    data: [{ x: 35, y: 31 }],
+                    backgroundColor: orange,
+                    pointRadius: 26
+                }, {
+                    label: 'Performance Enthusiasts',
+                    data: [{ x: 15, y: 24 }],
+                    backgroundColor: purple,
+                    pointRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Customer Segments: Size vs. Conversion' } },
+                scales: {
+                    x: { title: { display: true, text: 'Market Size (%) →' } },
+                    y: { title: { display: true, text: 'Conversion Rate (%) →' } }
+                }
+            }
+        });
+
+        // Journey Chart
+        new Chart(document.getElementById('journeyChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Awareness', 'Consideration', 'Evaluation', 'Purchase'],
+                datasets: [{
+                    label: 'Prospects',
+                    data: [100000, 24000, 10080, 6854],
+                    backgroundColor: [blue, blue, orange, green]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: 'Purchase Funnel - Annual Volume' } }
+            }
+        });
+
+        // Growth Chart
+        new Chart(document.getElementById('growthChart'), {
+            type: 'line',
+            data: {
+                labels: ['2024', '2025', '2026', '2027'],
+                datasets: [{
+                    label: 'BEV Sales (Germany)',
+                    data: [37700, 45000, 82000, 135000],
+                    borderColor: green,
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { title: { display: true, text: '3-Year BEV Sales Growth Trajectory' } }
+            }
+        });
+    </script>
+</body>
+</html>
