@@ -1,0 +1,688 @@
+<h1>Creating Dynamic Thumbnails with html2canvas (generated together with ChatGPT)</h1>
+<h3>- Read the blog post about it on <a href="https://dev.to/netsi1964/creating-dynamic-thumbnails-with-html2canvas-5566">dev.to</a></h3>
+<div class="settings">
+	<label for="" class="width">Width <input type="range" min="75" max="400"></label>
+	<label for="" class="height">Height <input type="range" min="75" max="400"></label>
+</div>
+<p class="target" contenteditable=true><b>Lorem ipsum dolor</b> sit amet consectetur adipisicing elit. Odit excepturi rerum necessitatibus dolores quisquam illo quidem quo blanditiis deleniti, natus culpa assumenda dicta id optio ratione ipsa corporis in veniam?</p>
+<button id="generate-button">Generate Thumbnail</button>
+<br><br>
+<div class="thumbnail-gallery">
+</div>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÖZGÜN BATUHAN DOGAN // STRATEGIC PORTFOLIO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --black: #0a0a0a;
+            --white: #fafafa;
+            --red: #ff0000;
+            --gray: #888888;
+        }
+        
+        body {
+            font-family: 'Space Grotesk', monospace;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.4;
+            overflow-x: hidden;
+        }
+
+        /* Brutal Grid Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(0,0,0,0.03) 49px, rgba(0,0,0,0.03) 50px),
+                repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(0,0,0,0.03) 49px, rgba(0,0,0,0.03) 50px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 40px;
+            z-index: 1000;
+            border-bottom: 4px solid var(--red);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            padding: 8px 16px;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            border: 2px solid var(--red);
+            background: var(--red);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            padding: 140px 40px 80px;
+            background: var(--white);
+            position: relative;
+        }
+
+        .hero::after {
+            content: 'SCROLL';
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            transform: rotate(90deg);
+            transform-origin: right bottom;
+        }
+
+        .hero-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .hero-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            padding: 8px 16px;
+            background: var(--black);
+            color: var(--white);
+            display: inline-block;
+            border: 3px solid var(--black);
+        }
+
+        .hero h1 {
+            font-size: clamp(60px, 10vw, 140px);
+            font-weight: 700;
+            line-height: 0.9;
+            margin-bottom: 40px;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--red);
+            -webkit-text-stroke: 2px var(--black);
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 24px;
+            max-width: 800px;
+            margin-bottom: 60px;
+            border-left: 6px solid var(--black);
+            padding-left: 30px;
+            font-weight: 500;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            max-width: 900px;
+            background: var(--black);
+            border: 4px solid var(--black);
+            margin-bottom: 60px;
+        }
+
+        .stat-box {
+            background: var(--white);
+            padding: 40px;
+            border: 2px solid var(--black);
+        }
+
+        .stat-box:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .stat-number {
+            font-size: 72px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-brutal {
+            display: inline-block;
+            padding: 20px 50px;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 4px solid var(--black);
+            box-shadow: 8px 8px 0 var(--red);
+            transition: all 0.2s;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .cta-brutal:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0 var(--red);
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 40px;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .section-header {
+            max-width: 1600px;
+            margin: 0 auto 80px;
+        }
+
+        .section-title {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .projects {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            gap: 4px;
+            background: var(--red);
+        }
+
+        .project {
+            background: var(--white);
+            color: var(--black);
+            padding: 60px;
+            border: 4px solid var(--black);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 100%;
+            background: var(--red);
+            transition: width 0.3s;
+            z-index: 0;
+        }
+
+        .project:hover::before {
+            width: 100%;
+        }
+
+        .project:hover {
+            color: var(--white);
+        }
+
+        .project > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 200px;
+            font-weight: 700;
+            position: absolute;
+            top: -40px;
+            right: 40px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .project-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 6px 12px;
+            border: 2px solid var(--black);
+        }
+
+        .project:hover .project-tag {
+            border-color: var(--white);
+        }
+
+        .project-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .project-description {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 30px;
+        }
+
+        .meta-item {
+            font-family: 'Space Mono', monospace;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            opacity: 0.7;
+        }
+
+        .meta-value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 3px solid var(--black);
+            transition: all 0.2s;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .project:hover .project-link {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        /* About */
+        .about {
+            padding: 100px 40px;
+            background: var(--white);
+        }
+
+        .about-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+        }
+
+        .about h2 {
+            font-size: 72px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            line-height: 1;
+        }
+
+        .about p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            background: var(--black);
+            border: 4px solid var(--black);
+            margin-top: 60px;
+        }
+
+        .skill {
+            background: var(--white);
+            padding: 30px;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            border: 2px solid var(--black);
+            transition: all 0.2s;
+        }
+
+        .skill:hover {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        /* Contact */
+        .contact {
+            padding: 100px 40px;
+            background: var(--red);
+            color: var(--white);
+        }
+
+        .contact-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: clamp(60px, 10vw, 120px);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 60px;
+            line-height: 0.9;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            padding: 20px 50px;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 4px solid var(--black);
+            box-shadow: 6px 6px 0 var(--black);
+            transition: all 0.2s;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .contact-btn:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 var(--black);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .hero-stats { grid-template-columns: 1fr; }
+            .about-container { grid-template-columns: 1fr; }
+            .project-meta { flex-direction: column; gap: 20px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">ÖBD//2025</div>
+            <div class="nav-links">
+                <a href="#work">WORK</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-label">/// AVAILABLE FOR WORK</div>
+            
+            <h1>
+                STRATEGIC<br>
+                <span>ANALYST</span>
+            </h1>
+            
+            <p class="hero-description">
+                DATA-DRIVEN DECISION MAKING // PRODUCT MANAGEMENT // MARKET STRATEGY // AUTOMOTIVE // SEMICONDUCTOR // STARTUPS
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat-box">
+                    <span class="stat-number">18</span>
+                    <span class="stat-label">CASE STUDIES</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">03</span>
+                    <span class="stat-label">INDUSTRIES</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">YEARS EXP</span>
+                </div>
+            </div>
+
+            <a href="#work" class="cta-brutal">VIEW WORK</a>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="portfolio" id="work">
+        <div class="section-header">
+            <h2 class="section-title">SELECTED<br>PROJECTS</h2>
+            <p class="section-subtitle">/// 2024 - 2025</p>
+        </div>
+
+        <div class="projects">
+            <div class="project">
+                <div class="project-number">01</div>
+                <div class="project-tag">AUTOMOTIVE & LUXURY</div>
+                <h3 class="project-title">BMW & ROLLS-ROYCE</h3>
+                <p class="project-description">
+                    Comprehensive strategic analysis covering CRM systems, UX design, data analytics platforms, sustainability roadmaps, venture capital investments, and ultra-luxury brand management.
+                </p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">BMW CASES</div>
+                        <div class="meta-value">06</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">RR CASES</div>
+                        <div class="meta-value">03</div>
+                    </div>
+                </div>
+                <a href="automotive/index.html" class="project-link">VIEW PROJECT →</a>
+            </div>
+
+            <div class="project">
+                <div class="project-number">02</div>
+                <div class="project-tag">SEMICONDUCTOR & INDUSTRIAL</div>
+                <h3 class="project-title">INFINEON TECH</h3>
+                <p class="project-description">
+                    Product strategy and market analysis for 6 business units: PMIC pricing, solar GTM strategy, EV charging infrastructure, 5G RF components, industrial motor control, IoT platforms.
+                </p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">REVENUE TARGET</div>
+                        <div class="meta-value">€5.4B</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">BUSINESS UNITS</div>
+                        <div class="meta-value">06</div>
+                    </div>
+                </div>
+                <a href="infineon/infineon_portfolio_updated.html" class="project-link">VIEW PROJECT →</a>
+            </div>
+
+            <div class="project">
+                <div class="project-number">03</div>
+                <div class="project-tag">STARTUP ECOSYSTEM</div>
+                <h3 class="project-title">MUNICH TECH</h3>
+                <p class="project-description">
+                    Strategic analysis of Bavaria's fastest-growing startups across FinTech, Mobility, Climate Tech, and Enterprise SaaS with detailed market positioning and growth strategies.
+                </p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <div class="meta-label">STARTUPS</div>
+                        <div class="meta-value">10</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">SECTORS</div>
+                        <div class="meta-value">04</div>
+                    </div>
+                </div>
+                <a href="startups/startup_portfolio.html" class="project-link">VIEW PROJECT →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-container">
+            <div>
+                <h2>ABOUT</h2>
+                <p>
+                    B.SC. INDUSTRIAL ENGINEERING FROM NIŞANTAŞI UNIVERSITY. M.A. BUSINESS MANAGEMENT AT MACROMEDIA UNIVERSITY MUNICH.
+                </p>
+                <p>
+                    5+ YEARS EXPERIENCE IN BUSINESS DEVELOPMENT WITH APOLLO IOT, GETSTREAM, AND GASTROCLUB. EXPERTISE IN MARKET ANALYSIS, PRODUCT STRATEGY, AND DATA-DRIVEN DECISION MAKING.
+                </p>
+                <p>
+                    <strong>CURRENTLY SEEKING: WERKSTUDENT / TRAINEE / JUNIOR POSITIONS IN MUNICH</strong>
+                </p>
+            </div>
+
+            <div>
+                <div class="skills">
+                    <div class="skill">PRODUCT STRATEGY</div>
+                    <div class="skill">DATA ANALYTICS</div>
+                    <div class="skill">MARKET RESEARCH</div>
+                    <div class="skill">BUSINESS INTEL</div>
+                    <div class="skill">CRM & MARKETING</div>
+                    <div class="skill">FINANCIAL MODEL</div>
+                    <div class="skill">TABLEAU & SQL</div>
+                    <div class="skill">STRATEGIC PLAN</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>LET'S<br>WORK</h2>
+            
+            <div class="contact-links">
+                <a href="https://www.linkedin.com/in/ozgunbatuhandogan/" class="contact-btn" target="_blank">LINKEDIN</a>
+                <a href="mailto:ozgunbatuhan@gmail.com" class="contact-btn">EMAIL</a>
+                <a href="tel:+4915566196266" class="contact-btn">PHONE</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 ÖZGÜN BATUHAN DOGAN // MUNICH, GERMANY // ALL RIGHTS RESERVED</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
